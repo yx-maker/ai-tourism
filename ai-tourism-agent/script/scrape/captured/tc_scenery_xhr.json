@@ -1,7 +1,0 @@
-[
- {
-  "url": "https://www.ly.com/commonAjax/ajaxHandler/GetProjectTopAd?_dAjax=callback&PageName=scenery-index&AdvSlideId=1714&ChannelName=scenery&callback=tc80158703647",
-  "len": 130,
-  "body": "tc80158703647({\"Success\":true,\"Message\":\"success\",\"Code\":200,\"ReturnValue\":null,\"TimeCost\":\"\",\"ServerTime\":\"2026-10-23 10:42:06\"})"
- }
-]

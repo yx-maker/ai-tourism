@@ -1,0 +1,100 @@
+# =============================================================================
+# 敏感配置 —— 绝不提交（含真实 API Key / 数据库密码）
+# =============================================================================
+.env
+.env.*
+.gh_token_local
+*.gh_token
+!.env.example
+!.env.template
+*.local
+secrets/
+credentials*.json
+*.pem
+*.key
+*.p12
+*.jks
+
+# =============================================================================
+# 后端 Java / Spring Boot
+# =============================================================================
+ai-tourism/target/
+ai-tourism/build/
+ai-tourism/.mvn/
+ai-tourism/logs/
+ai-tourism/*.log
+ai-tourism/*.log.*.gz
+ai-tourism/backend-run.log
+ai-tourism/backend.log
+ai-tourism/.idea/
+ai-tourism/*.iml
+ai-tourism/.settings/
+ai-tourism/.classpath
+ai-tourism/.project
+
+# =============================================================================
+# Agent 服务 Python
+# =============================================================================
+ai-tourism-agent/.venv/
+ai-tourism-agent/venv/
+ai-tourism-agent/__pycache__/
+ai-tourism-agent/**/__pycache__/
+ai-tourism-agent/**/*.py[cod]
+ai-tourism-agent/chroma_db/
+ai-tourism-agent/logs/
+ai-tourism-agent/*.log
+ai-tourism-agent/agent-run.log
+ai-tourism-agent/checkpoints.db
+ai-tourism-agent/checkpoints.db-shm
+ai-tourism-agent/checkpoints.db-wal
+ai-tourism-agent/.pytest_cache/
+ai-tourism-agent/.chroma/
+ai-tourism-agent/**/.ipynb_checkpoints/
+
+# =============================================================================
+# 前端 Vue / Node
+# =============================================================================
+ai-tourism-frontend/node_modules/
+ai-tourism-frontend/dist/
+ai-tourism-frontend/.vite/
+ai-tourism-frontend/dev.log
+ai-tourism-frontend/dev-run.log
+ai-tourism-frontend/.env.local
+ai-tourism-frontend/coverage/
+
+# =============================================================================
+# 爬虫运行时产物（Playwright 浏览器缓存、会话快照等，体积巨大且无意义）
+# =============================================================================
+ai-tourism-agent/script/scrape/browser_profile/
+ai-tourism-agent/script/scrape/ota_profile/
+ai-tourism-agent/script/scrape/*_profile/
+ai-tourism-agent/.vendor/
+ai-tourism-agent/**/browser_profile/
+**/.playwright/
+
+# =============================================================================
+# 通用
+# =============================================================================
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+*.tmp
+*.bak
+
+# =============================================================================
+# 毕业论文文档（含学号/姓名等个人信息，默认不上公开仓库）
+# 如需一并提交，删除下面这段即可
+# =============================================================================
+*.docx
+*.pptx
+*.pdf
+开题答辩/
+mysqltest/
+specs.zip
+
+# 临时测试脚本（根目录散落的调试文件）
+test_*.py
+test_*.js

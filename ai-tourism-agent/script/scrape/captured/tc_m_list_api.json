@@ -1,0 +1,7 @@
+[
+ {
+  "url": "https://m.ly.com/wlfrontend/tcbaseconfig/taroApp?clientType=5&wxVersion=&WL_NOCHECK_URL_GQ=1&timestamp=1792727487414&GUID=1792727487422867&account=e03f275bcd2cfb670874ba441ac3e7ee&sign=d85d266bc867ddedb0f5bfba53ff1d39&MemberId=undefined&userKey=undef",
+  "len": 229,
+  "body": "{\"StateCode\":200,\"Body\":{\"preLoad\":{\"order\":{\"android\":false,\"ios\":false}},\"diyRoute\":{\"pages/orderv2/order\":{\"mode\":\"inner\",\"innerTarget\":\"../orderv3/order\",\"outerReg\":\".*\",\"outerTarget\":\"\"}},\"continuousClickShowVersion\":false}}"
+ }
+]

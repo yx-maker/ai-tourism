@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+scripts/.env
+.env
+.env.local
+
+# Checkpoint database
+*.db
+*.db-shm
+*.db-wal
+checkpoints.db
+checkpoints.db-shm
+checkpoints.db-wal
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# 公钥与私钥
+secrets/
+*.pem
+
+# 测试结果
+/test/intent_eval/outputs/
+/test/rag_eval/outputs/
+
+# 向量数据库
+chroma_db/
+
+# RAG脚本中的断点文件与向量数据库
+/script/ingest_checkpoint.json
+/script/chroma_db/

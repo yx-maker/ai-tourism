@@ -1,0 +1,271 @@
+server:
+  # 端口
+  port: 8290
+
+# 连接数据库
+spring:
+  datasource:
+    # allowPublicKeyRetrieval=true：MySQL 8 默认使用 caching_sha2_password 认证，
+    # 在 useSSL=false 时必须允许客户端获取服务端公钥，否则报
+    # "Public Key Retrieval is not allowed" 导致启动失败。
+    url: jdbc:mysql://127.0.0.1:3306/aitourism?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  output:
+    ansi:
+      enabled: ALWAYS
+  task:
+    scheduling:
+      pool:
+        size: 1
+  # data:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 
+    database: 0
+    ttl: 1800
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+
+# MCP服务配置
+mcp:
+  heartbeat-interval-seconds: 300       # 5分钟
+  ping-timeout-seconds: 5
+  # MCP工具结果裁剪配置
+  result-truncation:
+    enabled: true                       # 是否启用结果裁剪功能
+    max-length: 2000                    # 最大结果长度（字符数），考虑免费API的4096 token限制
+    smart-truncation: true              # 是否启用智能裁剪（在自然断点处截断）
+    preserve-structure: true            # 是否保持JSON等结构化数据的完整性
+    # 裁剪策略配置
+    strategy: "smart"                   # 裁剪策略：smart(智能), simple(简单), summary(摘要)
+    # 不同工具的不同裁剪长度限制（格式：工具名:长度,工具名:长度）
+    tool-specific-limits: "baidu_search:1500,fetchJuejinArticle:1000"
+  clients:
+    - name: "amap"
+      sse-url: "https://mcp.amap.com/sse?key=${AMAP_MCP_KEY}"
+      log-requests: true
+      log-responses: true
+      timeout-seconds: 600
+    # - name: "local"
+    #   sse-url: "http://localhost:3000/sse"
+    #   log-requests: true
+    #   log-responses: true
+    #   timeout-seconds: 600
+
+openweather:
+  api-key: "xxx"
+
+# 高德地图（天气工具地理编码用，用户自有 Web 服务 key）
+amap:
+  # 安全提示：Key 通过环境变量注入，切勿硬编码提交到仓库。
+  # 本地在 ai-tourism/.env.local 中配置 AMAP_WEB_API_KEY=你的高德Web服务Key
+  web-api-key: "${AMAP_WEB_API_KEY:}"
+
+# =============================================================================
+# 真实价格数据源配置（预算系统「数据真实性分层」改造，2026-10-22）
+# -----------------------------------------------------------------------------
+# 三级价格链：真实 API（火车票）→ 快照表（酒店/景点库门票）→ 系数估算（兜底）
+# 任一层缺失自动降级，费用明细中如实标注来源，绝不把估算显示为真实价格。
+#
+# 火车票（唯一需要个人付费申请的真实票价源，约 ¥2/100 次）：
+#   juhe = 聚合数据「火车订票查询」(id 817)  https://www.juhe.cn     实名认证后申请
+#   jisu = 极速数据 train/station2s          https://www.jisuapi.com 实名认证后申请
+# 酒店房价：携程/美团/飞猪官方 API 均要求企业分销资质（个人不可申请），
+#   改用快照表方案，见 sql/price_real_data.sql（t_hotel_price_snapshot，季度更新）
+price:
+  train:
+    provider: juhe      # juhe / jisu；留空 = 不启用真实票价（自动降级系数估算）
+    # 通过环境变量注入：JUHE_TRAIN_API_KEY=你的聚合数据Key
+    # 当前默认留空 → 真实票价接口不可用，系统自动降级为 12306 本地票价表/系数估算（不影响功能）
+    api-key: "${JUHE_TRAIN_API_KEY:}"
+    api-url: ""         # 留空 = 按 provider 使用默认地址（https://apis.juhe.cn/fapigw/train/query）
+    cache-hours: 24     # 真实票价缓存时长（小时）
+
+# =============================================================================
+# 大模型配置（OpenAI 兼容协议）
+# -----------------------------------------------------------------------------
+# 本系统所有大模型调用都走 OpenAI 兼容协议（/chat/completions），
+# 因此**只需改 base-url + api-key + model-name 即可切换任意模型服务**，
+# 无需改动任何业务代码。可选后端（额度以厂商控制台实时显示为准）：
+#
+#   1) 智谱 GLM-4-Flash（当前默认，实测可用）
+#        base-url: https://open.bigmodel.cn/api/paas/v4
+#        api-key : ${ZHIPU_API_KEY}      # 本地放 .env.local（已被 .gitignore 忽略）
+#        model   : glm-4-flash
+#        实测（2026-10-10）：glm-4-flash 正常返回，且支持 response_format=json_object，
+#        与本项目 BudgetServiceImpl / MemoryChatServiceImpl 的 JSON 模式用法兼容。
+#
+#        ⚠️ 不要用 glm-4.7-flash：实测持续返回 429「该模型当前访问量过大」，
+#           非偶发，无法用于演示。
+#        ⚠️ 不要用 glm-4.5-flash / glm-4.5-air：这两个是思考型模型，会先输出
+#           reasoning_content，max_tokens 偏小时 content 返回空字符串
+#           （实测 max_tokens=32 时 content 为空）。若必须使用，需把
+#           max-output-tokens 调大到 2000 以上，且不适合 openai-small 场景。
+#
+#   2) 硅基流动 SiliconFlow（30+ Free 标签模型，一个 Key 通用）
+#        base-url: https://api.siliconflow.cn/v1
+#        model   : deepseek-ai/DeepSeek-V4-Flash
+#        说明：模型名区分大小写且带组织前缀，须从控制台复制。
+#
+#   3) DeepSeek 官方（新用户仅 100 万 tokens 且 3 天有效，已不作为默认）
+#        base-url: https://api.deepseek.com/v1
+#        model   : deepseek-chat
+#
+#   4) 阿里百炼 / 火山方舟 / 腾讯混元 / 百度千帆：同为 OpenAI 兼容，改 base-url 与 model 即可
+#
+#   5) 本地 Ollama：base-url: http://localhost:11434/v1，api-key 任意非空字符串
+#
+#   6) WorkBuddy 内置免密钥大模型
+#        注意：该通道由 WorkBuddy 云服务提供，属**浏览器侧、按 Origin 校验**的调用通道
+#        （路径 /.cloud/llm/chat/completions，凭 publishableKey 识别应用），
+#        设计上只能由前端页面调用，**后端服务无法直接使用**。
+#        接入位置见 ai-tourism-frontend/src/utils/ 下的前端适配层，
+#        且需先在 WorkBuddy 中为该应用开通云服务后方可生效。
+#
+# 切换步骤：只改下面两个块的三行值，重启后端即可，无需改动 Java 代码
+#          （消费点为 MemoryAssistantServiceFactory / BudgetServiceImpl /
+#            MemoryChatServiceImpl 中的 @Value("${openai.*}")）。
+# =============================================================================
+
+# OpenAI兼容配置（主模型 - 行程规划与预算提取）
+openai:
+  api-key: "${ZHIPU_API_KEY}"
+  base-url: "https://open.bigmodel.cn/api/paas/v4"
+  model-name: "glm-4-flash"
+  max-output-tokens: 2000
+
+# OpenAI兼容配置（小模型 - 会话标题生成）
+openai-small:
+  api-key: "${ZHIPU_API_KEY}"
+  base-url: "https://open.bigmodel.cn/api/paas/v4"
+  model-name: "glm-4-flash"
+  max-output-tokens: 200
+
+# HTTP客户端配置
+http:
+  client:
+    connect-timeout: 30000
+    read-timeout: 120000
+    max-connections: 100
+    keep-alive-duration: 300000
+
+# 应用配置
+app:
+  mcp:
+    health-check-interval: 300000  # 5分钟
+    retry-attempts: 3
+    retry-delay: 5000
+
+
+# MyBatis 写数据库
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.example.aitourism.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+# 日志
+logging:
+  file:
+    name: app.log
+    # 或者使用 path
+    # path: ./logs
+  level:
+    com.example.aitourism: INFO
+    org.springframework.web: INFO
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 30
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%highlight(%-5level)] [%thread] [%X{traceId}] %-5level %logger{36}:%line - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%highlight(%-5level)] [%thread] [%X{traceId}] %-5level %logger{36}:%line - %msg%n"
+
+
+# Sa-Token & JWT 配置
+sa-token:
+  token-name: Authorization
+  is-read-cookie: false
+  is-read-body: false
+  is-read-header: true
+  token-prefix: Bearer
+  timeout: 300   # 10分钟过期，然后前端会refresh刷新
+  active-timeout: -1
+  is-share: false
+  is-log: true
+  jwt-secret-key: "please-change-me-very-strong"
+
+# Knife4j 接口文档配置（开题报告：接口文档）
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+
+# 会话隔离记忆管理配置
+ai:
+  memory:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: 
+      ttl: 1800  # 1小时过期，1800
+      key-prefix: "ai:memory:"
+
+# 会话隔离相关配置
+session:
+  isolation:
+    enabled: true
+    max-sessions-per-user: 50
+    session-timeout: 3600  # 会话超时时间（秒）
+    memory-cache-size: 2000  # 记忆缓存大小
+
+# A/B测试配置 - 针对单人测试优化
+ab-test:
+  tool-cache:
+    enabled: true
+    target-hit-rate: 0.8
+    record-no-cache-baseline: true
+    no-cache-test-ratio: 0.3  # 30%的请求不使用缓存，快速收集对比数据
+  service-cache:
+    enabled: true
+    record-no-cache-baseline: true
+    no-cache-test-ratio: 0.2  # 20%的请求不使用缓存，快速收集对比数据
+  truncation:
+    enabled: true
+    record-no-truncation-baseline: true
+    no-truncation-test-ratio: 0.2  # 20%的请求不使用裁剪，快速收集对比数据
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics,threaddump,env,logfile
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
+  prometheus:
+    metrics:
+      export:
+        step: 10s
+        registry-type: classic

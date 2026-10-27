@@ -1,0 +1,38 @@
+[
+ {
+  "url": "https://www.xiaohongshu.com/ai_chat?from=sidebar",
+  "status": 200,
+  "len": 142888,
+  "head": "<!doctype html><html class=\"\"><head><script formula-runtime >function e(e){for(var r=1;r<arguments.length;r++){var t=null!=arguments[r]?arguments[r]:{},n=Object.keys(t);\"function\"==typeof Object.getOwnPropertySymbols&&(n=n.concat(Object.getOwnPropertySymbols(t).filter(function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),n.forEach(function(r){var n;n=t[r],r in e?Object.definePrope"
+ },
+ {
+  "url": "https://fe-static.xhscdn.com/formula-static/xhs-pc-web/public/resource/js/async/AiChat.976041a7.js",
+  "status": 200,
+  "len": 212655,
+  "head": "\"use strict\";(self.webpackChunkxhs_pc_web=self.webpackChunkxhs_pc_web||[]).push([[\"4457\"],{92517:function(e,n,t){t.r(n),t.d(n,{default:function(){return aQ}});var i=t(41622),a=t(70879),r=t(66993),o=t(377);t(87989),t(75973),t(69032),t(93354),t(97357),t(34333),t(72169),t(58486);var l=t(93328),s=t(85753),u=t(11133),c=t(13285),d=t(27337),v=t(82726);t(63235),t(15368),t(12970),t(8503),t(32207),t(13598),"
+ },
+ {
+  "url": "https://edith.xiaohongshu.com/api/sns/v1/im/web/get_recent_chats",
+  "status": 200,
+  "len": 5887,
+  "head": "{\"code\":0,\"success\":true,\"msg\":\"成功\",\"data\":{\"user_list\":[{\"nickname\":\"早睡\",\"image\":\"https://sns-avatar-qc.xhscdn.com/avatar/649e7fbf29fb964058732b37.jpg?imageView2/2/w/120/format/jpg\",\"is_group_chat\":false,\"source\":\"algo\",\"type\":1,\"user_id\":\"5f66035000000000010098c5\"},{\"user_id\":\"6115b254000000000100b0d1\",\"nickname\":\"🙏🏻\",\"image\":\"https://sns-avatar-qc.xhscdn.com/avatar/1040g2jo31nss023h4q405o8lm9a0"
+ },
+ {
+  "url": "https://edith.xiaohongshu.com/api/im/web/chats/group?limit=100&complete=true&page=0&source=pc",
+  "status": 200,
+  "len": 1601,
+  "head": "{\"code\":0,\"success\":true,\"msg\":\"成功\",\"data\":{\"result\":{\"success\":true,\"code\":0,\"message\":\"success\"},\"page\":0,\"total\":1,\"next_ts\":-1,\"chats\":[{\"user_id\":\"674493e8000000001d02e1a2\",\"max_store_id\":5658,\"last_msg_time\":1790908631815,\"notification_status\":2,\"at_types\":0,\"info\":{\"user_num\":437,\"avatar\":\"https://msg-img.xhscdn.com/im-avatar/6a6613542c10f50015f19a18.png?imageView2/2/w/400/format/png\",\"anno"
+ },
+ {
+  "url": "https://edith.xiaohongshu.com/api/im/web/v3/chats?limit=100&complete=true&page=0&source=pc",
+  "status": 200,
+  "len": 47020,
+  "head": "{\"msg\":\"成功\",\"data\":{\"page\":0,\"total\":38,\"next_ts\":-1,\"chats\":[{\"user_id\":\"674493e8000000001d02e1a2\",\"start_store_id\":0,\"max_store_id\":11,\"last_msg_content\":\"[图片]\",\"chat_status\":0,\"chat_user_id\":\"6939a6a7000000003700a288\",\"last_msg_time\":1785898711000,\"info\":{\"is_ai_assistant\":false,\"total_chat_days\":0,\"join_timestamp\":0,\"is_mute\":false,\"is_brand\":false,\"is_interact\":false,\"show_audio\":false,\"extra"
+ },
+ {
+  "url": "https://edith.xiaohongshu.com/api/im/web/chat/get_unread",
+  "status": 200,
+  "len": 1228,
+  "head": "{\"data\":{\"user_chat_unread_counts\":{\"66efb452000000001d02204f\":0,\"5f5f2d49000000000101f63e\":0,\"671107fa000000001d033cf3\":0,\"5ba7e67465f0230001104a8e\":0,\"6939a6a7000000003700a288\":0,\"5b46fcf84eacab58a0c3f0e2\":0,\"68714edd000000000d03d9ef\":0,\"637dc43d000000001f01aa8f\":0,\"5fce06d4000000000101e69f\":0,\"6115b254000000000100b0d1\":0,\"64620002000000001400ee9a\":0,\"67badee0000000000e0123e8\":0,\"5d75bfb80000000"
+ }
+]

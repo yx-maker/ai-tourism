@@ -1,0 +1,2745 @@
+{
+ "generated_at": "2026-10-26T23:25:29",
+ "source": "amap-district-v3",
+ "total": 391,
+ "tier1": 82,
+ "cities": [
+  {
+   "name": "洛阳",
+   "full": "洛阳市",
+   "adcode": "410300",
+   "province": "河南省",
+   "tier": 1
+  },
+  {
+   "name": "漯河",
+   "full": "漯河市",
+   "adcode": "411100",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "南阳",
+   "full": "南阳市",
+   "adcode": "411300",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "信阳",
+   "full": "信阳市",
+   "adcode": "411500",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "濮阳",
+   "full": "濮阳市",
+   "adcode": "410900",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "三门峡",
+   "full": "三门峡市",
+   "adcode": "411200",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "济源",
+   "full": "济源市",
+   "adcode": "419001",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "许昌",
+   "full": "许昌市",
+   "adcode": "411000",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "焦作",
+   "full": "焦作市",
+   "adcode": "410800",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "开封",
+   "full": "开封市",
+   "adcode": "410200",
+   "province": "河南省",
+   "tier": 1
+  },
+  {
+   "name": "驻马店",
+   "full": "驻马店市",
+   "adcode": "411700",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "安阳",
+   "full": "安阳市",
+   "adcode": "410500",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "鹤壁",
+   "full": "鹤壁市",
+   "adcode": "410600",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "新乡",
+   "full": "新乡市",
+   "adcode": "410700",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "平顶山",
+   "full": "平顶山市",
+   "adcode": "410400",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "郑州",
+   "full": "郑州市",
+   "adcode": "410100",
+   "province": "河南省",
+   "tier": 1
+  },
+  {
+   "name": "周口",
+   "full": "周口市",
+   "adcode": "411600",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "商丘",
+   "full": "商丘市",
+   "adcode": "411400",
+   "province": "河南省",
+   "tier": 2
+  },
+  {
+   "name": "汕头",
+   "full": "汕头市",
+   "adcode": "440500",
+   "province": "广东省",
+   "tier": 1
+  },
+  {
+   "name": "佛山",
+   "full": "佛山市",
+   "adcode": "440600",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "肇庆",
+   "full": "肇庆市",
+   "adcode": "441200",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "惠州",
+   "full": "惠州市",
+   "adcode": "441300",
+   "province": "广东省",
+   "tier": 1
+  },
+  {
+   "name": "深圳",
+   "full": "深圳市",
+   "adcode": "440300",
+   "province": "广东省",
+   "tier": 1
+  },
+  {
+   "name": "珠海",
+   "full": "珠海市",
+   "adcode": "440400",
+   "province": "广东省",
+   "tier": 1
+  },
+  {
+   "name": "江门",
+   "full": "江门市",
+   "adcode": "440700",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "阳江",
+   "full": "阳江市",
+   "adcode": "441700",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "茂名",
+   "full": "茂名市",
+   "adcode": "440900",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "湛江",
+   "full": "湛江市",
+   "adcode": "440800",
+   "province": "广东省",
+   "tier": 1
+  },
+  {
+   "name": "潮州",
+   "full": "潮州市",
+   "adcode": "445100",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "汕尾",
+   "full": "汕尾市",
+   "adcode": "441500",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "揭阳",
+   "full": "揭阳市",
+   "adcode": "445200",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "广州",
+   "full": "广州市",
+   "adcode": "440100",
+   "province": "广东省",
+   "tier": 1
+  },
+  {
+   "name": "梅州",
+   "full": "梅州市",
+   "adcode": "441400",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "清远",
+   "full": "清远市",
+   "adcode": "441800",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "韶关",
+   "full": "韶关市",
+   "adcode": "440200",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "河源",
+   "full": "河源市",
+   "adcode": "441600",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "云浮",
+   "full": "云浮市",
+   "adcode": "445300",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "东莞",
+   "full": "东莞市",
+   "adcode": "441900",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "中山",
+   "full": "中山市",
+   "adcode": "442000",
+   "province": "广东省",
+   "tier": 2
+  },
+  {
+   "name": "乌海",
+   "full": "乌海市",
+   "adcode": "150300",
+   "province": "内蒙古自治区",
+   "tier": 2
+  },
+  {
+   "name": "巴彦淖尔",
+   "full": "巴彦淖尔市",
+   "adcode": "150800",
+   "province": "内蒙古自治区",
+   "tier": 2
+  },
+  {
+   "name": "包头",
+   "full": "包头市",
+   "adcode": "150200",
+   "province": "内蒙古自治区",
+   "tier": 2
+  },
+  {
+   "name": "呼伦贝尔",
+   "full": "呼伦贝尔市",
+   "adcode": "150700",
+   "province": "内蒙古自治区",
+   "tier": 2
+  },
+  {
+   "name": "兴安",
+   "full": "兴安盟",
+   "adcode": "152200",
+   "province": "内蒙古自治区",
+   "tier": 2
+  },
+  {
+   "name": "锡林郭勒",
+   "full": "锡林郭勒盟",
+   "adcode": "152500",
+   "province": "内蒙古自治区",
+   "tier": 2
+  },
+  {
+   "name": "乌兰察布",
+   "full": "乌兰察布市",
+   "adcode": "150900",
+   "province": "内蒙古自治区",
+   "tier": 2
+  },
+  {
+   "name": "阿拉善",
+   "full": "阿拉善盟",
+   "adcode": "152900",
+   "province": "内蒙古自治区",
+   "tier": 2
+  },
+  {
+   "name": "鄂尔多斯",
+   "full": "鄂尔多斯市",
+   "adcode": "150600",
+   "province": "内蒙古自治区",
+   "tier": 2
+  },
+  {
+   "name": "呼和浩特",
+   "full": "呼和浩特市",
+   "adcode": "150100",
+   "province": "内蒙古自治区",
+   "tier": 1
+  },
+  {
+   "name": "赤峰",
+   "full": "赤峰市",
+   "adcode": "150400",
+   "province": "内蒙古自治区",
+   "tier": 2
+  },
+  {
+   "name": "通辽",
+   "full": "通辽市",
+   "adcode": "150500",
+   "province": "内蒙古自治区",
+   "tier": 2
+  },
+  {
+   "name": "大兴安岭",
+   "full": "大兴安岭地区",
+   "adcode": "232700",
+   "province": "黑龙江省",
+   "tier": 2
+  },
+  {
+   "name": "鹤岗",
+   "full": "鹤岗市",
+   "adcode": "230400",
+   "province": "黑龙江省",
+   "tier": 2
+  },
+  {
+   "name": "黑河",
+   "full": "黑河市",
+   "adcode": "231100",
+   "province": "黑龙江省",
+   "tier": 2
+  },
+  {
+   "name": "牡丹江",
+   "full": "牡丹江市",
+   "adcode": "231000",
+   "province": "黑龙江省",
+   "tier": 2
+  },
+  {
+   "name": "伊春",
+   "full": "伊春市",
+   "adcode": "230700",
+   "province": "黑龙江省",
+   "tier": 2
+  },
+  {
+   "name": "鸡西",
+   "full": "鸡西市",
+   "adcode": "230300",
+   "province": "黑龙江省",
+   "tier": 2
+  },
+  {
+   "name": "齐齐哈尔",
+   "full": "齐齐哈尔市",
+   "adcode": "230200",
+   "province": "黑龙江省",
+   "tier": 2
+  },
+  {
+   "name": "绥化",
+   "full": "绥化市",
+   "adcode": "231200",
+   "province": "黑龙江省",
+   "tier": 2
+  },
+  {
+   "name": "大庆",
+   "full": "大庆市",
+   "adcode": "230600",
+   "province": "黑龙江省",
+   "tier": 2
+  },
+  {
+   "name": "哈尔滨",
+   "full": "哈尔滨市",
+   "adcode": "230100",
+   "province": "黑龙江省",
+   "tier": 1
+  },
+  {
+   "name": "佳木斯",
+   "full": "佳木斯市",
+   "adcode": "230800",
+   "province": "黑龙江省",
+   "tier": 2
+  },
+  {
+   "name": "七台河",
+   "full": "七台河市",
+   "adcode": "230900",
+   "province": "黑龙江省",
+   "tier": 2
+  },
+  {
+   "name": "双鸭山",
+   "full": "双鸭山市",
+   "adcode": "230500",
+   "province": "黑龙江省",
+   "tier": 2
+  },
+  {
+   "name": "双河",
+   "full": "双河市",
+   "adcode": "659007",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "铁门关",
+   "full": "铁门关市",
+   "adcode": "659006",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "北屯",
+   "full": "北屯市",
+   "adcode": "659005",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "塔城",
+   "full": "塔城地区",
+   "adcode": "654200",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "昆玉",
+   "full": "昆玉市",
+   "adcode": "659009",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "和田",
+   "full": "和田地区",
+   "adcode": "653200",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "阿勒泰",
+   "full": "阿勒泰地区",
+   "adcode": "654300",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "石河子",
+   "full": "石河子市",
+   "adcode": "659001",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "可克达拉",
+   "full": "可克达拉市",
+   "adcode": "659008",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "博尔塔拉蒙古",
+   "full": "博尔塔拉蒙古自治州",
+   "adcode": "652700",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "昌吉",
+   "full": "昌吉回族自治州",
+   "adcode": "652300",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "伊犁",
+   "full": "伊犁哈萨克自治州",
+   "adcode": "654000",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "阿拉尔",
+   "full": "阿拉尔市",
+   "adcode": "659002",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "喀什",
+   "full": "喀什地区",
+   "adcode": "653100",
+   "province": "新疆维吾尔自治区",
+   "tier": 1
+  },
+  {
+   "name": "克拉玛依",
+   "full": "克拉玛依市",
+   "adcode": "650200",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "吐鲁番",
+   "full": "吐鲁番市",
+   "adcode": "650400",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "哈密",
+   "full": "哈密市",
+   "adcode": "650500",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "新星",
+   "full": "新星市",
+   "adcode": "659011",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "图木舒克",
+   "full": "图木舒克市",
+   "adcode": "659003",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "阿克苏",
+   "full": "阿克苏地区",
+   "adcode": "652900",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "乌鲁木齐",
+   "full": "乌鲁木齐市",
+   "adcode": "650100",
+   "province": "新疆维吾尔自治区",
+   "tier": 1
+  },
+  {
+   "name": "胡杨河",
+   "full": "胡杨河市",
+   "adcode": "659010",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "五家渠",
+   "full": "五家渠市",
+   "adcode": "659004",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "巴音郭楞蒙古",
+   "full": "巴音郭楞蒙古自治州",
+   "adcode": "652800",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "白杨",
+   "full": "白杨市",
+   "adcode": "659012",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "克孜勒苏",
+   "full": "克孜勒苏柯尔克孜自治州",
+   "adcode": "653000",
+   "province": "新疆维吾尔自治区",
+   "tier": 2
+  },
+  {
+   "name": "襄阳",
+   "full": "襄阳市",
+   "adcode": "420600",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "十堰",
+   "full": "十堰市",
+   "adcode": "420300",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "宜昌",
+   "full": "宜昌市",
+   "adcode": "420500",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "武汉",
+   "full": "武汉市",
+   "adcode": "420100",
+   "province": "湖北省",
+   "tier": 1
+  },
+  {
+   "name": "黄冈",
+   "full": "黄冈市",
+   "adcode": "421100",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "荆门",
+   "full": "荆门市",
+   "adcode": "420800",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "潜江",
+   "full": "潜江市",
+   "adcode": "429005",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "天门",
+   "full": "天门市",
+   "adcode": "429006",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "孝感",
+   "full": "孝感市",
+   "adcode": "420900",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "仙桃",
+   "full": "仙桃市",
+   "adcode": "429004",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "荆州",
+   "full": "荆州市",
+   "adcode": "421000",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "恩施",
+   "full": "恩施土家族苗族自治州",
+   "adcode": "422800",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "咸宁",
+   "full": "咸宁市",
+   "adcode": "421200",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "神农架林区",
+   "full": "神农架林区",
+   "adcode": "429021",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "随州",
+   "full": "随州市",
+   "adcode": "421300",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "黄石",
+   "full": "黄石市",
+   "adcode": "420200",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "鄂州",
+   "full": "鄂州市",
+   "adcode": "420700",
+   "province": "湖北省",
+   "tier": 2
+  },
+  {
+   "name": "葫芦岛",
+   "full": "葫芦岛市",
+   "adcode": "211400",
+   "province": "辽宁省",
+   "tier": 2
+  },
+  {
+   "name": "大连",
+   "full": "大连市",
+   "adcode": "210200",
+   "province": "辽宁省",
+   "tier": 1
+  },
+  {
+   "name": "丹东",
+   "full": "丹东市",
+   "adcode": "210600",
+   "province": "辽宁省",
+   "tier": 1
+  },
+  {
+   "name": "锦州",
+   "full": "锦州市",
+   "adcode": "210700",
+   "province": "辽宁省",
+   "tier": 2
+  },
+  {
+   "name": "沈阳",
+   "full": "沈阳市",
+   "adcode": "210100",
+   "province": "辽宁省",
+   "tier": 1
+  },
+  {
+   "name": "铁岭",
+   "full": "铁岭市",
+   "adcode": "211200",
+   "province": "辽宁省",
+   "tier": 2
+  },
+  {
+   "name": "阜新",
+   "full": "阜新市",
+   "adcode": "210900",
+   "province": "辽宁省",
+   "tier": 2
+  },
+  {
+   "name": "本溪",
+   "full": "本溪市",
+   "adcode": "210500",
+   "province": "辽宁省",
+   "tier": 2
+  },
+  {
+   "name": "辽阳",
+   "full": "辽阳市",
+   "adcode": "211000",
+   "province": "辽宁省",
+   "tier": 2
+  },
+  {
+   "name": "抚顺",
+   "full": "抚顺市",
+   "adcode": "210400",
+   "province": "辽宁省",
+   "tier": 2
+  },
+  {
+   "name": "盘锦",
+   "full": "盘锦市",
+   "adcode": "211100",
+   "province": "辽宁省",
+   "tier": 2
+  },
+  {
+   "name": "朝阳",
+   "full": "朝阳市",
+   "adcode": "211300",
+   "province": "辽宁省",
+   "tier": 2
+  },
+  {
+   "name": "鞍山",
+   "full": "鞍山市",
+   "adcode": "210300",
+   "province": "辽宁省",
+   "tier": 1
+  },
+  {
+   "name": "营口",
+   "full": "营口市",
+   "adcode": "210800",
+   "province": "辽宁省",
+   "tier": 2
+  },
+  {
+   "name": "东营",
+   "full": "东营市",
+   "adcode": "370500",
+   "province": "山东省",
+   "tier": 2
+  },
+  {
+   "name": "滨州",
+   "full": "滨州市",
+   "adcode": "371600",
+   "province": "山东省",
+   "tier": 2
+  },
+  {
+   "name": "烟台",
+   "full": "烟台市",
+   "adcode": "370600",
+   "province": "山东省",
+   "tier": 1
+  },
+  {
+   "name": "威海",
+   "full": "威海市",
+   "adcode": "371000",
+   "province": "山东省",
+   "tier": 1
+  },
+  {
+   "name": "青岛",
+   "full": "青岛市",
+   "adcode": "370200",
+   "province": "山东省",
+   "tier": 1
+  },
+  {
+   "name": "聊城",
+   "full": "聊城市",
+   "adcode": "371500",
+   "province": "山东省",
+   "tier": 2
+  },
+  {
+   "name": "淄博",
+   "full": "淄博市",
+   "adcode": "370300",
+   "province": "山东省",
+   "tier": 2
+  },
+  {
+   "name": "潍坊",
+   "full": "潍坊市",
+   "adcode": "370700",
+   "province": "山东省",
+   "tier": 2
+  },
+  {
+   "name": "泰安",
+   "full": "泰安市",
+   "adcode": "370900",
+   "province": "山东省",
+   "tier": 1
+  },
+  {
+   "name": "枣庄",
+   "full": "枣庄市",
+   "adcode": "370400",
+   "province": "山东省",
+   "tier": 2
+  },
+  {
+   "name": "济南",
+   "full": "济南市",
+   "adcode": "370100",
+   "province": "山东省",
+   "tier": 1
+  },
+  {
+   "name": "临沂",
+   "full": "临沂市",
+   "adcode": "371300",
+   "province": "山东省",
+   "tier": 2
+  },
+  {
+   "name": "日照",
+   "full": "日照市",
+   "adcode": "371100",
+   "province": "山东省",
+   "tier": 2
+  },
+  {
+   "name": "德州",
+   "full": "德州市",
+   "adcode": "371400",
+   "province": "山东省",
+   "tier": 2
+  },
+  {
+   "name": "济宁",
+   "full": "济宁市",
+   "adcode": "370800",
+   "province": "山东省",
+   "tier": 2
+  },
+  {
+   "name": "菏泽",
+   "full": "菏泽市",
+   "adcode": "371700",
+   "province": "山东省",
+   "tier": 2
+  },
+  {
+   "name": "上海",
+   "full": "上海市",
+   "adcode": "310000",
+   "province": "上海市",
+   "tier": 1
+  },
+  {
+   "name": "遵义",
+   "full": "遵义市",
+   "adcode": "520300",
+   "province": "贵州省",
+   "tier": 1
+  },
+  {
+   "name": "铜仁",
+   "full": "铜仁市",
+   "adcode": "520600",
+   "province": "贵州省",
+   "tier": 2
+  },
+  {
+   "name": "六盘水",
+   "full": "六盘水市",
+   "adcode": "520200",
+   "province": "贵州省",
+   "tier": 2
+  },
+  {
+   "name": "安顺",
+   "full": "安顺市",
+   "adcode": "520400",
+   "province": "贵州省",
+   "tier": 1
+  },
+  {
+   "name": "黔南",
+   "full": "黔南布依族苗族自治州",
+   "adcode": "522700",
+   "province": "贵州省",
+   "tier": 2
+  },
+  {
+   "name": "黔西南",
+   "full": "黔西南布依族苗族自治州",
+   "adcode": "522300",
+   "province": "贵州省",
+   "tier": 2
+  },
+  {
+   "name": "黔东南",
+   "full": "黔东南苗族侗族自治州",
+   "adcode": "522600",
+   "province": "贵州省",
+   "tier": 2
+  },
+  {
+   "name": "毕节",
+   "full": "毕节市",
+   "adcode": "520500",
+   "province": "贵州省",
+   "tier": 2
+  },
+  {
+   "name": "贵阳",
+   "full": "贵阳市",
+   "adcode": "520100",
+   "province": "贵州省",
+   "tier": 1
+  },
+  {
+   "name": "重庆",
+   "full": "重庆市",
+   "adcode": "500000",
+   "province": "重庆市",
+   "tier": 1
+  },
+  {
+   "name": "铜陵",
+   "full": "铜陵市",
+   "adcode": "340700",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "池州",
+   "full": "池州市",
+   "adcode": "341700",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "安庆",
+   "full": "安庆市",
+   "adcode": "340800",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "马鞍山",
+   "full": "马鞍山市",
+   "adcode": "340500",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "淮北",
+   "full": "淮北市",
+   "adcode": "340600",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "六安",
+   "full": "六安市",
+   "adcode": "341500",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "阜阳",
+   "full": "阜阳市",
+   "adcode": "341200",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "滁州",
+   "full": "滁州市",
+   "adcode": "341100",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "蚌埠",
+   "full": "蚌埠市",
+   "adcode": "340300",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "黄山",
+   "full": "黄山市",
+   "adcode": "341000",
+   "province": "安徽省",
+   "tier": 1
+  },
+  {
+   "name": "合肥",
+   "full": "合肥市",
+   "adcode": "340100",
+   "province": "安徽省",
+   "tier": 1
+  },
+  {
+   "name": "芜湖",
+   "full": "芜湖市",
+   "adcode": "340200",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "宣城",
+   "full": "宣城市",
+   "adcode": "341800",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "亳州",
+   "full": "亳州市",
+   "adcode": "341600",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "淮南",
+   "full": "淮南市",
+   "adcode": "340400",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "宿州",
+   "full": "宿州市",
+   "adcode": "341300",
+   "province": "安徽省",
+   "tier": 2
+  },
+  {
+   "name": "宁德",
+   "full": "宁德市",
+   "adcode": "350900",
+   "province": "福建省",
+   "tier": 2
+  },
+  {
+   "name": "福州",
+   "full": "福州市",
+   "adcode": "350100",
+   "province": "福建省",
+   "tier": 1
+  },
+  {
+   "name": "莆田",
+   "full": "莆田市",
+   "adcode": "350300",
+   "province": "福建省",
+   "tier": 2
+  },
+  {
+   "name": "泉州",
+   "full": "泉州市",
+   "adcode": "350500",
+   "province": "福建省",
+   "tier": 1
+  },
+  {
+   "name": "厦门",
+   "full": "厦门市",
+   "adcode": "350200",
+   "province": "福建省",
+   "tier": 1
+  },
+  {
+   "name": "漳州",
+   "full": "漳州市",
+   "adcode": "350600",
+   "province": "福建省",
+   "tier": 1
+  },
+  {
+   "name": "三明",
+   "full": "三明市",
+   "adcode": "350400",
+   "province": "福建省",
+   "tier": 2
+  },
+  {
+   "name": "南平",
+   "full": "南平市",
+   "adcode": "350700",
+   "province": "福建省",
+   "tier": 2
+  },
+  {
+   "name": "龙岩",
+   "full": "龙岩市",
+   "adcode": "350800",
+   "province": "福建省",
+   "tier": 2
+  },
+  {
+   "name": "怀化",
+   "full": "怀化市",
+   "adcode": "431200",
+   "province": "湖南省",
+   "tier": 2
+  },
+  {
+   "name": "岳阳",
+   "full": "岳阳市",
+   "adcode": "430600",
+   "province": "湖南省",
+   "tier": 2
+  },
+  {
+   "name": "湘西",
+   "full": "湘西土家族苗族自治州",
+   "adcode": "433100",
+   "province": "湖南省",
+   "tier": 2
+  },
+  {
+   "name": "张家界",
+   "full": "张家界市",
+   "adcode": "430800",
+   "province": "湖南省",
+   "tier": 1
+  },
+  {
+   "name": "永州",
+   "full": "永州市",
+   "adcode": "431100",
+   "province": "湖南省",
+   "tier": 2
+  },
+  {
+   "name": "常德",
+   "full": "常德市",
+   "adcode": "430700",
+   "province": "湖南省",
+   "tier": 2
+  },
+  {
+   "name": "湘潭",
+   "full": "湘潭市",
+   "adcode": "430300",
+   "province": "湖南省",
+   "tier": 2
+  },
+  {
+   "name": "郴州",
+   "full": "郴州市",
+   "adcode": "431000",
+   "province": "湖南省",
+   "tier": 2
+  },
+  {
+   "name": "株洲",
+   "full": "株洲市",
+   "adcode": "430200",
+   "province": "湖南省",
+   "tier": 2
+  },
+  {
+   "name": "长沙",
+   "full": "长沙市",
+   "adcode": "430100",
+   "province": "湖南省",
+   "tier": 1
+  },
+  {
+   "name": "衡阳",
+   "full": "衡阳市",
+   "adcode": "430400",
+   "province": "湖南省",
+   "tier": 2
+  },
+  {
+   "name": "邵阳",
+   "full": "邵阳市",
+   "adcode": "430500",
+   "province": "湖南省",
+   "tier": 2
+  },
+  {
+   "name": "娄底",
+   "full": "娄底市",
+   "adcode": "431300",
+   "province": "湖南省",
+   "tier": 2
+  },
+  {
+   "name": "益阳",
+   "full": "益阳市",
+   "adcode": "430900",
+   "province": "湖南省",
+   "tier": 2
+  },
+  {
+   "name": "白沙",
+   "full": "白沙黎族自治县",
+   "adcode": "469025",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "屯昌",
+   "full": "屯昌县",
+   "adcode": "469022",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "东方",
+   "full": "东方市",
+   "adcode": "469007",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "琼中",
+   "full": "琼中黎族苗族自治县",
+   "adcode": "469030",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "乐东",
+   "full": "乐东黎族自治县",
+   "adcode": "469027",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "文昌",
+   "full": "文昌市",
+   "adcode": "469005",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "三沙",
+   "full": "三沙市",
+   "adcode": "460300",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "陵水",
+   "full": "陵水黎族自治县",
+   "adcode": "469028",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "临高",
+   "full": "临高县",
+   "adcode": "469024",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "三亚",
+   "full": "三亚市",
+   "adcode": "460200",
+   "province": "海南省",
+   "tier": 1
+  },
+  {
+   "name": "五指山",
+   "full": "五指山市",
+   "adcode": "469001",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "保亭",
+   "full": "保亭黎族苗族自治县",
+   "adcode": "469029",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "定安",
+   "full": "定安县",
+   "adcode": "469021",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "昌江",
+   "full": "昌江黎族自治县",
+   "adcode": "469026",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "澄迈",
+   "full": "澄迈县",
+   "adcode": "469023",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "海口",
+   "full": "海口市",
+   "adcode": "460100",
+   "province": "海南省",
+   "tier": 1
+  },
+  {
+   "name": "儋州",
+   "full": "儋州市",
+   "adcode": "460400",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "琼海",
+   "full": "琼海市",
+   "adcode": "469002",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "万宁",
+   "full": "万宁市",
+   "adcode": "469006",
+   "province": "海南省",
+   "tier": 2
+  },
+  {
+   "name": "连云港",
+   "full": "连云港市",
+   "adcode": "320700",
+   "province": "江苏省",
+   "tier": 2
+  },
+  {
+   "name": "南通",
+   "full": "南通市",
+   "adcode": "320600",
+   "province": "江苏省",
+   "tier": 2
+  },
+  {
+   "name": "南京",
+   "full": "南京市",
+   "adcode": "320100",
+   "province": "江苏省",
+   "tier": 1
+  },
+  {
+   "name": "苏州",
+   "full": "苏州市",
+   "adcode": "320500",
+   "province": "江苏省",
+   "tier": 1
+  },
+  {
+   "name": "宿迁",
+   "full": "宿迁市",
+   "adcode": "321300",
+   "province": "江苏省",
+   "tier": 2
+  },
+  {
+   "name": "淮安",
+   "full": "淮安市",
+   "adcode": "320800",
+   "province": "江苏省",
+   "tier": 2
+  },
+  {
+   "name": "徐州",
+   "full": "徐州市",
+   "adcode": "320300",
+   "province": "江苏省",
+   "tier": 2
+  },
+  {
+   "name": "常州",
+   "full": "常州市",
+   "adcode": "320400",
+   "province": "江苏省",
+   "tier": 1
+  },
+  {
+   "name": "盐城",
+   "full": "盐城市",
+   "adcode": "320900",
+   "province": "江苏省",
+   "tier": 2
+  },
+  {
+   "name": "泰州",
+   "full": "泰州市",
+   "adcode": "321200",
+   "province": "江苏省",
+   "tier": 2
+  },
+  {
+   "name": "无锡",
+   "full": "无锡市",
+   "adcode": "320200",
+   "province": "江苏省",
+   "tier": 1
+  },
+  {
+   "name": "镇江",
+   "full": "镇江市",
+   "adcode": "321100",
+   "province": "江苏省",
+   "tier": 1
+  },
+  {
+   "name": "扬州",
+   "full": "扬州市",
+   "adcode": "321000",
+   "province": "江苏省",
+   "tier": 1
+  },
+  {
+   "name": "海东",
+   "full": "海东市",
+   "adcode": "630200",
+   "province": "青海省",
+   "tier": 2
+  },
+  {
+   "name": "海南",
+   "full": "海南藏族自治州",
+   "adcode": "632500",
+   "province": "青海省",
+   "tier": 2
+  },
+  {
+   "name": "海西",
+   "full": "海西蒙古族藏族自治州",
+   "adcode": "632800",
+   "province": "青海省",
+   "tier": 2
+  },
+  {
+   "name": "玉树",
+   "full": "玉树藏族自治州",
+   "adcode": "632700",
+   "province": "青海省",
+   "tier": 2
+  },
+  {
+   "name": "黄南",
+   "full": "黄南藏族自治州",
+   "adcode": "632300",
+   "province": "青海省",
+   "tier": 2
+  },
+  {
+   "name": "果洛",
+   "full": "果洛藏族自治州",
+   "adcode": "632600",
+   "province": "青海省",
+   "tier": 2
+  },
+  {
+   "name": "海北",
+   "full": "海北藏族自治州",
+   "adcode": "632200",
+   "province": "青海省",
+   "tier": 2
+  },
+  {
+   "name": "西宁",
+   "full": "西宁市",
+   "adcode": "630100",
+   "province": "青海省",
+   "tier": 1
+  },
+  {
+   "name": "百色",
+   "full": "百色市",
+   "adcode": "451000",
+   "province": "广西壮族自治区",
+   "tier": 2
+  },
+  {
+   "name": "钦州",
+   "full": "钦州市",
+   "adcode": "450700",
+   "province": "广西壮族自治区",
+   "tier": 2
+  },
+  {
+   "name": "北海",
+   "full": "北海市",
+   "adcode": "450500",
+   "province": "广西壮族自治区",
+   "tier": 1
+  },
+  {
+   "name": "防城港",
+   "full": "防城港市",
+   "adcode": "450600",
+   "province": "广西壮族自治区",
+   "tier": 2
+  },
+  {
+   "name": "柳州",
+   "full": "柳州市",
+   "adcode": "450200",
+   "province": "广西壮族自治区",
+   "tier": 2
+  },
+  {
+   "name": "梧州",
+   "full": "梧州市",
+   "adcode": "450400",
+   "province": "广西壮族自治区",
+   "tier": 2
+  },
+  {
+   "name": "贵港",
+   "full": "贵港市",
+   "adcode": "450800",
+   "province": "广西壮族自治区",
+   "tier": 2
+  },
+  {
+   "name": "玉林",
+   "full": "玉林市",
+   "adcode": "450900",
+   "province": "广西壮族自治区",
+   "tier": 2
+  },
+  {
+   "name": "崇左",
+   "full": "崇左市",
+   "adcode": "451400",
+   "province": "广西壮族自治区",
+   "tier": 2
+  },
+  {
+   "name": "贺州",
+   "full": "贺州市",
+   "adcode": "451100",
+   "province": "广西壮族自治区",
+   "tier": 2
+  },
+  {
+   "name": "南宁",
+   "full": "南宁市",
+   "adcode": "450100",
+   "province": "广西壮族自治区",
+   "tier": 1
+  },
+  {
+   "name": "桂林",
+   "full": "桂林市",
+   "adcode": "450300",
+   "province": "广西壮族自治区",
+   "tier": 1
+  },
+  {
+   "name": "来宾",
+   "full": "来宾市",
+   "adcode": "451300",
+   "province": "广西壮族自治区",
+   "tier": 2
+  },
+  {
+   "name": "河池",
+   "full": "河池市",
+   "adcode": "451200",
+   "province": "广西壮族自治区",
+   "tier": 2
+  },
+  {
+   "name": "石嘴山",
+   "full": "石嘴山市",
+   "adcode": "640200",
+   "province": "宁夏回族自治区",
+   "tier": 2
+  },
+  {
+   "name": "固原",
+   "full": "固原市",
+   "adcode": "640400",
+   "province": "宁夏回族自治区",
+   "tier": 2
+  },
+  {
+   "name": "中卫",
+   "full": "中卫市",
+   "adcode": "640500",
+   "province": "宁夏回族自治区",
+   "tier": 2
+  },
+  {
+   "name": "银川",
+   "full": "银川市",
+   "adcode": "640100",
+   "province": "宁夏回族自治区",
+   "tier": 1
+  },
+  {
+   "name": "吴忠",
+   "full": "吴忠市",
+   "adcode": "640300",
+   "province": "宁夏回族自治区",
+   "tier": 2
+  },
+  {
+   "name": "舟山",
+   "full": "舟山市",
+   "adcode": "330900",
+   "province": "浙江省",
+   "tier": 2
+  },
+  {
+   "name": "嘉兴",
+   "full": "嘉兴市",
+   "adcode": "330400",
+   "province": "浙江省",
+   "tier": 1
+  },
+  {
+   "name": "宁波",
+   "full": "宁波市",
+   "adcode": "330200",
+   "province": "浙江省",
+   "tier": 1
+  },
+  {
+   "name": "台州",
+   "full": "台州市",
+   "adcode": "331000",
+   "province": "浙江省",
+   "tier": 2
+  },
+  {
+   "name": "温州",
+   "full": "温州市",
+   "adcode": "330300",
+   "province": "浙江省",
+   "tier": 1
+  },
+  {
+   "name": "丽水",
+   "full": "丽水市",
+   "adcode": "331100",
+   "province": "浙江省",
+   "tier": 2
+  },
+  {
+   "name": "衢州",
+   "full": "衢州市",
+   "adcode": "330800",
+   "province": "浙江省",
+   "tier": 2
+  },
+  {
+   "name": "金华",
+   "full": "金华市",
+   "adcode": "330700",
+   "province": "浙江省",
+   "tier": 2
+  },
+  {
+   "name": "湖州",
+   "full": "湖州市",
+   "adcode": "330500",
+   "province": "浙江省",
+   "tier": 1
+  },
+  {
+   "name": "杭州",
+   "full": "杭州市",
+   "adcode": "330100",
+   "province": "浙江省",
+   "tier": 1
+  },
+  {
+   "name": "绍兴",
+   "full": "绍兴市",
+   "adcode": "330600",
+   "province": "浙江省",
+   "tier": 1
+  },
+  {
+   "name": "唐山",
+   "full": "唐山市",
+   "adcode": "130200",
+   "province": "河北省",
+   "tier": 2
+  },
+  {
+   "name": "秦皇岛",
+   "full": "秦皇岛市",
+   "adcode": "130300",
+   "province": "河北省",
+   "tier": 1
+  },
+  {
+   "name": "邯郸",
+   "full": "邯郸市",
+   "adcode": "130400",
+   "province": "河北省",
+   "tier": 2
+  },
+  {
+   "name": "石家庄",
+   "full": "石家庄市",
+   "adcode": "130100",
+   "province": "河北省",
+   "tier": 1
+  },
+  {
+   "name": "廊坊",
+   "full": "廊坊市",
+   "adcode": "131000",
+   "province": "河北省",
+   "tier": 2
+  },
+  {
+   "name": "张家口",
+   "full": "张家口市",
+   "adcode": "130700",
+   "province": "河北省",
+   "tier": 2
+  },
+  {
+   "name": "邢台",
+   "full": "邢台市",
+   "adcode": "130500",
+   "province": "河北省",
+   "tier": 2
+  },
+  {
+   "name": "承德",
+   "full": "承德市",
+   "adcode": "130800",
+   "province": "河北省",
+   "tier": 1
+  },
+  {
+   "name": "衡水",
+   "full": "衡水市",
+   "adcode": "131100",
+   "province": "河北省",
+   "tier": 2
+  },
+  {
+   "name": "保定",
+   "full": "保定市",
+   "adcode": "130600",
+   "province": "河北省",
+   "tier": 2
+  },
+  {
+   "name": "沧州",
+   "full": "沧州市",
+   "adcode": "130900",
+   "province": "河北省",
+   "tier": 2
+  },
+  {
+   "name": "香港",
+   "full": "香港特别行政区",
+   "adcode": "810000",
+   "province": "香港特别行政区",
+   "tier": 1
+  },
+  {
+   "name": "澳门",
+   "full": "澳门特别行政区",
+   "adcode": "820000",
+   "province": "澳门特别行政区",
+   "tier": 1
+  },
+  {
+   "name": "酒泉",
+   "full": "酒泉市",
+   "adcode": "620900",
+   "province": "甘肃省",
+   "tier": 2
+  },
+  {
+   "name": "嘉峪关",
+   "full": "嘉峪关市",
+   "adcode": "620200",
+   "province": "甘肃省",
+   "tier": 1
+  },
+  {
+   "name": "兰州",
+   "full": "兰州市",
+   "adcode": "620100",
+   "province": "甘肃省",
+   "tier": 1
+  },
+  {
+   "name": "平凉",
+   "full": "平凉市",
+   "adcode": "620800",
+   "province": "甘肃省",
+   "tier": 2
+  },
+  {
+   "name": "金昌",
+   "full": "金昌市",
+   "adcode": "620300",
+   "province": "甘肃省",
+   "tier": 2
+  },
+  {
+   "name": "天水",
+   "full": "天水市",
+   "adcode": "620500",
+   "province": "甘肃省",
+   "tier": 2
+  },
+  {
+   "name": "白银",
+   "full": "白银市",
+   "adcode": "620400",
+   "province": "甘肃省",
+   "tier": 2
+  },
+  {
+   "name": "武威",
+   "full": "武威市",
+   "adcode": "620600",
+   "province": "甘肃省",
+   "tier": 2
+  },
+  {
+   "name": "张掖",
+   "full": "张掖市",
+   "adcode": "620700",
+   "province": "甘肃省",
+   "tier": 1
+  },
+  {
+   "name": "定西",
+   "full": "定西市",
+   "adcode": "621100",
+   "province": "甘肃省",
+   "tier": 2
+  },
+  {
+   "name": "甘南",
+   "full": "甘南藏族自治州",
+   "adcode": "623000",
+   "province": "甘肃省",
+   "tier": 2
+  },
+  {
+   "name": "庆阳",
+   "full": "庆阳市",
+   "adcode": "621000",
+   "province": "甘肃省",
+   "tier": 2
+  },
+  {
+   "name": "临夏",
+   "full": "临夏回族自治州",
+   "adcode": "622900",
+   "province": "甘肃省",
+   "tier": 2
+  },
+  {
+   "name": "陇南",
+   "full": "陇南市",
+   "adcode": "621200",
+   "province": "甘肃省",
+   "tier": 2
+  },
+  {
+   "name": "广元",
+   "full": "广元市",
+   "adcode": "510800",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "南充",
+   "full": "南充市",
+   "adcode": "511300",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "巴中",
+   "full": "巴中市",
+   "adcode": "511900",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "德阳",
+   "full": "德阳市",
+   "adcode": "510600",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "绵阳",
+   "full": "绵阳市",
+   "adcode": "510700",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "成都",
+   "full": "成都市",
+   "adcode": "510100",
+   "province": "四川省",
+   "tier": 1
+  },
+  {
+   "name": "广安",
+   "full": "广安市",
+   "adcode": "511600",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "达州",
+   "full": "达州市",
+   "adcode": "511700",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "遂宁",
+   "full": "遂宁市",
+   "adcode": "510900",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "资阳",
+   "full": "资阳市",
+   "adcode": "512000",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "眉山",
+   "full": "眉山市",
+   "adcode": "511400",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "内江",
+   "full": "内江市",
+   "adcode": "511000",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "乐山",
+   "full": "乐山市",
+   "adcode": "511100",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "自贡",
+   "full": "自贡市",
+   "adcode": "510300",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "泸州",
+   "full": "泸州市",
+   "adcode": "510500",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "宜宾",
+   "full": "宜宾市",
+   "adcode": "511500",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "凉山",
+   "full": "凉山彝族自治州",
+   "adcode": "513400",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "攀枝花",
+   "full": "攀枝花市",
+   "adcode": "510400",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "甘孜",
+   "full": "甘孜藏族自治州",
+   "adcode": "513300",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "雅安",
+   "full": "雅安市",
+   "adcode": "511800",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "阿坝",
+   "full": "阿坝藏族羌族自治州",
+   "adcode": "513200",
+   "province": "四川省",
+   "tier": 2
+  },
+  {
+   "name": "天津",
+   "full": "天津市",
+   "adcode": "120000",
+   "province": "天津市",
+   "tier": 1
+  },
+  {
+   "name": "阳泉",
+   "full": "阳泉市",
+   "adcode": "140300",
+   "province": "山西省",
+   "tier": 2
+  },
+  {
+   "name": "大同",
+   "full": "大同市",
+   "adcode": "140200",
+   "province": "山西省",
+   "tier": 1
+  },
+  {
+   "name": "吕梁",
+   "full": "吕梁市",
+   "adcode": "141100",
+   "province": "山西省",
+   "tier": 2
+  },
+  {
+   "name": "运城",
+   "full": "运城市",
+   "adcode": "140800",
+   "province": "山西省",
+   "tier": 1
+  },
+  {
+   "name": "晋城",
+   "full": "晋城市",
+   "adcode": "140500",
+   "province": "山西省",
+   "tier": 2
+  },
+  {
+   "name": "朔州",
+   "full": "朔州市",
+   "adcode": "140600",
+   "province": "山西省",
+   "tier": 2
+  },
+  {
+   "name": "忻州",
+   "full": "忻州市",
+   "adcode": "140900",
+   "province": "山西省",
+   "tier": 2
+  },
+  {
+   "name": "临汾",
+   "full": "临汾市",
+   "adcode": "141000",
+   "province": "山西省",
+   "tier": 2
+  },
+  {
+   "name": "长治",
+   "full": "长治市",
+   "adcode": "140400",
+   "province": "山西省",
+   "tier": 2
+  },
+  {
+   "name": "晋中",
+   "full": "晋中市",
+   "adcode": "140700",
+   "province": "山西省",
+   "tier": 2
+  },
+  {
+   "name": "太原",
+   "full": "太原市",
+   "adcode": "140100",
+   "province": "山西省",
+   "tier": 1
+  },
+  {
+   "name": "商洛",
+   "full": "商洛市",
+   "adcode": "611000",
+   "province": "陕西省",
+   "tier": 2
+  },
+  {
+   "name": "汉中",
+   "full": "汉中市",
+   "adcode": "610700",
+   "province": "陕西省",
+   "tier": 2
+  },
+  {
+   "name": "西安",
+   "full": "西安市",
+   "adcode": "610100",
+   "province": "陕西省",
+   "tier": 1
+  },
+  {
+   "name": "榆林",
+   "full": "榆林市",
+   "adcode": "610800",
+   "province": "陕西省",
+   "tier": 2
+  },
+  {
+   "name": "咸阳",
+   "full": "咸阳市",
+   "adcode": "610400",
+   "province": "陕西省",
+   "tier": 2
+  },
+  {
+   "name": "宝鸡",
+   "full": "宝鸡市",
+   "adcode": "610300",
+   "province": "陕西省",
+   "tier": 2
+  },
+  {
+   "name": "安康",
+   "full": "安康市",
+   "adcode": "610900",
+   "province": "陕西省",
+   "tier": 2
+  },
+  {
+   "name": "延安",
+   "full": "延安市",
+   "adcode": "610600",
+   "province": "陕西省",
+   "tier": 2
+  },
+  {
+   "name": "铜川",
+   "full": "铜川市",
+   "adcode": "610200",
+   "province": "陕西省",
+   "tier": 2
+  },
+  {
+   "name": "渭南",
+   "full": "渭南市",
+   "adcode": "610500",
+   "province": "陕西省",
+   "tier": 2
+  },
+  {
+   "name": "昌都",
+   "full": "昌都市",
+   "adcode": "540300",
+   "province": "西藏自治区",
+   "tier": 2
+  },
+  {
+   "name": "那曲",
+   "full": "那曲市",
+   "adcode": "540600",
+   "province": "西藏自治区",
+   "tier": 2
+  },
+  {
+   "name": "日喀则",
+   "full": "日喀则市",
+   "adcode": "540200",
+   "province": "西藏自治区",
+   "tier": 1
+  },
+  {
+   "name": "拉萨",
+   "full": "拉萨市",
+   "adcode": "540100",
+   "province": "西藏自治区",
+   "tier": 1
+  },
+  {
+   "name": "山南",
+   "full": "山南市",
+   "adcode": "540500",
+   "province": "西藏自治区",
+   "tier": 2
+  },
+  {
+   "name": "林芝",
+   "full": "林芝市",
+   "adcode": "540400",
+   "province": "西藏自治区",
+   "tier": 2
+  },
+  {
+   "name": "阿里",
+   "full": "阿里地区",
+   "adcode": "542500",
+   "province": "西藏自治区",
+   "tier": 2
+  },
+  {
+   "name": "昭通",
+   "full": "昭通市",
+   "adcode": "530600",
+   "province": "云南省",
+   "tier": 2
+  },
+  {
+   "name": "曲靖",
+   "full": "曲靖市",
+   "adcode": "530300",
+   "province": "云南省",
+   "tier": 2
+  },
+  {
+   "name": "红河",
+   "full": "红河哈尼族彝族自治州",
+   "adcode": "532500",
+   "province": "云南省",
+   "tier": 2
+  },
+  {
+   "name": "怒江",
+   "full": "怒江傈僳族自治州",
+   "adcode": "533300",
+   "province": "云南省",
+   "tier": 2
+  },
+  {
+   "name": "玉溪",
+   "full": "玉溪市",
+   "adcode": "530400",
+   "province": "云南省",
+   "tier": 2
+  },
+  {
+   "name": "大理",
+   "full": "大理白族自治州",
+   "adcode": "532900",
+   "province": "云南省",
+   "tier": 1
+  },
+  {
+   "name": "迪庆",
+   "full": "迪庆藏族自治州",
+   "adcode": "533400",
+   "province": "云南省",
+   "tier": 2
+  },
+  {
+   "name": "保山",
+   "full": "保山市",
+   "adcode": "530500",
+   "province": "云南省",
+   "tier": 2
+  },
+  {
+   "name": "丽江",
+   "full": "丽江市",
+   "adcode": "530700",
+   "province": "云南省",
+   "tier": 1
+  },
+  {
+   "name": "西双版纳",
+   "full": "西双版纳傣族自治州",
+   "adcode": "532800",
+   "province": "云南省",
+   "tier": 1
+  },
+  {
+   "name": "楚雄",
+   "full": "楚雄彝族自治州",
+   "adcode": "532300",
+   "province": "云南省",
+   "tier": 2
+  },
+  {
+   "name": "昆明",
+   "full": "昆明市",
+   "adcode": "530100",
+   "province": "云南省",
+   "tier": 1
+  },
+  {
+   "name": "普洱",
+   "full": "普洱市",
+   "adcode": "530800",
+   "province": "云南省",
+   "tier": 2
+  },
+  {
+   "name": "德宏",
+   "full": "德宏傣族景颇族自治州",
+   "adcode": "533100",
+   "province": "云南省",
+   "tier": 2
+  },
+  {
+   "name": "文山",
+   "full": "文山壮族苗族自治州",
+   "adcode": "532600",
+   "province": "云南省",
+   "tier": 2
+  },
+  {
+   "name": "临沧",
+   "full": "临沧市",
+   "adcode": "530900",
+   "province": "云南省",
+   "tier": 2
+  },
+  {
+   "name": "南投",
+   "full": "南投县",
+   "adcode": "710900",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "花莲",
+   "full": "花莲县",
+   "adcode": "711000",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "苗栗",
+   "full": "苗栗县",
+   "adcode": "711100",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "台中",
+   "full": "台中市",
+   "adcode": "710400",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "云林",
+   "full": "云林县",
+   "adcode": "711400",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "彰化",
+   "full": "彰化县",
+   "adcode": "711300",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "屏东",
+   "full": "屏东县",
+   "adcode": "710800",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "台南",
+   "full": "台南市",
+   "adcode": "710500",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "台东",
+   "full": "台东县",
+   "adcode": "711500",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "高雄",
+   "full": "高雄市",
+   "adcode": "710200",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "嘉义",
+   "full": "嘉义市",
+   "adcode": "711800",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "新竹",
+   "full": "新竹县",
+   "adcode": "710700",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "新竹",
+   "full": "新竹市",
+   "adcode": "711200",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "桃园",
+   "full": "桃园市",
+   "adcode": "710600",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "宜兰",
+   "full": "宜兰县",
+   "adcode": "711700",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "基隆",
+   "full": "基隆市",
+   "adcode": "711600",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "台北",
+   "full": "台北市",
+   "adcode": "710100",
+   "province": "台湾省",
+   "tier": 1
+  },
+  {
+   "name": "澎湖",
+   "full": "澎湖县",
+   "adcode": "712000",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "嘉义",
+   "full": "嘉义县",
+   "adcode": "711900",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "新北",
+   "full": "新北市",
+   "adcode": "710300",
+   "province": "台湾省",
+   "tier": 2
+  },
+  {
+   "name": "北京",
+   "full": "北京市",
+   "adcode": "110000",
+   "province": "北京市",
+   "tier": 1
+  },
+  {
+   "name": "吉林",
+   "full": "吉林市",
+   "adcode": "220200",
+   "province": "吉林省",
+   "tier": 1
+  },
+  {
+   "name": "长春",
+   "full": "长春市",
+   "adcode": "220100",
+   "province": "吉林省",
+   "tier": 1
+  },
+  {
+   "name": "白城",
+   "full": "白城市",
+   "adcode": "220800",
+   "province": "吉林省",
+   "tier": 2
+  },
+  {
+   "name": "松原",
+   "full": "松原市",
+   "adcode": "220700",
+   "province": "吉林省",
+   "tier": 2
+  },
+  {
+   "name": "四平",
+   "full": "四平市",
+   "adcode": "220300",
+   "province": "吉林省",
+   "tier": 2
+  },
+  {
+   "name": "辽源",
+   "full": "辽源市",
+   "adcode": "220400",
+   "province": "吉林省",
+   "tier": 2
+  },
+  {
+   "name": "通化",
+   "full": "通化市",
+   "adcode": "220500",
+   "province": "吉林省",
+   "tier": 2
+  },
+  {
+   "name": "白山",
+   "full": "白山市",
+   "adcode": "220600",
+   "province": "吉林省",
+   "tier": 2
+  },
+  {
+   "name": "延边",
+   "full": "延边朝鲜族自治州",
+   "adcode": "222400",
+   "province": "吉林省",
+   "tier": 2
+  },
+  {
+   "name": "新余",
+   "full": "新余市",
+   "adcode": "360500",
+   "province": "江西省",
+   "tier": 2
+  },
+  {
+   "name": "吉安",
+   "full": "吉安市",
+   "adcode": "360800",
+   "province": "江西省",
+   "tier": 2
+  },
+  {
+   "name": "抚州",
+   "full": "抚州市",
+   "adcode": "361000",
+   "province": "江西省",
+   "tier": 2
+  },
+  {
+   "name": "鹰潭",
+   "full": "鹰潭市",
+   "adcode": "360600",
+   "province": "江西省",
+   "tier": 2
+  },
+  {
+   "name": "宜春",
+   "full": "宜春市",
+   "adcode": "360900",
+   "province": "江西省",
+   "tier": 2
+  },
+  {
+   "name": "萍乡",
+   "full": "萍乡市",
+   "adcode": "360300",
+   "province": "江西省",
+   "tier": 2
+  },
+  {
+   "name": "景德镇",
+   "full": "景德镇市",
+   "adcode": "360200",
+   "province": "江西省",
+   "tier": 2
+  },
+  {
+   "name": "南昌",
+   "full": "南昌市",
+   "adcode": "360100",
+   "province": "江西省",
+   "tier": 1
+  },
+  {
+   "name": "上饶",
+   "full": "上饶市",
+   "adcode": "361100",
+   "province": "江西省",
+   "tier": 2
+  },
+  {
+   "name": "赣州",
+   "full": "赣州市",
+   "adcode": "360700",
+   "province": "江西省",
+   "tier": 1
+  },
+  {
+   "name": "九江",
+   "full": "九江市",
+   "adcode": "360400",
+   "province": "江西省",
+   "tier": 1
+  }
+ ]
+}

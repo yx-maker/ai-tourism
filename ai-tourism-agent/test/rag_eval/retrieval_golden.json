@@ -1,0 +1,193 @@
+[
+  {
+    "id": "g001",
+    "query_intent": "北京3天经典景点游",
+    "city_name": "北京",
+    "day_count": 3,
+    "customization_requirements": "companions=家庭;kids=有小孩;pace=慢节奏;interests=历史文化,人文景观",
+    "expect_keywords": [
+      "故宫"
+    ],
+    "expect_note": "故宫一日游 / 故宫2026攻略"
+  },
+  {
+    "id": "g002",
+    "query_intent": "北京美食攻略",
+    "city_name": "北京",
+    "day_count": 2,
+    "customization_requirements": "diet=爱吃辣;interests=美食",
+    "expect_keywords": [
+      "北京菜",
+      "涮肉",
+      "烤鸭"
+    ],
+    "expect_note": "地道北京菜 / 老北京涮肉"
+  },
+  {
+    "id": "g003",
+    "query_intent": "北京环球影城一日游",
+    "city_name": "北京",
+    "day_count": 1,
+    "customization_requirements": "interests=主题乐园",
+    "expect_keywords": [
+      "环球影城",
+      "环球"
+    ],
+    "expect_note": "环球影城一日游攻略 / 环球VS欢乐谷PK"
+  },
+  {
+    "id": "g004",
+    "query_intent": "北京欢乐谷怎么玩",
+    "city_name": "北京",
+    "day_count": 1,
+    "customization_requirements": "interests=主题乐园,游乐场",
+    "expect_keywords": [
+      "欢乐谷"
+    ],
+    "expect_note": "北京欢乐谷攻略"
+  },
+  {
+    "id": "g005",
+    "query_intent": "北京亲子游",
+    "city_name": "北京",
+    "day_count": 5,
+    "customization_requirements": "companions=家庭;kids=有小孩;elderly=没有老人;pace=中等;interests=亲子友好",
+    "expect_keywords": [
+      "亲子"
+    ],
+    "expect_note": "各类亲子游行程"
+  },
+  {
+    "id": "g006",
+    "query_intent": "北京滑雪场推荐",
+    "city_name": "北京",
+    "day_count": 2,
+    "customization_requirements": "companions=朋友;pace=高强度;interests=滑雪,冬季运动",
+    "expect_keywords": [
+      "雪场",
+      "滑雪"
+    ],
+    "expect_note": "北京冬季雪场推荐"
+  },
+  {
+    "id": "g007",
+    "query_intent": "北京露营指南",
+    "city_name": "北京",
+    "day_count": 2,
+    "customization_requirements": "companions=朋友;interests=露营,户外",
+    "expect_keywords": [
+      "露营"
+    ],
+    "expect_note": "北京周边露营指南"
+  },
+  {
+    "id": "g008",
+    "query_intent": "北京春天赏花",
+    "city_name": "北京",
+    "day_count": 3,
+    "customization_requirements": "pace=慢节奏;interests=赏花,摄影,自然景观",
+    "expect_keywords": [
+      "山桃",
+      "玉兰",
+      "赏花",
+      "花海"
+    ],
+    "expect_note": "山桃花与玉兰花 / 市郊铁路赏花"
+  },
+  {
+    "id": "g009",
+    "query_intent": "北京赏秋民宿",
+    "city_name": "北京",
+    "day_count": 2,
+    "customization_requirements": "companions=情侣;pace=慢节奏;interests=民宿,秋景",
+    "expect_keywords": [
+      "民宿"
+    ],
+    "expect_note": "金秋观景民宿"
+  },
+  {
+    "id": "g010",
+    "query_intent": "北京胡同咖啡厅打卡",
+    "city_name": "北京",
+    "day_count": 1,
+    "customization_requirements": "interests=咖啡",
+    "expect_keywords": [
+      "咖啡"
+    ],
+    "expect_note": "屋顶咖啡实录"
+  },
+  {
+    "id": "g011",
+    "query_intent": "北京街拍圣地",
+    "city_name": "北京",
+    "day_count": 1,
+    "customization_requirements": "interests=摄影,街拍",
+    "expect_keywords": [
+      "街拍",
+      "三里屯"
+    ],
+    "expect_note": "三里屯街拍圣地"
+  },
+  {
+    "id": "g012",
+    "query_intent": "带父母北京五日游",
+    "city_name": "北京",
+    "day_count": 5,
+    "customization_requirements": "companions=家庭;elderly=有老人;kids=没有小孩;pace=慢节奏;interests=历史文化,人文景观",
+    "expect_keywords": [
+      "父母"
+    ],
+    "expect_note": "带着父母去旅游之北京五日游"
+  },
+  {
+    "id": "g013",
+    "query_intent": "北京市郊铁路玩法",
+    "city_name": "北京",
+    "day_count": 2,
+    "customization_requirements": "interests=铁路,交通,自然景观",
+    "expect_keywords": [
+      "市郊铁路",
+      "铁路",
+      "S2"
+    ],
+    "expect_note": "市郊铁路乘车秘籍"
+  },
+  {
+    "id": "g014",
+    "query_intent": "北京博物馆参观",
+    "city_name": "北京",
+    "day_count": 3,
+    "customization_requirements": "pace=中等;interests=博物馆,历史文化",
+    "expect_keywords": [
+      "博物馆"
+    ],
+    "expect_note": "七大博物馆新玩法"
+  },
+  {
+    "id": "g015",
+    "query_intent": "北京深度多日游",
+    "city_name": "北京",
+    "day_count": 5,
+    "customization_requirements": "companions=朋友;pace=高强度;interests=历史文化,人文景观",
+    "expect_keywords": [
+      "深度",
+      "五天四晚",
+      "6天5晚",
+      "五日游"
+    ],
+    "expect_note": "深度5日游 / 五天四晚亲子 / 6天5晚寒假行"
+  },
+  {
+    "id": "g016",
+    "query_intent": "北京冬季玩雪",
+    "city_name": "北京",
+    "day_count": 3,
+    "customization_requirements": "companions=家庭;kids=有小孩;pace=中等;interests=滑雪,滑冰,冬季",
+    "expect_keywords": [
+      "滑雪",
+      "雪场",
+      "滑冰"
+    ],
+    "expect_note": "雪场推荐 / 寒假滑冰"
+  }
+]

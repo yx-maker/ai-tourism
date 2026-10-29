@@ -68,12 +68,9 @@ SUFFIXES = ["市", "自治州", "地区", "盟", "特别行政区", "自治区",
 
 
 def get_amap_key() -> str:
-    import os
-    key = os.getenv("AMAP_WEB_API_KEY", "0782108ec78417ce420abd965b6c7bf0")
-    if not key:
-        print("[error] 缺少 AMAP_WEB_API_KEY", file=sys.stderr)
-        sys.exit(1)
-    return key
+    """从环境变量或 ai-tourism/.env.local 读取「Web服务」Key（不硬编码）。"""
+    from amap_env import get_amap_web_key
+    return get_amap_web_key()
 
 
 # 民族修饰词：自治州全名里夹在中间的成分，需逐个剥离

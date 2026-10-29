@@ -41,7 +41,9 @@ import requests
 HERE = Path(__file__).parent
 CITY_LIST_FILE = HERE / "cities_cn.json"
 
-AMAP_KEY = os.getenv("AMAP_WEB_API_KEY", "0782108ec78417ce420abd965b6c7bf0")
+from amap_env import get_amap_web_key  # noqa: E402  （同目录工具，禁止硬编码 Key）
+
+AMAP_KEY = get_amap_web_key()
 AMAP_URL = "https://restapi.amap.com/v3/place/text"
 
 DB = dict(host="127.0.0.1", port=3306, user="root", password="123456",

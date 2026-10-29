@@ -68,6 +68,8 @@ ai-tourism-frontend/coverage/
 ai-tourism-agent/script/scrape/browser_profile/
 ai-tourism-agent/script/scrape/ota_profile/
 ai-tourism-agent/script/scrape/*_profile/
+# 抓包快照：含第三方网站页面与其内嵌的 token（会触发 GitHub Secret 扫描拦截）
+ai-tourism-agent/script/scrape/captured/
 ai-tourism-agent/.vendor/
 ai-tourism-agent/**/browser_profile/
 **/.playwright/

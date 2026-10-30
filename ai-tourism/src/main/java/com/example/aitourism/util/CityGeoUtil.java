@@ -176,30 +176,99 @@ public class CityGeoUtil {
         return R * c;
     }
 
-    /** 从行程文本中提取出发城市（"从北京出发"、"北京出发"、"深圳出发"、"北京到西安"等模式） */
+    /** 模式1：从X出发 / X出发 / X来 / X启程（"从/由/自"可省略） */
+    private static final java.util.regex.Pattern P_ORIGIN_DEPART = java.util.regex.Pattern
+            .compile("(?:从|由|自)?([\\u4e00-\\u9fa5]{2,4})(?:出发|过来|来|启程|动身)");
+
+    /** 模式2：X到Y / X去Y / X前往Y（前置"从/由/自"单独成组，避免被当成城市名的一部分） */
+    private static final java.util.regex.Pattern P_ORIGIN_PAIR = java.util.regex.Pattern
+            .compile("(?:从|由|自)?([\\u4e00-\\u9fa5]{2,4})(?:到|去|前往|飞往|至)([\\u4e00-\\u9fa5]{2,4})");
+
+    /** 坐标库中全部已知城市名（硬编码表 + city_centers.json，共 400+ 城） */
+    public static java.util.Set<String> allKnownCities() {
+        java.util.Set<String> set = new java.util.HashSet<>(CITY_COORDS.keySet());
+        set.addAll(CITY_CENTERS.keySet());
+        return set;
+    }
+
+    /**
+     * 去掉句首的"从/由/自"等介词。
+     *
+     * <p>只在砍掉后仍是已知城市时才砍，否则会把「自贡」误伤成「贡」。
+     */
+    private static String stripLeadingPreposition(String s) {
+        if (s == null) return null;
+        String r = s.trim();
+        if (r.length() >= 3) {
+            char c0 = r.charAt(0);
+            if (c0 == '从' || c0 == '由' || c0 == '自') {
+                String tail = r.substring(1);
+                if (getCoord(tail) != null) {
+                    return tail;
+                }
+            }
+        }
+        return r;
+    }
+
+    /**
+     * 从行程文本中提取出发城市（"从北京出发"、"深圳出发"、"北京到西安"、"从广州去长沙"等模式）。
+     *
+     * <p>三级匹配：介词+出发动词 → 两地名句式 → 扫描文本中出现的已知城市（取最靠前且非目的地者）。
+     * 第三级兜底很关键：正则句式覆盖不全时，出发城市会变成 null，大交通票价与在途时长
+     * 就只能退回「默认 800km」的估算值，行程里的时间账会明显失真。
+     */
     public static String extractOriginCity(String text, String destCity) {
         if (text == null) return null;
-        // 模式1：从X出发/从X来/由X / X出发（可省略"从"字，如"深圳出发"）
-        java.util.regex.Matcher m1 = java.util.regex.Pattern
-                .compile("(?:从|由|自)?([\\u4e00-\\u9fa5]{2,4})(?:出发|过来|来|启程|动身)").matcher(text);
+        String t = text.trim();
+
+        // 模式1：从X出发 / X出发（可省略"从"，如"深圳出发"）
+        java.util.regex.Matcher m1 = P_ORIGIN_DEPART.matcher(t);
         while (m1.find()) {
-            String city = m1.group(1);
+            String city = stripLeadingPreposition(m1.group(1));
             if (getCoord(city) != null && (destCity == null || !city.contains(destCity))) {
                 return city;
             }
         }
-        // 模式2：X到Y / X去Y / X→Y / X-Y（两地名模式）
+
+        // 模式2：X到Y / X去Y / X前往Y（"从广州去长沙"中的"从"不再被吞进城市名）
         if (destCity != null && !destCity.isEmpty()) {
-            java.util.regex.Matcher m2 = java.util.regex.Pattern
-                    .compile("([\\u4e00-\\u9fa5]{2,4})(?:到|去|前往|飞往|至)([\\u4e00-\\u9fa5]{2,4})").matcher(text);
+            java.util.regex.Matcher m2 = P_ORIGIN_PAIR.matcher(t);
             while (m2.find()) {
-                String from = m2.group(1);
+                String from = stripLeadingPreposition(m2.group(1));
                 String to = m2.group(2);
                 if (to.contains(destCity) && getCoord(from) != null && !from.equals(destCity)) {
                     return from;
                 }
             }
         }
+
+        // 模式3（兜底）：扫描文本里出现过的已知城市，取最靠前且不是目的地的那个
+        if (destCity != null && !destCity.isEmpty()) {
+            return scanFirstOtherCity(t, destCity);
+        }
         return null;
+    }
+
+    /**
+     * 扫描文本中出现过的已知城市，返回出现位置最靠前、且不是目的地的城市名。
+     * 位置相同时取更长的名字（避免「吉安」被「安」之类短名抢先命中）。
+     */
+    private static String scanFirstOtherCity(String text, String destCity) {
+        java.util.List<String> cities = new java.util.ArrayList<>(allKnownCities());
+        cities.removeIf(c -> c == null || c.trim().length() < 2 || c.trim().equals(destCity));
+        cities.sort((a, b) -> Integer.compare(b.trim().length(), a.trim().length()));
+        int bestPos = Integer.MAX_VALUE;
+        String best = null;
+        for (String raw : cities) {
+            String c = raw.trim();
+            int p = text.indexOf(c);
+            if (p < 0) continue;
+            if (p < bestPos || (p == bestPos && best != null && c.length() > best.length())) {
+                bestPos = p;
+                best = c;
+            }
+        }
+        return best;
     }
 }

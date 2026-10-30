@@ -2,6 +2,7 @@ package com.example.aitourism.service.impl;
 
 import com.example.aitourism.entity.Budget;
 import com.example.aitourism.dto.budget.BudgetEnvelope;
+import com.example.aitourism.dto.budget.TransportDuration;
 import com.example.aitourism.mapper.BudgetMapper;
 import com.example.aitourism.mapper.POIMapper;
 import com.example.aitourism.service.BudgetService;
@@ -44,6 +45,7 @@ public class BudgetServiceImpl implements BudgetService {
     private final BudgetMapper budgetMapper;
     private final com.example.aitourism.mapper.SessionMapper sessionMapper;
     private final com.example.aitourism.service.BudgetEnvelopeService envelopeService;
+    private final com.example.aitourism.service.TransportDurationService durationService;
     private final PriceProxyService priceProxyService;
     private final POIMapper poiMapper;
 
@@ -100,12 +102,26 @@ public class BudgetServiceImpl implements BudgetService {
         BigDecimal envelopeTransport = (BigDecimal) transportParts[0];
         String envelopeTransportMode = (String) transportParts[2];
         int poiCount = estimatePoiCount(itineraryText);
+        // 大交通时长（按预算选出的方式对应的在途时间，真实车次历时优先）
+        TransportDuration envelopeDuration = transportParts.length > 5
+                ? (TransportDuration) transportParts[5] : null;
         // 住宿快照价覆盖（无快照的档次自动回落默认价）——让封套上限贴近真实房价行情
         Map<String, BigDecimal> hotelOverrides = buildHotelOverrides(destCity);
         BudgetEnvelope envelope = envelopeService.build(
-                userBudget, days, poiCount, envelopeTransport, envelopeTransportMode, hotelOverrides);
+                userBudget, days, poiCount, envelopeTransport, envelopeTransportMode,
+                hotelOverrides, envelopeDuration);
         log.info("[BUDGET] 预算封套: 用户预算={} 天数={} 档次={} 封套合计={} 可行={}",
                 userBudget, days, envelope.getLevel(), envelope.getTotal(), envelope.isFeasible());
+
+        // 时间账与钱账同样重要：在途超过 8 小时时，给出时间安排建议
+        if (envelopeDuration != null && envelopeDuration.getMinutesOneWay() != null
+                && envelopeDuration.getMinutesOneWay() >= 480) {
+            envelope.getSuggestions().add(String.format(
+                    "大交通在途较长（%s 单程约 %s，往返约 %s）：建议选夕发朝至车次，"
+                            + "抵达当天与返程当天各只安排 1 个不需要预约的景点。",
+                    envelopeDuration.getKind(), envelopeDuration.textOneWay(),
+                    envelopeDuration.textRoundTrip()));
+        }
 
         // 把识别到的预算回写会话，供后续「同会话再次规划」直接复用
         if (userBudget != null && userBudget.compareTo(BigDecimal.ZERO) > 0) {
@@ -398,6 +414,8 @@ public class BudgetServiceImpl implements BudgetService {
                 ? (String) transportParts[3] : "ESTIMATE";
         String transportAsOf = transportParts.length > 4 && transportParts[4] != null
                 ? (String) transportParts[4] : LocalDate.now().toString();
+        TransportDuration transportDuration = transportParts.length > 5
+                ? (TransportDuration) transportParts[5] : null;
         BigDecimal transport = longDistance.add(local);
         BigDecimal other = new BigDecimal("100").multiply(BigDecimal.valueOf(days));
 
@@ -410,7 +428,9 @@ public class BudgetServiceImpl implements BudgetService {
 
         // 规则引擎生成兜底费用明细条目（每条携带价格来源，供前端分级展示）
         List<Map<String, Object>> items = new java.util.ArrayList<>();
-        items.add(item("交通", "往返大交通（" + transportMode + "）", longDistance,
+        items.add(item("交通", "往返大交通（" + transportMode
+                        + (transportDuration == null ? "" : "，单程约 " + transportDuration.textOneWay()) + "）",
+                longDistance,
                 transportSource, transportAsOf, "TRAIN_API".equals(transportSource) ? "high" : "low"));
         if (local.compareTo(BigDecimal.ZERO) > 0) {
             items.add(item("交通", "市内交通（" + days + "天，按路线实际通勤距离估算）", local,
@@ -436,7 +456,8 @@ public class BudgetServiceImpl implements BudgetService {
 
     /**
      * 交通费用估算（论文改进点：按用户预算上限自动选择出行方式，价格基于真实票价模型）
-     * @return [0]=往返大交通（元）, [1]=市内交通（元）, [2]=出行方式描述
+     * @return [0]=往返大交通（元）, [1]=市内交通（元）, [2]=出行方式描述,
+     *         [3]=价格来源, [4]=数据日期, [5]=大交通时长 {@link TransportDuration}
      */
     private Object[] estimateTransport(String itineraryText, int days, String dailyRoutesJson) {
         BigDecimal longDistance = CITY_TRANSPORT;  // 兜底：往返大交通 400 元
@@ -444,6 +465,7 @@ public class BudgetServiceImpl implements BudgetService {
         String transportSource = "ESTIMATE";       // TRAIN_API=真实票价 / ESTIMATE=系数估算
         String transportAsOf = LocalDate.now().toString();
         BigDecimal local = TRANSPORT_DAILY.multiply(BigDecimal.valueOf(days));  // 兜底：60元/天
+        double distKm = 0;                         // 城市间距离（用于时长估算）
 
         // ---------- 大交通：提取出发地/目的地，按预算选择出行方式 ----------
         String destCity = extractDestCity(itineraryText);
@@ -452,6 +474,7 @@ public class BudgetServiceImpl implements BudgetService {
         if (destCity != null && originCity != null) {
             double dist = com.example.aitourism.util.CityGeoUtil.distanceKm(originCity, destCity);
             if (dist > 50) {
+                distKm = dist;
                 // 第一优先：真实票价 API（同步 12306，需在预售期 14 天内）
                 Object[] real = queryRealTrainPrice(originCity, destCity, userBudget);
                 if (real != null) {
@@ -490,7 +513,25 @@ public class BudgetServiceImpl implements BudgetService {
         if (localFromRoutes != null) {
             local = localFromRoutes;
         }
-        return new Object[]{round(longDistance), round(local), transportMode, transportSource, transportAsOf};
+        // ---------- 大交通时长：按「预算选出的方式」给出在途时间 ----------
+        TransportDuration duration = resolveTransportDuration(transportMode, distKm, originCity, destCity);
+        if (duration != null) {
+            log.info("大交通时长: {}→{} 「{}」{}（来源 {}）", originCity, destCity,
+                    transportMode, duration.summary(), duration.getSource());
+        }
+        return new Object[]{round(longDistance), round(local), transportMode,
+                transportSource, transportAsOf, duration};
+    }
+
+    /**
+     * 解析大交通时长：委托 {@link TransportDurationService}（与规划链路同一口径）。
+     *
+     * <p>「按预算选交通方式」的代价必须可见：预算紧张时系统会降级到普速列车，
+     * 票价省了但单程可能从 7 小时变成 30 小时。
+     */
+    private TransportDuration resolveTransportDuration(String mode, double distKm,
+                                                      String originCity, String destCity) {
+        return durationService.resolve(mode, originCity, destCity, distKm);
     }
 
     /**
@@ -560,10 +601,13 @@ public class BudgetServiceImpl implements BudgetService {
             if (quotes == null || quotes.isEmpty()) {
                 return null;
             }
-            // 选席别：默认二等座（性价比基准）；预算内买不起则降级到预算内最便宜席别
+            // 选席别：默认二等座（性价比基准）；没有二等座再退硬卧；预算内买不起则降级到便宜席别
             SeatQuote second = quotes.stream()
-                    .filter(q -> "二等座".equals(q.seatType()) || "硬卧".equals(q.seatType()))
-                    .findFirst().orElse(null);
+                    .filter(q -> "二等座".equals(q.seatType()))
+                    .findFirst()
+                    .orElseGet(() -> quotes.stream()
+                            .filter(q -> "硬卧".equals(q.seatType()))
+                            .findFirst().orElse(null));
             SeatQuote chosen = null;
             if (userBudget != null && userBudget.compareTo(BigDecimal.ZERO) > 0) {
                 BigDecimal oneWayCap = userBudget.multiply(new BigDecimal("0.35"))
@@ -588,7 +632,15 @@ public class BudgetServiceImpl implements BudgetService {
                 return null;
             }
             BigDecimal roundTrip = chosen.price().multiply(new BigDecimal("2"));
-            return new Object[]{round(roundTrip), chosen.seatType() + "（12306实时票价）"};
+            // 文案带上车次：用户能一眼核对「票价与时长出自同一趟车」，
+            // 而不是「¥122 的二等座 + 高铁 2 小时」这种跨车次拼出来的组合
+            String code = chosen.trainCode();
+            String label = chosen.seatType() + (code != null && !code.isBlank()
+                    ? "（" + code + (chosen.departTime() == null || chosen.departTime().isBlank()
+                    ? "" : " " + chosen.departTime()) + "，12306实爬票价）"
+                    : "（12306实爬票价）");
+            log.info("大交通车次级选择: {}→{} {} {} 往返{}元", origin, dest, code, chosen.seatType(), roundTrip);
+            return new Object[]{round(roundTrip), label};
         } catch (Exception e) {
             log.warn("真实火车票价查询失败（降级系数模型）: {}→{} {}", origin, dest, e.getMessage());
             return null;

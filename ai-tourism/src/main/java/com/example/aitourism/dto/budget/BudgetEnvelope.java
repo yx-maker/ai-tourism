@@ -41,6 +41,20 @@ public class BudgetEnvelope {
     /** 出行方式描述，如「高铁二等座」 */
     private String transportMode;
 
+    // ---------------- 大交通时长（按预算选定方式对应的在途时间） ----------------
+
+    /** 大交通时长（单程在途分钟 + 来源 + 说明），见 {@link TransportDuration} */
+    private TransportDuration transportDuration;
+
+    /**
+     * 单程在途时长文案，如「7 小时 2 分」（冗余字段，供前端直接展示）。
+     * 真实来源为 12306 实爬车次历时，估算来源为速度模型。
+     */
+    private String transportDurationText;
+
+    /** 时长来源：TRAIN_REAL（12306 实爬车次历时）/ ESTIMATE（速度模型估算） */
+    private String transportDurationSource;
+
     // ---------------- 分项上限（封套核心） ----------------
 
     /** 住宿单价上限（元/晚） */
@@ -102,6 +116,10 @@ public class BudgetEnvelope {
         m.put("feasible", feasible);
         m.put("transportMode", transportMode);
         m.put("transportCost", transportCost);
+        // 交通时长：与交通方式/票价并列展示，让用户看到「省钱 = 多花时间」的取舍
+        m.put("transportDuration", transportDuration == null ? null : transportDuration.summary());
+        m.put("transportDurationSource", transportDurationSource);
+        m.put("transportMinutesOneWay", transportDuration == null ? null : transportDuration.getMinutesOneWay());
         m.put("hotelTier", hotelTier);
         m.put("hotelPerNight", hotelPerNight);
         m.put("foodTier", foodTier);

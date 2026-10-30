@@ -116,6 +116,7 @@ class PriceQuote:
     as_of: str             # YYYY-MM-DD
     confidence: str        # high | medium | low
     note: str = ""
+    mode: str = ""         # 交通方式（高铁二等座 / 普速列车硬座 / 长途大巴 / 飞机经济舱…）
 
     @property
     def is_real(self) -> bool:
@@ -129,6 +130,79 @@ class PriceQuote:
         if self.source == "SNAPSHOT":
             return f"快照价·{self.note}（{self.as_of}）"
         return f"系统估算（{self.as_of}）"
+
+
+@dataclass
+class DurationQuote:
+    """一条带溯源信息的交通时长（与价格同级的「时间账」）"""
+    minutes: Optional[int]      # 单程在途分钟
+    kind: str                   # 高铁动车 / 普速 / 长途大巴 / 飞机经济舱
+    source: str                 # TRAIN_REAL（12306 实爬车次历时）| ESTIMATE（速度模型）
+    note: str = ""
+    train_code: Optional[str] = None
+    depart: Optional[str] = None
+    arrive: Optional[str] = None
+
+    @property
+    def is_real(self) -> bool:
+        return self.source == "TRAIN_REAL"
+
+    def text_one_way(self) -> str:
+        return human_minutes(self.minutes)
+
+    def text_round_trip(self) -> str:
+        return human_minutes(self.minutes * 2) if self.minutes else None
+
+    def summary(self) -> str:
+        if not self.minutes:
+            return ""
+        return f"单程约 {self.text_one_way()} · 往返在途约 {self.text_round_trip()}"
+
+    def label(self) -> str:
+        """来源标签，供 Prompt 与前端展示"""
+        if self.is_real:
+            return f"12306 实爬车次历时（{self.note}）"
+        return f"速度模型估算（{self.note}）"
+
+
+def human_minutes(m: Optional[int]) -> str:
+    """分钟 → 「7 小时 2 分」"""
+    if not m:
+        return ""
+    m = max(int(m), 0)
+    if m < 60:
+        return f"{m} 分钟"
+    h, rest = divmod(m, 60)
+    return f"{h} 小时" if rest == 0 else f"{h} 小时 {rest} 分"
+
+
+def duration_kind_of(mode: str) -> str:
+    """出行方式 → 时长类别（与 Java durationKindOf / train_duration_local.json 同口径）"""
+    mode = mode or ""
+    if "飞机" in mode or "航班" in mode or "机票" in mode:
+        return "飞机经济舱"
+    if "大巴" in mode or "汽车" in mode:
+        return "长途大巴"
+    if "普速" in mode or "硬座" in mode or "硬卧" in mode or "软卧" in mode or "软座" in mode:
+        return "普速"
+    return "高铁动车"
+
+
+def model_duration_minutes(kind: str, dist_km: float) -> int:
+    """速度模型：里程 ÷ 方式巡航速度 + 固定附加（进出站 / 候车 / 安检）。
+
+    与 Java BudgetServiceImpl.estimateDurationMinutes 同口径：
+        铁路里程 ≈ 直线距离 × 1.3；高铁动车 220km/h、普速 100km/h、
+        大巴 60km/h、飞机 750km/h + 3h 值机安检。
+    """
+    km = max(float(dist_km or 0), 0.0)
+    if kind == "普速":
+        return int(round(km * 1.3 / 100 * 60)) + 60
+    if kind == "长途大巴":
+        return int(round(km * 1.2 / 60 * 60)) + 30
+    if kind == "飞机经济舱":
+        return int(round(km / 750 * 60)) + 180
+    return int(round(km * 1.3 / 220 * 60)) + 60
 
 
 def _d(v) -> Decimal:
@@ -228,7 +302,59 @@ class PriceProvider:
             return None
         return km if km > 0 else None
 
-    # ---------------- ② 火车票（真实 API → 缓存 → 系数模型） ----------------
+    # ---------------- ② 火车票（车次级报价 → 旧票价表 → 系数模型） ----------------
+
+    def train_option(self, origin: Optional[str], dest: Optional[str]) -> Optional[dict]:
+        """车次级报价：同一趟车的席别票价 + 官方历时。
+
+        为什么必须车次级：票价与时长若分开取，会拼出现实中不存在的组合——
+        广州-长沙「二等座 ¥122」其实是 D 字头动集（历时 7~8 小时）的价格，
+        而「最快高铁 1 小时 57 分」来自 G6018（二等座 ¥319）。车次级绑定后，
+        选了哪趟车的席别，时长就一定是那趟车的。
+        """
+        if not origin or not dest:
+            return None
+        data = self._get("/api/tools/train-option", {"origin": origin, "dest": dest})
+        if isinstance(data, dict) and data.get("options"):
+            return data
+        return None
+
+    @staticmethod
+    def _pick_from_options(options: dict, budget: Optional[float]):
+        """在车次级选项里按预算选「一趟车 + 一个席别」。
+
+        返回 (kind, train_code, seat, price, minutes) 或 None。
+        席别与车次来自同一条记录，价格与历时天然自洽。
+        """
+        cands = []
+        for kind in ("高铁动车", "普速"):
+            item = options.get(kind) or {}
+            minutes = int(item.get("minutes") or 0)
+            if minutes <= 0:
+                continue
+            for seat, price in (item.get("seats") or {}).items():
+                p = _d(price)
+                if p > 0:
+                    cands.append((kind, item.get("train_code") or "", seat, p, minutes))
+        if not cands:
+            return None
+
+        def preferred(kind: str, seat_kw: str):
+            return next((c for c in cands if c[0] == kind and seat_kw in c[2]), None)
+
+        base = preferred("高铁动车", "二等") or preferred("普速", "硬卧") or cands[0]
+        if not budget:
+            return base
+
+        cap = Decimal(str(budget)) * Decimal("0.35") / 2
+        if base[3] <= cap:
+            return base
+        # 预算内买得起的最贵席别（同车次内更优体验）
+        within = [c for c in cands if c[3] <= cap]
+        if within:
+            return max(within, key=lambda c: c[3])
+        # 都超预算：最便宜（超支部分交由封套引擎处理）
+        return min(cands, key=lambda c: c[3])
 
     def train_round_trip(self, origin: Optional[str], dest: Optional[str],
                          budget: Optional[float] = None,
@@ -240,12 +366,22 @@ class PriceProvider:
         """
         mode, one_way, source, note = self._train_quote(origin, dest, budget, dist_km)
         if source == "TRAIN_API":
-            return PriceQuote(_d(one_way * 2), "TRAIN_API", self._today, "high", note)
-        return PriceQuote(_d(one_way * 2), "ESTIMATE", self._today, "low", note)
+            return PriceQuote(_d(one_way * 2), "TRAIN_API", self._today, "high", note, mode)
+        return PriceQuote(_d(one_way * 2), "ESTIMATE", self._today, "low", note, mode)
 
     def _train_quote(self, origin, dest, budget, dist_km) -> Tuple[str, Decimal, str, str]:
         """返回 (方式, 单程价, source, note)"""
-        # --- 第一级：真实 API ---
+        # --- 第一级：车次级报价（票价与历时同源） ---
+        opt = self.train_option(origin, dest)
+        if opt:
+            picked = self._pick_from_options(opt["options"], budget)
+            if picked:
+                kind, code, seat, price, minutes = picked
+                label = f"{seat}（{code}，单程约 {human_minutes(minutes)}）" if code else seat
+                return (label, price, "TRAIN_API",
+                        f"{seat}·{code or '12306'}·实爬({opt.get('as_of', self._today)})")
+
+        # --- 第二级：旧票价表 / 第三方 API（无车次级数据时） ---
         if origin and dest:
             data = self._get("/api/tools/train-price", {
                 "origin": origin, "dest": dest, "date": self._today})
@@ -332,6 +468,47 @@ class PriceProvider:
             cheapest = quotes[0]
             return cheapest[0] + "（预算紧张，已选最经济席别）", cheapest[1]
         return second if second else quotes[-1]
+
+    # ---------------- ②之二 交通时长（真实车次历时 → 速度模型） ----------------
+
+    def transport_duration(self, origin: Optional[str], dest: Optional[str],
+                           mode: str, dist_km: Optional[Decimal] = None) -> DurationQuote:
+        """大交通单程在途时长：优先 12306 实爬车次历时，失败降级速度模型估算。
+
+        「按预算选交通方式」的代价必须可见：预算紧张时系统会降级到普速列车，
+        票价省了但单程可能从 7 小时变成 30 小时。时长与方式绑定计算，
+        使规划 Prompt 与预算分析都能把这笔时间账显式写出来。
+        """
+        kind = duration_kind_of(mode)
+
+        # --- 第一级：车次级报价里的历时（与票价同一条记录，绝不跨车次错配） ---
+        if origin and dest and kind in ("高铁动车", "普速"):
+            opt = self.train_option(origin, dest)
+            q = (opt or {}).get("options", {}).get(kind) if isinstance(opt, dict) else None
+            if q and int(q.get("minutes") or 0) > 0:
+                code, depart, arrive = q.get("train_code"), q.get("depart"), q.get("arrive")
+                return DurationQuote(
+                    minutes=int(q["minutes"]), kind=kind, source="TRAIN_REAL",
+                    note=f"{code or ''} {depart or ''}→{arrive or ''}".strip(),
+                    train_code=code, depart=depart, arrive=arrive)
+
+        # --- 第一级之二：旧历时表（无车次级数据时） ---
+        if origin and dest and kind in ("高铁动车", "普速"):
+            data = self._get("/api/tools/train-duration", {"origin": origin, "dest": dest})
+            q = (data or {}).get("durations", {}).get(kind) if isinstance(data, dict) else None
+            if q and int(q.get("minutes") or 0) > 0:
+                code, depart, arrive = q.get("train_code"), q.get("depart"), q.get("arrive")
+                return DurationQuote(
+                    minutes=int(q["minutes"]), kind=kind, source="TRAIN_REAL",
+                    note=f"{code or ''} {depart or ''}→{arrive or ''}".strip(),
+                    train_code=code, depart=depart, arrive=arrive)
+
+        # --- 第二级：速度模型估算（与 Java 同口径） ---
+        if dist_km is None and origin and dest:
+            dist_km = self.city_distance_km(origin, dest)
+        km = float(dist_km) if dist_km else 800.0   # 距离未知时按典型跨省里程
+        return DurationQuote(minutes=model_duration_minutes(kind, km), kind=kind,
+                             source="ESTIMATE", note=f"{kind}，约 {km:.0f} km")
 
     # ---------------- ③ 酒店（快照表 → 档次默认价） ----------------
 
@@ -444,6 +621,9 @@ class PriceProvider:
 
         route_desc = f"{origin_city}→{dest_city}" if (origin_city and dest_city) else "往返大交通"
 
+        # ---- 时长：与「按预算选出的方式」绑定，让用户看到省钱的时间代价 ----
+        dur_q = self.transport_duration(origin_city, dest_city, transport_q.mode, dist)
+
         lines = [
             "## 预算约束（硬约束，必须严格遵守）",
             f"- 用户总预算：**{total} 元**（人民币），行程 {days} 天（{nights} 晚）",
@@ -451,6 +631,8 @@ class PriceProvider:
         if dist is not None:
             lines.append(f"- 行程距离：{route_desc} 约 {dist.quantize(Decimal('1'))} km")
         lines.append(f"- 往返大交通（{transport_q.note}）：约 {transport_q.price} 元")
+        if dur_q.minutes:
+            lines.append(f"- 大交通在途时长：{dur_q.kind} {dur_q.summary()}（{dur_q.label()}）")
         if dest_city:
             hq = hotel_q[chosen.name] if chosen else hotel_q["经济"]
             lines.append(f"- 住宿参考（{hq.label()}）：约 {hq.price} 元/晚")
@@ -478,6 +660,19 @@ class PriceProvider:
                 f"分项之和须等于合计，且合计不超过 {total} 元。"
                 "价格请沿用上方参考价（真实价格优先），并在表格中保持一致。",
             ]
+            if dur_q.minutes:
+                lines += [
+                    "",
+                    "**交通耗时必须写进攻略**：",
+                    f"- D1 的「抵达交通」里写明：{route_desc} 乘{dur_q.kind}"
+                    f"（{dur_q.summary()}，{dur_q.label()}）"
+                    + (f"，参考车次 {dur_q.train_code} {dur_q.depart}→{dur_q.arrive}"
+                       if dur_q.is_real and dur_q.train_code else "")
+                    + "；",
+                    "- 返程那天同样写明在途时长，并据此安排最后一天的可游玩时间"
+                    "（在途超过 8 小时时，当天不要再安排需要预约的景点）；",
+                    "- 费用参考表的「交通」行请在该行名称或备注中带上单程耗时。",
+                ]
             logger.info(f"[PLANNING] 预算约束注入: 总额{total}元/{days}天/「{chosen.name}」档 "
                         f"预计{chosen_total}元 交通[{transport_q.source}]")
             return "\n".join(lines)
@@ -491,8 +686,17 @@ class PriceProvider:
 
         # 最便宜交通方式可省金额（用于方案二）
         options = self._model_options(dist) if dist is not None else []
-        cheapest = min((p for _, p in options), default=transport_q.price)
+        cheapest_pair = min(options, key=lambda x: x[1]) if options else None
+        cheapest = cheapest_pair[1] if cheapest_pair else transport_q.price
         save = max(transport_q.price - cheapest * 2, Decimal("0"))
+        # 降级交通的「时间代价」：省下的钱要用在途时间换，必须一并告知
+        slow_q = self.transport_duration(
+            origin_city, dest_city, cheapest_pair[0] if cheapest_pair else transport_q.mode, dist)
+        time_cost = ""
+        if dur_q.minutes and slow_q.minutes and slow_q.minutes > dur_q.minutes:
+            extra = slow_q.minutes - dur_q.minutes
+            time_cost = (f"（代价：单程在途由 {dur_q.text_one_way()} 变为 {slow_q.text_one_way()}，"
+                         f"多花约 {human_minutes(extra)}）")
 
         lines += [
             f"- ⚠️ **预算不足，无法支撑 {days} 天行程**：最低可行预算约 {min_budget} 元"
@@ -505,9 +709,9 @@ class PriceProvider:
         else:
             lines.append("  1. 缩短天数：减少行程天数可显著降低住宿与餐饮支出")
         if save > 0:
-            lines.append(f"  2. 更换交通：改乘普速列车硬座 / 长途大巴往返，约可省 {save} 元")
+            lines.append(f"  2. 更换交通：改乘普速列车硬座 / 长途大巴往返，约可省 {save} 元{time_cost}")
         else:
-            lines.append("  2. 更换交通：改乘普速列车硬座 / 长途大巴往返，降低大交通占比")
+            lines.append(f"  2. 更换交通：改乘普速列车硬座 / 长途大巴往返，降低大交通占比{time_cost}")
         lines.append(f"  3. 降低住宿：已按最低档（{eco_hotel.label()} 约 {eco_hotel_price} 元/晚）计算，可改青旅床位进一步压缩")
         lines.append(f"  4. 提高预算：将总预算提高到 {min_budget} 元以上")
         if adjustments:
@@ -540,6 +744,14 @@ class PriceProvider:
         route_desc = f"{origin_city}→{dest_city}" if (origin_city and dest_city) else "往返大交通"
         if transport_q.is_real:
             lines.append(f"- 往返大交通：{route_desc} {transport_q.note}，往返约 {transport_q.price} 元")
+            has_real = True
+        # 时长只在拿到真实车次历时时才注入，避免用估算值污染「真实数据」参考块
+        dur_q = self.transport_duration(origin_city, dest_city, transport_q.mode, dist)
+        if dur_q.is_real:
+            lines.append(f"- 大交通在途时长：{dur_q.kind} {dur_q.summary()}（{dur_q.label()}）"
+                         + (f"，参考车次 {dur_q.train_code} {dur_q.depart}→{dur_q.arrive}"
+                            if dur_q.train_code else ""))
+            lines.append("- 请在 D1 抵达交通与返程安排中写明上述耗时，据此安排当天可游玩时间")
             has_real = True
         if hotel_q.is_real:
             lines.append(f"- 住宿参考：{dest_city} 舒适型酒店约 {hotel_q.price} 元/晚（{hotel_q.label()}）")

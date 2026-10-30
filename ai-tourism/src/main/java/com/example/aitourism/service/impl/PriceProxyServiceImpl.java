@@ -83,12 +83,31 @@ public class PriceProxyServiceImpl implements PriceProxyService {
     private static final String LOCAL_PRICE_RESOURCE = "/price/train_price_local.json";
     private static final String LOCAL_PRICE_PROVIDER = "local-12306";
 
+    /** 本地真实车次历时表（12306 实爬，classpath:price/train_duration_local.json），
+     *  key = "城市A-城市B"，value = {"高铁动车": {train_code, depart, arrive, lishi, minutes}, "普速": {...}} */
+    private static final String LOCAL_DURATION_RESOURCE = "/price/train_duration_local.json";
+
+    /**
+     * 车次级绑定表（票价 + 历时同源，classpath:price/train_binding_local.json）。
+     *
+     * <p>格式：{"广州-长沙": {"高铁动车": {train_code, depart, arrive, lishi, minutes,
+     * seats:{二等座:319, 一等座:454}}, "普速": {...}}}
+     * 由 script/scrape/fetch_train_binding_http.py 抓取，是票价与时长唯一自洽的来源。
+     */
+    private static final String LOCAL_BINDING_RESOURCE = "/price/train_binding_local.json";
+
     private static final HttpClient HTTP = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(5))
             .build();
 
     /** 本地票价表缓存；classpath 资源缺失或解析失败时为空表（不影响后续层级） */
     private final Map<String, Map<String, BigDecimal>> localTrainPrices = loadLocalTrainPrices();
+
+    /** 本地车次历时表缓存（可选资源；缺失时时长层降级为速度模型估算） */
+    private final Map<String, Map<String, DurationQuote>> localTrainDurations = loadLocalTrainDurations();
+
+    /** 车次级绑定表缓存：票价与历时同源，优先于「分开取」的两张旧表 */
+    private final Map<String, Map<String, TrainOption>> localTrainOptions = loadLocalTrainOptions();
 
     /** 加载 classpath 下的 12306 实爬票价表（可选资源，格式 {"北京-上海": {"二等座": 338, ...}}） */
     private static Map<String, Map<String, BigDecimal>> loadLocalTrainPrices() {
@@ -119,9 +138,122 @@ public class PriceProxyServiceImpl implements PriceProxyService {
         }
     }
 
+    /** 加载 classpath 下的 12306 实爬车次历时表（可选资源） */
+    private static Map<String, Map<String, DurationQuote>> loadLocalTrainDurations() {
+        try (var in = PriceProxyServiceImpl.class.getResourceAsStream(LOCAL_DURATION_RESOURCE)) {
+            if (in == null) {
+                return Map.of();
+            }
+            JsonNode root = new ObjectMapper().readTree(in);
+            Map<String, Map<String, DurationQuote>> table = new ConcurrentHashMap<>();
+            root.fields().forEachRemaining(route -> {
+                Map<String, DurationQuote> kinds = new LinkedHashMap<>();
+                route.getValue().fields().forEachRemaining(kind -> {
+                    JsonNode q = kind.getValue();
+                    if (!q.isObject()) {
+                        return;
+                    }
+                    JsonNode mins = q.get("minutes");
+                    if (mins == null || !mins.isNumber() || mins.asInt() <= 0) {
+                        return;
+                    }
+                    kinds.put(kind.getKey(), new DurationQuote(
+                            kind.getKey(),
+                            q.get("train_code") == null ? null : q.get("train_code").asText(),
+                            q.get("depart") == null ? null : q.get("depart").asText(),
+                            q.get("arrive") == null ? null : q.get("arrive").asText(),
+                            q.get("lishi") == null ? null : q.get("lishi").asText(),
+                            mins.asInt()));
+                });
+                if (!kinds.isEmpty()) {
+                    table.put(route.getKey(), kinds);
+                }
+            });
+            return table;
+        } catch (Exception e) {
+            return Map.of();
+        }
+    }
+
+    /** 加载车次级绑定表（票价与历时同源） */
+    private static Map<String, Map<String, TrainOption>> loadLocalTrainOptions() {
+        try (var in = PriceProxyServiceImpl.class.getResourceAsStream(LOCAL_BINDING_RESOURCE)) {
+            if (in == null) {
+                return Map.of();
+            }
+            JsonNode root = new ObjectMapper().readTree(in);
+            Map<String, Map<String, TrainOption>> table = new ConcurrentHashMap<>();
+            root.fields().forEachRemaining(route -> {
+                Map<String, TrainOption> kinds = new LinkedHashMap<>();
+                route.getValue().fields().forEachRemaining(kindNode -> {
+                    JsonNode q = kindNode.getValue();
+                    if (!q.isObject()) {
+                        return;
+                    }
+                    JsonNode mins = q.get("minutes");
+                    if (mins == null || !mins.isNumber() || mins.asInt() <= 0) {
+                        return;
+                    }
+                    Map<String, BigDecimal> seats = new LinkedHashMap<>();
+                    JsonNode seatNode = q.get("seats");
+                    if (seatNode != null && seatNode.isObject()) {
+                        seatNode.fields().forEachRemaining(seat -> {
+                            JsonNode v = seat.getValue();
+                            if (v.isNumber() && v.decimalValue().signum() > 0) {
+                                seats.put(seat.getKey(), v.decimalValue());
+                            }
+                        });
+                    }
+                    kinds.put(kindNode.getKey(), new TrainOption(
+                            kindNode.getKey(),
+                            q.get("train_code") == null ? null : q.get("train_code").asText(),
+                            q.get("depart") == null ? null : q.get("depart").asText(),
+                            q.get("arrive") == null ? null : q.get("arrive").asText(),
+                            q.get("lishi") == null ? null : q.get("lishi").asText(),
+                            mins.asInt(),
+                            seats));
+                });
+                if (!kinds.isEmpty()) {
+                    table.put(route.getKey(), kinds);
+                }
+            });
+            return table;
+        } catch (Exception e) {
+            return Map.of();
+        }
+    }
+
+    @Override
+    public Map<String, TrainOption> trainOptions(String origin, String dest) {
+        String from = normalizeCity(origin);
+        String to = normalizeCity(dest);
+        if (from == null || to == null || from.equals(to)) {
+            return Map.of();
+        }
+        Map<String, TrainOption> opts = localTrainOptions.get(from + "-" + to);
+        if (opts == null) {
+            opts = localTrainOptions.get(to + "-" + from);
+        }
+        if (opts == null || opts.isEmpty()) {
+            return Map.of();
+        }
+        log.info("[PRICE] 车次级报价命中: {}→{} {}", from, to, opts.keySet());
+        return opts;
+    }
+
+    /** 本地车次级绑定表覆盖的线路数 */
+    public int localTrainOptionRoutes() {
+        return localTrainOptions.size();
+    }
+
     /** 本地票价表覆盖的线路数（供监控/日志用） */
     public int localTrainPriceRoutes() {
         return localTrainPrices.size();
+    }
+
+    /** 本地车次历时表覆盖的线路数（供监控/日志用） */
+    public int localTrainDurationRoutes() {
+        return localTrainDurations.size();
     }
 
     public PriceProxyServiceImpl(TrainPriceCacheMapper trainPriceCacheMapper,
@@ -148,18 +280,26 @@ public class PriceProxyServiceImpl implements PriceProxyService {
             return List.of();
         }
 
-        // 0) 本地 12306 实爬票价表（离线真实数据，最高优先级；反向线路票价对称，同样命中。
-        //    注意：本地层不依赖 trainApiEnabled，未配置第三方 API 时仍可用）
-        Map<String, BigDecimal> localSeats = localTrainPrices.get(from + "-" + to);
-        if (localSeats == null) {
-            localSeats = localTrainPrices.get(to + "-" + from);
+        // 0) 车次级绑定表（离线真实数据，最高优先级）：每个席别都带所属车次，
+        //    调用方据此取时长不会再跨车次错配。不依赖 trainApiEnabled。
+        Map<String, TrainOption> bound = trainOptions(from, to);
+        if (!bound.isEmpty()) {
+            List<SeatQuote> boundQuotes = new java.util.ArrayList<>();
+            bound.values().forEach(o -> o.seats().forEach((seat, price) ->
+                    boundQuotes.add(new SeatQuote(seat, price, o.trainCode(), o.depart()))));
+            if (!boundQuotes.isEmpty()) {
+                log.info("[PRICE] 火车票价命中车次级绑定表: {}→{} 共{}个席别（票价与历时同源）",
+                        from, to, boundQuotes.size());
+                return boundQuotes;
+            }
         }
-        if (localSeats != null && !localSeats.isEmpty()) {
-            List<SeatQuote> localQuotes = localSeats.entrySet().stream()
-                    .map(e -> new SeatQuote(e.getKey(), e.getValue(), null, null))
-                    .toList();
-            log.info("[PRICE] 火车票价命中本地实爬表: {}→{} 共{}个席别", from, to, localQuotes.size());
-            return localQuotes;
+
+        // 旧票价表（train_price_local.json）已停用：它按「城市对 + 席别」跨车次取最低价，
+        // 席别可能来自不同车次（广州-长沙二等座 ¥122 出自 D 字头动集，历时 7~8 小时），
+        // 与时长表拼在一起会得出「一百多块 2 小时到长沙」这种现实中不存在的组合。
+        // 未收录车次级报价的线路，宁可降级为系数估算并标注「估算」，也不冒充真实数据。
+        if (!localTrainPrices.isEmpty() && localTrainPrices.containsKey(from + "-" + to)) {
+            log.info("[PRICE] {}→{} 仅有旧票价表（席别可能跨车次），已弃用，降级估算", from, to);
         }
 
         if (!trainApiEnabled()) {
@@ -395,6 +535,30 @@ public class PriceProxyServiceImpl implements PriceProxyService {
         String c = city.trim();
         if (c.endsWith("市")) c = c.substring(0, c.length() - 1);
         return c.isBlank() ? null : c;
+    }
+
+    // ==================================================================================
+    // 交通时长（12306 实爬车次历时）
+    // ==================================================================================
+
+    @Override
+    public Map<String, DurationQuote> trainDurations(String origin, String dest) {
+        String from = normalizeCity(origin);
+        String to = normalizeCity(dest);
+        if (from == null || to == null || from.equals(to)) {
+            return Map.of();
+        }
+        // 正向优先，反向回退（往返历时基本对称）
+        Map<String, DurationQuote> kinds = localTrainDurations.get(from + "-" + to);
+        if (kinds == null || kinds.isEmpty()) {
+            kinds = localTrainDurations.get(to + "-" + from);
+        }
+        if (kinds == null || kinds.isEmpty()) {
+            log.debug("[DURATION] 本地车次历时表未收录 {}→{}，降级为速度模型估算", from, to);
+            return Map.of();
+        }
+        log.info("[DURATION] 车次历时命中本地实爬表: {}→{} {}", from, to, kinds.keySet());
+        return kinds;
     }
 
     // ==================================================================================

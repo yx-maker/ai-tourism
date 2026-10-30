@@ -1,6 +1,7 @@
 package com.example.aitourism.service;
 
 import com.example.aitourism.dto.budget.BudgetEnvelope;
+import com.example.aitourism.dto.budget.TransportDuration;
 import com.example.aitourism.entity.Budget;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -87,6 +88,15 @@ public class BudgetEnvelopeService {
     }
 
     /**
+     * 构建预算封套（住宿单价使用档次默认价，并携带大交通时长）。
+     */
+    public BudgetEnvelope build(BigDecimal userBudget, int days, int poiCount,
+                                BigDecimal transportCost, String transportMode,
+                                TransportDuration transportDuration) {
+        return build(userBudget, days, poiCount, transportCost, transportMode, Map.of(), transportDuration);
+    }
+
+    /**
      * 构建预算封套。
      *
      * @param userBudget     用户给定总预算（元），null 表示未指定
@@ -101,6 +111,18 @@ public class BudgetEnvelopeService {
     public BudgetEnvelope build(BigDecimal userBudget, int days, int poiCount,
                                 BigDecimal transportCost, String transportMode,
                                 Map<String, BigDecimal> hotelOverrides) {
+        return build(userBudget, days, poiCount, transportCost, transportMode, hotelOverrides, null);
+    }
+
+    /**
+     * 构建预算封套。
+     *
+     * @param transportDuration 大交通时长（真实车次历时或速度模型估算），可为 null
+     */
+    public BudgetEnvelope build(BigDecimal userBudget, int days, int poiCount,
+                                BigDecimal transportCost, String transportMode,
+                                Map<String, BigDecimal> hotelOverrides,
+                                TransportDuration transportDuration) {
         BudgetEnvelope env = new BudgetEnvelope();
         int safeDays = Math.max(days, 1);
         int nights = Math.max(safeDays - 1, 0);
@@ -111,6 +133,9 @@ public class BudgetEnvelopeService {
         env.setNights(nights);
         env.setTransportCost(transport);
         env.setTransportMode(transportMode == null || transportMode.isBlank() ? "高铁二等座" : transportMode);
+        env.setTransportDuration(transportDuration);
+        env.setTransportDurationSource(transportDuration == null ? null : transportDuration.getSource());
+        env.setTransportDurationText(transportDuration == null ? null : transportDuration.summary());
 
         int paidPoi = poiCount > 0 ? poiCount : Math.max(safeDays * 2, 2);
 

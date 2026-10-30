@@ -127,6 +127,84 @@ public class ToolsController {
     }
 
     /**
+     * 交通时长（12306 实爬车次历时，按「高铁动车 / 普速」分类取最快一趟）。
+     * 未收录的城市对返回 5008，Agent 侧降级为速度模型估算并标注「估算」。
+     */
+    @GetMapping("/train-duration")
+    public BaseResponse<Map<String, Object>> trainDuration(
+            @RequestParam String origin,
+            @RequestParam String dest) {
+        try {
+            Map<String, PriceProxyService.DurationQuote> kinds =
+                    priceProxyService.trainDurations(origin, dest);
+            if (kinds.isEmpty()) {
+                return BaseResponse.error(5008,
+                        "暂无「" + origin + "→" + dest + "」真实车次历时，已降级为速度模型估算");
+            }
+            Map<String, Object> data = new HashMap<>();
+            data.put("origin", origin);
+            data.put("dest", dest);
+            data.put("provider", "local-12306");
+            data.put("as_of", LocalDate.now().toString());
+            Map<String, Object> durations = new LinkedHashMap<>();
+            kinds.forEach((kind, q) -> {
+                Map<String, Object> m = new LinkedHashMap<>();
+                m.put("minutes", q.minutes());
+                m.put("lishi", q.lishi());
+                m.put("train_code", q.trainCode());
+                m.put("depart", q.depart());
+                m.put("arrive", q.arrive());
+                durations.put(kind, m);
+            });
+            data.put("durations", durations);
+            return BaseResponse.success(data);
+        } catch (RuntimeException e) {
+            return BaseResponse.error(5009, "交通时长查询失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 车次级报价：同一趟车的席别票价 + 官方历时（票价与时长同源，不会跨车次错配）。
+     *
+     * <p>与 /train-duration 的区别：那个接口只给「每类最快车次的历时」，
+     * 与「跨车次最低票价」拼在一起会出现「¥122 的二等座 2 小时到长沙」这种不存在的组合。
+     * 需要同时给价格和时长时，必须用本接口。
+     */
+    @GetMapping("/train-option")
+    public BaseResponse<Map<String, Object>> trainOption(
+            @RequestParam String origin,
+            @RequestParam String dest) {
+        try {
+            Map<String, PriceProxyService.TrainOption> opts =
+                    priceProxyService.trainOptions(origin, dest);
+            if (opts.isEmpty()) {
+                return BaseResponse.error(5008,
+                        "暂无「" + origin + "→" + dest + "」车次级报价，已降级为速度模型估算");
+            }
+            Map<String, Object> data = new HashMap<>();
+            data.put("origin", origin);
+            data.put("dest", dest);
+            data.put("provider", "local-12306");
+            data.put("as_of", LocalDate.now().toString());
+            Map<String, Object> options = new LinkedHashMap<>();
+            opts.forEach((kind, o) -> {
+                Map<String, Object> m = new LinkedHashMap<>();
+                m.put("train_code", o.trainCode());
+                m.put("depart", o.depart());
+                m.put("arrive", o.arrive());
+                m.put("lishi", o.lishi());
+                m.put("minutes", o.minutes());
+                m.put("seats", o.seats());
+                options.put(kind, m);
+            });
+            data.put("options", options);
+            return BaseResponse.success(data);
+        } catch (RuntimeException e) {
+            return BaseResponse.error(5009, "车次级报价查询失败: " + e.getMessage());
+        }
+    }
+
+    /**
      * 酒店快照价（t_hotel_price_snapshot）。
      * tier: economy / comfort / premium。无快照数据返回 5006，Agent 降级档次默认价。
      */

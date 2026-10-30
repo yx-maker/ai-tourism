@@ -240,11 +240,13 @@ public class MemoryAssistantServiceFactory {
             log.info("开始向大模型发起请求，进行旅游规划");
             // 注入规划上下文：真实价格参考 + 预算硬约束 + 用户偏好记忆（无内容时原样发送）
             String context = planningContextService.buildContext(userId, message);
+            // 用固定分隔符拼接，护栏据此只校验分隔符之前的用户原始输入
             String enrichedMessage = (context == null || context.isBlank())
                     ? message
-                    : message + "\n\n" + context;
+                    : message + PromptSafetyInputGuardrail.CONTEXT_PREFIX + context;
             if (!enrichedMessage.equals(message)) {
-                log.info("[CONTEXT] 已注入规划上下文（{} 字符）", context.length());
+                log.info("[CONTEXT] 已注入规划上下文（{} 字符），用户输入 {} 字符",
+                        context.length(), message == null ? 0 : message.length());
             }
             // 开始发起流式请求
             return assistantService.chat_Stream(memoryId, enrichedMessage);

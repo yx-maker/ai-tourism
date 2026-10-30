@@ -141,7 +141,9 @@ openai:
   api-key: "${ZHIPU_API_KEY}"
   base-url: "https://open.bigmodel.cn/api/paas/v4"
   model-name: "glm-4-flash"
-  max-output-tokens: 2000
+  # 3 天行程 + 每日明细 + 费用参考表 ≈ 2200~2600 tokens，
+  # 2000 会在「每日行程」中途截断（实测文本停在「**」），故提高到 4000。
+  max-output-tokens: 4000
 
 # OpenAI兼容配置（小模型 - 会话标题生成）
 openai-small:

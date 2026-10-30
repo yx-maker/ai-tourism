@@ -1,0 +1,5002 @@
+{
+ "北京-上海": {
+  "高铁动车": {
+   "train_code": "G25",
+   "depart": "17:00",
+   "arrive": "21:18",
+   "lishi": "04:18",
+   "minutes": 258
+  },
+  "普速": {
+   "train_code": "Z281",
+   "depart": "19:10",
+   "arrive": "08:44",
+   "lishi": "13:34",
+   "minutes": 814
+  }
+ },
+ "上海-北京": {
+  "高铁动车": {
+   "train_code": "G12",
+   "depart": "10:00",
+   "arrive": "14:24",
+   "lishi": "04:24",
+   "minutes": 264
+  },
+  "普速": {
+   "train_code": "Z282",
+   "depart": "19:17",
+   "arrive": "09:52",
+   "lishi": "14:35",
+   "minutes": 875
+  }
+ },
+ "北京-广州": {
+  "普速": {
+   "train_code": "Z501",
+   "depart": "20:23",
+   "arrive": "18:05",
+   "lishi": "21:42",
+   "minutes": 1302
+  },
+  "高铁动车": {
+   "train_code": "G381",
+   "depart": "10:00",
+   "arrive": "17:17",
+   "lishi": "07:17",
+   "minutes": 437
+  }
+ },
+ "广州-北京": {
+  "普速": {
+   "train_code": "Z14",
+   "depart": "17:08",
+   "arrive": "15:15",
+   "lishi": "22:07",
+   "minutes": 1327
+  },
+  "高铁动车": {
+   "train_code": "G382",
+   "depart": "12:13",
+   "arrive": "19:30",
+   "lishi": "07:17",
+   "minutes": 437
+  }
+ },
+ "北京-深圳": {
+  "普速": {
+   "train_code": "Z181",
+   "depart": "03:49",
+   "arrive": "05:12",
+   "lishi": "25:23",
+   "minutes": 1523
+  },
+  "高铁动车": {
+   "train_code": "G381",
+   "depart": "10:00",
+   "arrive": "17:50",
+   "lishi": "07:50",
+   "minutes": 470
+  }
+ },
+ "深圳-北京": {
+  "高铁动车": {
+   "train_code": "G382",
+   "depart": "11:41",
+   "arrive": "19:30",
+   "lishi": "07:49",
+   "minutes": 469
+  },
+  "普速": {
+   "train_code": "Z182",
+   "depart": "09:46",
+   "arrive": "08:46",
+   "lishi": "23:00",
+   "minutes": 1380
+  }
+ },
+ "北京-成都": {
+  "高铁动车": {
+   "train_code": "G323",
+   "depart": "15:00",
+   "arrive": "22:28",
+   "lishi": "07:28",
+   "minutes": 448
+  },
+  "普速": {
+   "train_code": "K117",
+   "depart": "11:54",
+   "arrive": "19:16",
+   "lishi": "31:22",
+   "minutes": 1882
+  }
+ },
+ "成都-北京": {
+  "普速": {
+   "train_code": "K118",
+   "depart": "21:12",
+   "arrive": "05:26",
+   "lishi": "32:14",
+   "minutes": 1934
+  },
+  "高铁动车": {
+   "train_code": "G322",
+   "depart": "06:56",
+   "arrive": "14:26",
+   "lishi": "07:30",
+   "minutes": 450
+  }
+ },
+ "北京-杭州": {
+  "高铁动车": {
+   "train_code": "G49",
+   "depart": "19:04",
+   "arrive": "23:21",
+   "lishi": "04:17",
+   "minutes": 257
+  },
+  "普速": {
+   "train_code": "Z281",
+   "depart": "19:10",
+   "arrive": "10:36",
+   "lishi": "15:26",
+   "minutes": 926
+  }
+ },
+ "杭州-北京": {
+  "高铁动车": {
+   "train_code": "G50",
+   "depart": "18:57",
+   "arrive": "23:25",
+   "lishi": "04:28",
+   "minutes": 268
+  },
+  "普速": {
+   "train_code": "Z282",
+   "depart": "17:40",
+   "arrive": "09:52",
+   "lishi": "16:12",
+   "minutes": 972
+  }
+ },
+ "北京-武汉": {
+  "普速": {
+   "train_code": "Z335",
+   "depart": "20:18",
+   "arrive": "07:03",
+   "lishi": "10:45",
+   "minutes": 645
+  },
+  "高铁动车": {
+   "train_code": "G339",
+   "depart": "09:05",
+   "arrive": "12:53",
+   "lishi": "03:48",
+   "minutes": 228
+  }
+ },
+ "武汉-北京": {
+  "普速": {
+   "train_code": "Z502",
+   "depart": "19:59",
+   "arrive": "06:49",
+   "lishi": "10:50",
+   "minutes": 650
+  },
+  "高铁动车": {
+   "train_code": "G344",
+   "depart": "08:36",
+   "arrive": "12:24",
+   "lishi": "03:48",
+   "minutes": 228
+  }
+ },
+ "北京-长沙": {
+  "普速": {
+   "train_code": "Z5",
+   "depart": "16:04",
+   "arrive": "06:13",
+   "lishi": "14:09",
+   "minutes": 849
+  },
+  "高铁动车": {
+   "train_code": "G381",
+   "depart": "10:00",
+   "arrive": "15:10",
+   "lishi": "05:10",
+   "minutes": 310
+  }
+ },
+ "长沙-北京": {
+  "普速": {
+   "train_code": "Z6",
+   "depart": "19:32",
+   "arrive": "09:57",
+   "lishi": "14:25",
+   "minutes": 865
+  },
+  "高铁动车": {
+   "train_code": "G382",
+   "depart": "14:19",
+   "arrive": "19:30",
+   "lishi": "05:11",
+   "minutes": 311
+  }
+ },
+ "北京-西安": {
+  "高铁动车": {
+   "train_code": "G351",
+   "depart": "07:55",
+   "arrive": "12:05",
+   "lishi": "04:10",
+   "minutes": 250
+  },
+  "普速": {
+   "train_code": "Z179",
+   "depart": "18:20",
+   "arrive": "06:51",
+   "lishi": "12:31",
+   "minutes": 751
+  }
+ },
+ "西安-北京": {
+  "普速": {
+   "train_code": "Z180",
+   "depart": "00:27",
+   "arrive": "13:33",
+   "lishi": "13:06",
+   "minutes": 786
+  },
+  "高铁动车": {
+   "train_code": "G324",
+   "depart": "18:22",
+   "arrive": "22:32",
+   "lishi": "04:10",
+   "minutes": 250
+  }
+ },
+ "北京-重庆": {
+  "高铁动车": {
+   "train_code": "G329",
+   "depart": "06:55",
+   "arrive": "13:55",
+   "lishi": "07:00",
+   "minutes": 420
+  },
+  "普速": {
+   "train_code": "T9",
+   "depart": "15:06",
+   "arrive": "15:39",
+   "lishi": "24:33",
+   "minutes": 1473
+  }
+ },
+ "重庆-北京": {
+  "高铁动车": {
+   "train_code": "G330",
+   "depart": "07:21",
+   "arrive": "14:31",
+   "lishi": "07:10",
+   "minutes": 430
+  },
+  "普速": {
+   "train_code": "K508",
+   "depart": "20:14",
+   "arrive": "21:38",
+   "lishi": "25:24",
+   "minutes": 1524
+  }
+ },
+ "北京-厦门": {
+  "高铁动车": {
+   "train_code": "G963",
+   "depart": "10:35",
+   "arrive": "21:15",
+   "lishi": "10:40",
+   "minutes": 640
+  },
+  "普速": {
+   "train_code": "K571",
+   "depart": "16:34",
+   "arrive": "21:58",
+   "lishi": "29:24",
+   "minutes": 1764
+  }
+ },
+ "厦门-北京": {
+  "高铁动车": {
+   "train_code": "G982",
+   "depart": "07:45",
+   "arrive": "18:24",
+   "lishi": "10:39",
+   "minutes": 639
+  },
+  "普速": {
+   "train_code": "K572",
+   "depart": "08:37",
+   "arrive": "14:38",
+   "lishi": "30:01",
+   "minutes": 1801
+  }
+ },
+ "北京-三亚": {
+  "普速": {
+   "train_code": "Z501",
+   "depart": "20:23",
+   "arrive": "10:50",
+   "lishi": "38:27",
+   "minutes": 2307
+  }
+ },
+ "三亚-北京": {
+  "普速": {
+   "train_code": "Z502",
+   "depart": "16:26",
+   "arrive": "06:49",
+   "lishi": "38:23",
+   "minutes": 2303
+  }
+ },
+ "北京-桂林": {
+  "普速": {
+   "train_code": "Z285",
+   "depart": "21:35",
+   "arrive": "16:36",
+   "lishi": "19:01",
+   "minutes": 1141
+  },
+  "高铁动车": {
+   "train_code": "G309",
+   "depart": "09:00",
+   "arrive": "16:58",
+   "lishi": "07:58",
+   "minutes": 478
+  }
+ },
+ "桂林-北京": {
+  "高铁动车": {
+   "train_code": "G310",
+   "depart": "12:45",
+   "arrive": "20:49",
+   "lishi": "08:04",
+   "minutes": 484
+  },
+  "普速": {
+   "train_code": "Z6",
+   "depart": "14:25",
+   "arrive": "09:57",
+   "lishi": "19:32",
+   "minutes": 1172
+  }
+ },
+ "北京-济南": {
+  "高铁动车": {
+   "train_code": "G37",
+   "depart": "07:52",
+   "arrive": "09:14",
+   "lishi": "01:22",
+   "minutes": 82
+  },
+  "普速": {
+   "train_code": "Z349",
+   "depart": "23:24",
+   "arrive": "04:57",
+   "lishi": "05:33",
+   "minutes": 333
+  }
+ },
+ "济南-北京": {
+  "高铁动车": {
+   "train_code": "G2",
+   "depart": "10:09",
+   "arrive": "11:32",
+   "lishi": "01:23",
+   "minutes": 83
+  },
+  "普速": {
+   "train_code": "K286",
+   "depart": "06:36",
+   "arrive": "12:54",
+   "lishi": "06:18",
+   "minutes": 378
+  }
+ },
+ "上海-广州": {
+  "高铁动车": {
+   "train_code": "G251",
+   "depart": "14:00",
+   "arrive": "20:14",
+   "lishi": "06:14",
+   "minutes": 374
+  },
+  "普速": {
+   "train_code": "K511",
+   "depart": "16:40",
+   "arrive": "14:17",
+   "lishi": "21:37",
+   "minutes": 1297
+  }
+ },
+ "广州-上海": {
+  "普速": {
+   "train_code": "K528",
+   "depart": "08:19",
+   "arrive": "03:46",
+   "lishi": "19:27",
+   "minutes": 1167
+  },
+  "高铁动车": {
+   "train_code": "G252",
+   "depart": "16:32",
+   "arrive": "22:43",
+   "lishi": "06:11",
+   "minutes": 371
+  }
+ },
+ "上海-深圳": {
+  "高铁动车": {
+   "train_code": "G269",
+   "depart": "15:00",
+   "arrive": "21:35",
+   "lishi": "06:35",
+   "minutes": 395
+  },
+  "普速": {
+   "train_code": "T101",
+   "depart": "12:30",
+   "arrive": "07:28",
+   "lishi": "18:58",
+   "minutes": 1138
+  }
+ },
+ "深圳-上海": {
+  "高铁动车": {
+   "train_code": "G270",
+   "depart": "07:43",
+   "arrive": "14:17",
+   "lishi": "06:34",
+   "minutes": 394
+  },
+  "普速": {
+   "train_code": "T102",
+   "depart": "16:04",
+   "arrive": "11:21",
+   "lishi": "19:17",
+   "minutes": 1157
+  }
+ },
+ "上海-成都": {
+  "高铁动车": {
+   "train_code": "G237",
+   "depart": "09:04",
+   "arrive": "19:35",
+   "lishi": "10:31",
+   "minutes": 631
+  },
+  "普速": {
+   "train_code": "K1156",
+   "depart": "10:57",
+   "arrive": "16:52",
+   "lishi": "29:55",
+   "minutes": 1795
+  }
+ },
+ "成都-上海": {
+  "高铁动车": {
+   "train_code": "G239",
+   "depart": "08:16",
+   "arrive": "18:22",
+   "lishi": "10:06",
+   "minutes": 606
+  },
+  "普速": {
+   "train_code": "K1158",
+   "depart": "08:07",
+   "arrive": "14:37",
+   "lishi": "30:30",
+   "minutes": 1830
+  }
+ },
+ "上海-杭州": {
+  "普速": {
+   "train_code": "K751",
+   "depart": "09:27",
+   "arrive": "11:01",
+   "lishi": "01:34",
+   "minutes": 94
+  },
+  "高铁动车": {
+   "train_code": "G1333",
+   "depart": "11:57",
+   "arrive": "12:31",
+   "lishi": "00:34",
+   "minutes": 34
+  }
+ },
+ "杭州-上海": {
+  "普速": {
+   "train_code": "Z282",
+   "depart": "17:40",
+   "arrive": "19:11",
+   "lishi": "01:31",
+   "minutes": 91
+  },
+  "高铁动车": {
+   "train_code": "G7324",
+   "depart": "11:43",
+   "arrive": "12:15",
+   "lishi": "00:32",
+   "minutes": 32
+  }
+ },
+ "上海-武汉": {
+  "高铁动车": {
+   "train_code": "G460",
+   "depart": "16:53",
+   "arrive": "20:25",
+   "lishi": "03:32",
+   "minutes": 212
+  },
+  "普速": {
+   "train_code": "K1127",
+   "depart": "18:22",
+   "arrive": "07:19",
+   "lishi": "12:57",
+   "minutes": 777
+  }
+ },
+ "武汉-上海": {
+  "高铁动车": {
+   "train_code": "G458",
+   "depart": "07:55",
+   "arrive": "11:31",
+   "lishi": "03:36",
+   "minutes": 216
+  },
+  "普速": {
+   "train_code": "K1125",
+   "depart": "19:17",
+   "arrive": "09:13",
+   "lishi": "13:56",
+   "minutes": 836
+  }
+ },
+ "上海-长沙": {
+  "高铁动车": {
+   "train_code": "G205",
+   "depart": "07:00",
+   "arrive": "11:00",
+   "lishi": "04:00",
+   "minutes": 240
+  },
+  "普速": {
+   "train_code": "K1373",
+   "depart": "16:34",
+   "arrive": "05:47",
+   "lishi": "13:13",
+   "minutes": 793
+  }
+ },
+ "长沙-上海": {
+  "普速": {
+   "train_code": "K1375",
+   "depart": "00:12",
+   "arrive": "14:57",
+   "lishi": "14:45",
+   "minutes": 885
+  },
+  "高铁动车": {
+   "train_code": "G206",
+   "depart": "18:01",
+   "arrive": "22:01",
+   "lishi": "04:00",
+   "minutes": 240
+  }
+ },
+ "上海-西安": {
+  "高铁动车": {
+   "train_code": "G94",
+   "depart": "08:55",
+   "arrive": "14:34",
+   "lishi": "05:39",
+   "minutes": 339
+  },
+  "普速": {
+   "train_code": "Z164",
+   "depart": "18:33",
+   "arrive": "09:19",
+   "lishi": "14:46",
+   "minutes": 886
+  }
+ },
+ "西安-上海": {
+  "高铁动车": {
+   "train_code": "G96",
+   "depart": "15:32",
+   "arrive": "21:22",
+   "lishi": "05:50",
+   "minutes": 350
+  },
+  "普速": {
+   "train_code": "Z42",
+   "depart": "21:10",
+   "arrive": "12:15",
+   "lishi": "15:05",
+   "minutes": 905
+  }
+ },
+ "上海-重庆": {
+  "高铁动车": {
+   "train_code": "G241",
+   "depart": "11:56",
+   "arrive": "20:55",
+   "lishi": "08:59",
+   "minutes": 539
+  },
+  "普速": {
+   "train_code": "K71",
+   "depart": "14:19",
+   "arrive": "17:43",
+   "lishi": "27:24",
+   "minutes": 1644
+  }
+ },
+ "重庆-上海": {
+  "高铁动车": {
+   "train_code": "G243",
+   "depart": "07:53",
+   "arrive": "16:54",
+   "lishi": "09:01",
+   "minutes": 541
+  },
+  "普速": {
+   "train_code": "K73",
+   "depart": "08:07",
+   "arrive": "12:42",
+   "lishi": "28:35",
+   "minutes": 1715
+  }
+ },
+ "上海-厦门": {
+  "高铁动车": {
+   "train_code": "G257",
+   "depart": "12:00",
+   "arrive": "17:03",
+   "lishi": "05:03",
+   "minutes": 303
+  }
+ },
+ "厦门-上海": {
+  "高铁动车": {
+   "train_code": "G258",
+   "depart": "11:42",
+   "arrive": "16:47",
+   "lishi": "05:05",
+   "minutes": 305
+  }
+ },
+ "上海-桂林": {
+  "高铁动车": {
+   "train_code": "G263",
+   "depart": "11:00",
+   "arrive": "18:18",
+   "lishi": "07:18",
+   "minutes": 438
+  },
+  "普速": {
+   "train_code": "T381",
+   "depart": "16:50",
+   "arrive": "11:39",
+   "lishi": "18:49",
+   "minutes": 1129
+  }
+ },
+ "桂林-上海": {
+  "普速": {
+   "train_code": "T382",
+   "depart": "14:15",
+   "arrive": "10:59",
+   "lishi": "20:44",
+   "minutes": 1244
+  },
+  "高铁动车": {
+   "train_code": "G264",
+   "depart": "12:05",
+   "arrive": "19:30",
+   "lishi": "07:25",
+   "minutes": 445
+  }
+ },
+ "上海-济南": {
+  "高铁动车": {
+   "train_code": "G12",
+   "depart": "10:00",
+   "arrive": "12:58",
+   "lishi": "02:58",
+   "minutes": 178
+  },
+  "普速": {
+   "train_code": "Z268",
+   "depart": "14:49",
+   "arrive": "00:28",
+   "lishi": "09:39",
+   "minutes": 579
+  }
+ },
+ "济南-上海": {
+  "普速": {
+   "train_code": "Z267",
+   "depart": "02:45",
+   "arrive": "12:21",
+   "lishi": "09:36",
+   "minutes": 576
+  },
+  "高铁动车": {
+   "train_code": "G35",
+   "depart": "20:50",
+   "arrive": "23:51",
+   "lishi": "03:01",
+   "minutes": 181
+  }
+ },
+ "广州-深圳": {
+  "高铁动车": {
+   "train_code": "G3017",
+   "depart": "06:18",
+   "arrive": "06:47",
+   "lishi": "00:29",
+   "minutes": 29
+  },
+  "普速": {
+   "train_code": "S4907",
+   "depart": "13:46",
+   "arrive": "14:55",
+   "lishi": "01:09",
+   "minutes": 69
+  }
+ },
+ "深圳-广州": {
+  "高铁动车": {
+   "train_code": "G1002",
+   "depart": "06:33",
+   "arrive": "07:02",
+   "lishi": "00:29",
+   "minutes": 29
+  },
+  "普速": {
+   "train_code": "S4908",
+   "depart": "15:19",
+   "arrive": "16:24",
+   "lishi": "01:05",
+   "minutes": 65
+  }
+ },
+ "广州-成都": {
+  "高铁动车": {
+   "train_code": "G2942",
+   "depart": "07:44",
+   "arrive": "14:46",
+   "lishi": "07:02",
+   "minutes": 422
+  },
+  "普速": {
+   "train_code": "Z586",
+   "depart": "22:41",
+   "arrive": "18:40",
+   "lishi": "19:59",
+   "minutes": 1199
+  }
+ },
+ "成都-广州": {
+  "高铁动车": {
+   "train_code": "G3705",
+   "depart": "07:39",
+   "arrive": "14:33",
+   "lishi": "06:54",
+   "minutes": 414
+  },
+  "普速": {
+   "train_code": "Z588",
+   "depart": "20:48",
+   "arrive": "16:55",
+   "lishi": "20:07",
+   "minutes": 1207
+  }
+ },
+ "广州-杭州": {
+  "普速": {
+   "train_code": "K528",
+   "depart": "08:19",
+   "arrive": "01:49",
+   "lishi": "17:30",
+   "minutes": 1050
+  },
+  "高铁动车": {
+   "train_code": "G252",
+   "depart": "16:32",
+   "arrive": "21:54",
+   "lishi": "05:22",
+   "minutes": 322
+  }
+ },
+ "杭州-广州": {
+  "高铁动车": {
+   "train_code": "G251",
+   "depart": "14:48",
+   "arrive": "20:14",
+   "lishi": "05:26",
+   "minutes": 326
+  },
+  "普速": {
+   "train_code": "K511",
+   "depart": "18:51",
+   "arrive": "14:17",
+   "lishi": "19:26",
+   "minutes": 1166
+  }
+ },
+ "广州-武汉": {
+  "高铁动车": {
+   "train_code": "G426",
+   "depart": "09:45",
+   "arrive": "13:02",
+   "lishi": "03:17",
+   "minutes": 197
+  },
+  "普速": {
+   "train_code": "Z14",
+   "depart": "17:08",
+   "arrive": "04:04",
+   "lishi": "10:56",
+   "minutes": 656
+  }
+ },
+ "武汉-广州": {
+  "普速": {
+   "train_code": "Z501",
+   "depart": "07:15",
+   "arrive": "18:05",
+   "lishi": "10:50",
+   "minutes": 650
+  },
+  "高铁动车": {
+   "train_code": "G381",
+   "depart": "13:59",
+   "arrive": "17:17",
+   "lishi": "03:18",
+   "minutes": 198
+  }
+ },
+ "广州-长沙": {
+  "高铁动车": {
+   "train_code": "G6018",
+   "depart": "13:14",
+   "arrive": "15:11",
+   "lishi": "01:57",
+   "minutes": 117
+  },
+  "普速": {
+   "train_code": "K9276",
+   "depart": "21:30",
+   "arrive": "04:53",
+   "lishi": "07:23",
+   "minutes": 443
+  }
+ },
+ "长沙-广州": {
+  "普速": {
+   "train_code": "T95",
+   "depart": "22:25",
+   "arrive": "05:28",
+   "lishi": "07:03",
+   "minutes": 423
+  },
+  "高铁动车": {
+   "train_code": "G1113",
+   "depart": "15:04",
+   "arrive": "16:57",
+   "lishi": "01:53",
+   "minutes": 113
+  }
+ },
+ "广州-西安": {
+  "高铁动车": {
+   "train_code": "G410",
+   "depart": "15:05",
+   "arrive": "22:03",
+   "lishi": "06:58",
+   "minutes": 418
+  },
+  "普速": {
+   "train_code": "Z230",
+   "depart": "11:10",
+   "arrive": "08:56",
+   "lishi": "21:46",
+   "minutes": 1306
+  }
+ },
+ "西安-广州": {
+  "高铁动车": {
+   "train_code": "G412",
+   "depart": "07:54",
+   "arrive": "14:47",
+   "lishi": "06:53",
+   "minutes": 413
+  },
+  "普速": {
+   "train_code": "Z232",
+   "depart": "20:01",
+   "arrive": "17:39",
+   "lishi": "21:38",
+   "minutes": 1298
+  }
+ },
+ "广州-重庆": {
+  "高铁动车": {
+   "train_code": "G2942",
+   "depart": "07:44",
+   "arrive": "13:26",
+   "lishi": "05:42",
+   "minutes": 342
+  },
+  "普速": {
+   "train_code": "Z586",
+   "depart": "22:41",
+   "arrive": "15:23",
+   "lishi": "16:42",
+   "minutes": 1002
+  }
+ },
+ "重庆-广州": {
+  "高铁动车": {
+   "train_code": "G2965",
+   "depart": "15:33",
+   "arrive": "21:19",
+   "lishi": "05:46",
+   "minutes": 346
+  },
+  "普速": {
+   "train_code": "K775",
+   "depart": "20:45",
+   "arrive": "13:31",
+   "lishi": "16:46",
+   "minutes": 1006
+  }
+ },
+ "广州-厦门": {
+  "高铁动车": {
+   "train_code": "G3044",
+   "depart": "08:18",
+   "arrive": "11:19",
+   "lishi": "03:01",
+   "minutes": 181
+  },
+  "普速": {
+   "train_code": "K229",
+   "depart": "20:12",
+   "arrive": "08:52",
+   "lishi": "12:40",
+   "minutes": 760
+  }
+ },
+ "厦门-广州": {
+  "高铁动车": {
+   "train_code": "G3043",
+   "depart": "09:25",
+   "arrive": "12:31",
+   "lishi": "03:06",
+   "minutes": 186
+  },
+  "普速": {
+   "train_code": "K230",
+   "depart": "17:26",
+   "arrive": "05:27",
+   "lishi": "12:01",
+   "minutes": 721
+  }
+ },
+ "广州-三亚": {
+  "普速": {
+   "train_code": "Z504",
+   "depart": "18:30",
+   "arrive": "10:50",
+   "lishi": "16:20",
+   "minutes": 980
+  }
+ },
+ "三亚-广州": {
+  "普速": {
+   "train_code": "Z502",
+   "depart": "16:26",
+   "arrive": "08:05",
+   "lishi": "15:39",
+   "minutes": 939
+  }
+ },
+ "广州-桂林": {
+  "高铁动车": {
+   "train_code": "G908",
+   "depart": "12:12",
+   "arrive": "14:16",
+   "lishi": "02:04",
+   "minutes": 124
+  }
+ },
+ "桂林-广州": {
+  "高铁动车": {
+   "train_code": "G3707",
+   "depart": "13:34",
+   "arrive": "15:32",
+   "lishi": "01:58",
+   "minutes": 118
+  }
+ },
+ "广州-济南": {
+  "高铁动车": {
+   "train_code": "G416",
+   "depart": "16:10",
+   "arrive": "23:28",
+   "lishi": "07:18",
+   "minutes": 438
+  }
+ },
+ "济南-广州": {
+  "高铁动车": {
+   "train_code": "G415",
+   "depart": "08:03",
+   "arrive": "15:37",
+   "lishi": "07:34",
+   "minutes": 454
+  },
+  "普速": {
+   "train_code": "Z167",
+   "depart": "17:08",
+   "arrive": "16:45",
+   "lishi": "23:37",
+   "minutes": 1417
+  }
+ },
+ "深圳-成都": {
+  "高铁动车": {
+   "train_code": "G2942",
+   "depart": "07:03",
+   "arrive": "14:46",
+   "lishi": "07:43",
+   "minutes": 463
+  },
+  "普速": {
+   "train_code": "Z586",
+   "depart": "20:58",
+   "arrive": "18:40",
+   "lishi": "21:42",
+   "minutes": 1302
+  }
+ },
+ "成都-深圳": {
+  "高铁动车": {
+   "train_code": "G2941",
+   "depart": "15:09",
+   "arrive": "22:59",
+   "lishi": "07:50",
+   "minutes": 470
+  },
+  "普速": {
+   "train_code": "Z588",
+   "depart": "20:48",
+   "arrive": "19:04",
+   "lishi": "22:16",
+   "minutes": 1336
+  }
+ },
+ "深圳-杭州": {
+  "高铁动车": {
+   "train_code": "G270",
+   "depart": "07:43",
+   "arrive": "13:29",
+   "lishi": "05:46",
+   "minutes": 346
+  },
+  "普速": {
+   "train_code": "T102",
+   "depart": "16:04",
+   "arrive": "09:11",
+   "lishi": "17:07",
+   "minutes": 1027
+  }
+ },
+ "杭州-深圳": {
+  "高铁动车": {
+   "train_code": "G269",
+   "depart": "15:48",
+   "arrive": "21:35",
+   "lishi": "05:47",
+   "minutes": 347
+  },
+  "普速": {
+   "train_code": "T101",
+   "depart": "14:33",
+   "arrive": "07:28",
+   "lishi": "16:55",
+   "minutes": 1015
+  }
+ },
+ "深圳-武汉": {
+  "高铁动车": {
+   "train_code": "G382",
+   "depart": "11:41",
+   "arrive": "15:31",
+   "lishi": "03:50",
+   "minutes": 230
+  },
+  "普速": {
+   "train_code": "Z230",
+   "depart": "09:33",
+   "arrive": "22:29",
+   "lishi": "12:56",
+   "minutes": 776
+  }
+ },
+ "武汉-深圳": {
+  "普速": {
+   "train_code": "T95",
+   "depart": "18:27",
+   "arrive": "07:20",
+   "lishi": "12:53",
+   "minutes": 773
+  },
+  "高铁动车": {
+   "train_code": "G381",
+   "depart": "13:59",
+   "arrive": "17:50",
+   "lishi": "03:51",
+   "minutes": 231
+  }
+ },
+ "深圳-长沙": {
+  "高铁动车": {
+   "train_code": "G6210",
+   "depart": "21:18",
+   "arrive": "23:51",
+   "lishi": "02:33",
+   "minutes": 153
+  },
+  "普速": {
+   "train_code": "Z230",
+   "depart": "09:33",
+   "arrive": "18:43",
+   "lishi": "09:10",
+   "minutes": 550
+  }
+ },
+ "长沙-深圳": {
+  "普速": {
+   "train_code": "T95",
+   "depart": "22:25",
+   "arrive": "07:20",
+   "lishi": "08:55",
+   "minutes": 535
+  },
+  "高铁动车": {
+   "train_code": "G6003",
+   "depart": "10:00",
+   "arrive": "12:35",
+   "lishi": "02:35",
+   "minutes": 155
+  }
+ },
+ "深圳-西安": {
+  "普速": {
+   "train_code": "Z230",
+   "depart": "09:33",
+   "arrive": "08:56",
+   "lishi": "23:23",
+   "minutes": 1403
+  },
+  "高铁动车": {
+   "train_code": "G830",
+   "depart": "12:43",
+   "arrive": "22:44",
+   "lishi": "10:01",
+   "minutes": 601
+  }
+ },
+ "西安-深圳": {
+  "普速": {
+   "train_code": "Z232",
+   "depart": "20:01",
+   "arrive": "19:19",
+   "lishi": "23:18",
+   "minutes": 1398
+  },
+  "高铁动车": {
+   "train_code": "G844",
+   "depart": "11:35",
+   "arrive": "21:00",
+   "lishi": "09:25",
+   "minutes": 565
+  }
+ },
+ "深圳-重庆": {
+  "高铁动车": {
+   "train_code": "G2942",
+   "depart": "07:03",
+   "arrive": "13:26",
+   "lishi": "06:23",
+   "minutes": 383
+  },
+  "普速": {
+   "train_code": "Z586",
+   "depart": "20:58",
+   "arrive": "15:23",
+   "lishi": "18:25",
+   "minutes": 1105
+  }
+ },
+ "重庆-深圳": {
+  "高铁动车": {
+   "train_code": "G2965",
+   "depart": "15:33",
+   "arrive": "22:01",
+   "lishi": "06:28",
+   "minutes": 388
+  },
+  "普速": {
+   "train_code": "Z585",
+   "depart": "23:59",
+   "arrive": "19:04",
+   "lishi": "19:05",
+   "minutes": 1145
+  }
+ },
+ "深圳-厦门": {
+  "高铁动车": {
+   "train_code": "D666",
+   "depart": "16:30",
+   "arrive": "19:07",
+   "lishi": "02:37",
+   "minutes": 157
+  }
+ },
+ "厦门-深圳": {
+  "高铁动车": {
+   "train_code": "D2293",
+   "depart": "19:21",
+   "arrive": "22:01",
+   "lishi": "02:40",
+   "minutes": 160
+  }
+ },
+ "深圳-三亚": {
+  "普速": {
+   "train_code": "Z8006",
+   "depart": "18:02",
+   "arrive": "13:10",
+   "lishi": "19:08",
+   "minutes": 1148
+  }
+ },
+ "三亚-深圳": {
+  "普速": {
+   "train_code": "Z8008",
+   "depart": "11:55",
+   "arrive": "06:56",
+   "lishi": "19:01",
+   "minutes": 1141
+  }
+ },
+ "深圳-桂林": {
+  "高铁动车": {
+   "train_code": "G908",
+   "depart": "11:37",
+   "arrive": "14:16",
+   "lishi": "02:39",
+   "minutes": 159
+  }
+ },
+ "桂林-深圳": {
+  "高铁动车": {
+   "train_code": "G907",
+   "depart": "13:46",
+   "arrive": "16:31",
+   "lishi": "02:45",
+   "minutes": 165
+  }
+ },
+ "深圳-济南": {
+  "高铁动车": {
+   "train_code": "G934",
+   "depart": "07:08",
+   "arrive": "17:47",
+   "lishi": "10:39",
+   "minutes": 639
+  },
+  "普速": {
+   "train_code": "K1282",
+   "depart": "15:03",
+   "arrive": "18:50",
+   "lishi": "27:47",
+   "minutes": 1667
+  }
+ },
+ "济南-深圳": {
+  "高铁动车": {
+   "train_code": "G933",
+   "depart": "07:10",
+   "arrive": "19:12",
+   "lishi": "12:02",
+   "minutes": 722
+  },
+  "普速": {
+   "train_code": "T397",
+   "depart": "21:38",
+   "arrive": "21:06",
+   "lishi": "23:28",
+   "minutes": 1408
+  }
+ },
+ "成都-杭州": {
+  "高铁动车": {
+   "train_code": "G239",
+   "depart": "08:16",
+   "arrive": "17:35",
+   "lishi": "09:19",
+   "minutes": 559
+  },
+  "普速": {
+   "train_code": "K530",
+   "depart": "18:00",
+   "arrive": "21:47",
+   "lishi": "27:47",
+   "minutes": 1667
+  }
+ },
+ "杭州-成都": {
+  "高铁动车": {
+   "train_code": "G237",
+   "depart": "09:53",
+   "arrive": "19:35",
+   "lishi": "09:42",
+   "minutes": 582
+  },
+  "普速": {
+   "train_code": "K529",
+   "depart": "12:23",
+   "arrive": "16:22",
+   "lishi": "27:59",
+   "minutes": 1679
+  }
+ },
+ "成都-武汉": {
+  "高铁动车": {
+   "train_code": "G3979",
+   "depart": "08:30",
+   "arrive": "13:45",
+   "lishi": "05:15",
+   "minutes": 315
+  },
+  "普速": {
+   "train_code": "K530",
+   "depart": "18:00",
+   "arrive": "10:39",
+   "lishi": "16:39",
+   "minutes": 999
+  }
+ },
+ "武汉-成都": {
+  "普速": {
+   "train_code": "T128",
+   "depart": "01:33",
+   "arrive": "17:01",
+   "lishi": "15:28",
+   "minutes": 928
+  },
+  "高铁动车": {
+   "train_code": "G3981",
+   "depart": "16:33",
+   "arrive": "21:49",
+   "lishi": "05:16",
+   "minutes": 316
+  }
+ },
+ "成都-长沙": {
+  "高铁动车": {
+   "train_code": "G2445",
+   "depart": "08:00",
+   "arrive": "13:45",
+   "lishi": "05:45",
+   "minutes": 345
+  },
+  "普速": {
+   "train_code": "K504",
+   "depart": "12:36",
+   "arrive": "05:30",
+   "lishi": "16:54",
+   "minutes": 1014
+  }
+ },
+ "长沙-成都": {
+  "高铁动车": {
+   "train_code": "G2446",
+   "depart": "14:06",
+   "arrive": "19:51",
+   "lishi": "05:45",
+   "minutes": 345
+  },
+  "普速": {
+   "train_code": "Z332",
+   "depart": "16:55",
+   "arrive": "08:30",
+   "lishi": "15:35",
+   "minutes": 935
+  }
+ },
+ "成都-西安": {
+  "普速": {
+   "train_code": "K386",
+   "depart": "13:09",
+   "arrive": "00:04",
+   "lishi": "10:55",
+   "minutes": 655
+  },
+  "高铁动车": {
+   "train_code": "G322",
+   "depart": "06:56",
+   "arrive": "10:05",
+   "lishi": "03:09",
+   "minutes": 189
+  }
+ },
+ "西安-成都": {
+  "高铁动车": {
+   "train_code": "G321",
+   "depart": "11:25",
+   "arrive": "14:30",
+   "lishi": "03:05",
+   "minutes": 185
+  },
+  "普速": {
+   "train_code": "K385",
+   "depart": "21:22",
+   "arrive": "08:00",
+   "lishi": "10:38",
+   "minutes": 638
+  }
+ },
+ "成都-重庆": {
+  "高铁动车": {
+   "train_code": "G8609",
+   "depart": "09:25",
+   "arrive": "10:27",
+   "lishi": "01:02",
+   "minutes": 62
+  },
+  "普速": {
+   "train_code": "Z588",
+   "depart": "20:48",
+   "arrive": "23:24",
+   "lishi": "02:36",
+   "minutes": 156
+  }
+ },
+ "重庆-成都": {
+  "高铁动车": {
+   "train_code": "G8612",
+   "depart": "10:30",
+   "arrive": "11:32",
+   "lishi": "01:02",
+   "minutes": 62
+  },
+  "普速": {
+   "train_code": "Z587",
+   "depart": "15:54",
+   "arrive": "18:40",
+   "lishi": "02:46",
+   "minutes": 166
+  }
+ },
+ "成都-厦门": {
+  "高铁动车": {
+   "train_code": "G2371",
+   "depart": "06:45",
+   "arrive": "20:51",
+   "lishi": "14:06",
+   "minutes": 846
+  }
+ },
+ "厦门-成都": {
+  "高铁动车": {
+   "train_code": "G2278",
+   "depart": "07:56",
+   "arrive": "21:53",
+   "lishi": "13:57",
+   "minutes": 837
+  }
+ },
+ "成都-桂林": {
+  "高铁动车": {
+   "train_code": "G917",
+   "depart": "10:41",
+   "arrive": "15:39",
+   "lishi": "04:58",
+   "minutes": 298
+  }
+ },
+ "桂林-成都": {
+  "高铁动车": {
+   "train_code": "G918",
+   "depart": "13:22",
+   "arrive": "18:21",
+   "lishi": "04:59",
+   "minutes": 299
+  }
+ },
+ "成都-丽江": {
+  "高铁动车": {
+   "train_code": "D239",
+   "depart": "08:33",
+   "arrive": "17:46",
+   "lishi": "09:13",
+   "minutes": 553
+  }
+ },
+ "丽江-成都": {
+  "高铁动车": {
+   "train_code": "D240",
+   "depart": "11:03",
+   "arrive": "20:18",
+   "lishi": "09:15",
+   "minutes": 555
+  }
+ },
+ "成都-济南": {
+  "高铁动车": {
+   "train_code": "G3418",
+   "depart": "06:34",
+   "arrive": "13:56",
+   "lishi": "07:22",
+   "minutes": 442
+  }
+ },
+ "济南-成都": {
+  "高铁动车": {
+   "train_code": "G1839",
+   "depart": "06:52",
+   "arrive": "14:58",
+   "lishi": "08:06",
+   "minutes": 486
+  },
+  "普速": {
+   "train_code": "Z315",
+   "depart": "16:11",
+   "arrive": "20:34",
+   "lishi": "28:23",
+   "minutes": 1703
+  }
+ },
+ "杭州-武汉": {
+  "高铁动车": {
+   "train_code": "G1794",
+   "depart": "16:28",
+   "arrive": "20:27",
+   "lishi": "03:59",
+   "minutes": 239
+  },
+  "普速": {
+   "train_code": "K1127",
+   "depart": "20:22",
+   "arrive": "07:19",
+   "lishi": "10:57",
+   "minutes": 657
+  }
+ },
+ "武汉-杭州": {
+  "高铁动车": {
+   "train_code": "G1792",
+   "depart": "12:10",
+   "arrive": "16:07",
+   "lishi": "03:57",
+   "minutes": 237
+  },
+  "普速": {
+   "train_code": "K531",
+   "depart": "11:02",
+   "arrive": "21:47",
+   "lishi": "10:45",
+   "minutes": 645
+  }
+ },
+ "杭州-长沙": {
+  "高铁动车": {
+   "train_code": "G205",
+   "depart": "07:47",
+   "arrive": "11:00",
+   "lishi": "03:13",
+   "minutes": 193
+  },
+  "普速": {
+   "train_code": "K1373",
+   "depart": "18:27",
+   "arrive": "05:47",
+   "lishi": "11:20",
+   "minutes": 680
+  }
+ },
+ "长沙-杭州": {
+  "普速": {
+   "train_code": "K1375",
+   "depart": "00:12",
+   "arrive": "12:13",
+   "lishi": "12:01",
+   "minutes": 721
+  },
+  "高铁动车": {
+   "train_code": "G242",
+   "depart": "12:52",
+   "arrive": "16:04",
+   "lishi": "03:12",
+   "minutes": 192
+  }
+ },
+ "杭州-西安": {
+  "普速": {
+   "train_code": "Z594",
+   "depart": "10:46",
+   "arrive": "04:33",
+   "lishi": "17:47",
+   "minutes": 1067
+  },
+  "高铁动车": {
+   "train_code": "G1898",
+   "depart": "16:31",
+   "arrive": "23:29",
+   "lishi": "06:58",
+   "minutes": 418
+  }
+ },
+ "西安-杭州": {
+  "高铁动车": {
+   "train_code": "G2238",
+   "depart": "08:18",
+   "arrive": "14:49",
+   "lishi": "06:31",
+   "minutes": 391
+  },
+  "普速": {
+   "train_code": "K390",
+   "depart": "11:00",
+   "arrive": "05:26",
+   "lishi": "18:26",
+   "minutes": 1106
+  }
+ },
+ "杭州-重庆": {
+  "高铁动车": {
+   "train_code": "G241",
+   "depart": "12:43",
+   "arrive": "20:55",
+   "lishi": "08:12",
+   "minutes": 492
+  },
+  "普速": {
+   "train_code": "K1152",
+   "depart": "13:55",
+   "arrive": "14:28",
+   "lishi": "24:33",
+   "minutes": 1473
+  }
+ },
+ "重庆-杭州": {
+  "高铁动车": {
+   "train_code": "G243",
+   "depart": "07:53",
+   "arrive": "16:04",
+   "lishi": "08:11",
+   "minutes": 491
+  },
+  "普速": {
+   "train_code": "K1154",
+   "depart": "12:14",
+   "arrive": "12:38",
+   "lishi": "24:24",
+   "minutes": 1464
+  }
+ },
+ "杭州-厦门": {
+  "高铁动车": {
+   "train_code": "G257",
+   "depart": "12:48",
+   "arrive": "17:03",
+   "lishi": "04:15",
+   "minutes": 255
+  }
+ },
+ "厦门-杭州": {
+  "高铁动车": {
+   "train_code": "G258",
+   "depart": "11:42",
+   "arrive": "15:55",
+   "lishi": "04:13",
+   "minutes": 253
+  }
+ },
+ "杭州-桂林": {
+  "高铁动车": {
+   "train_code": "G263",
+   "depart": "11:48",
+   "arrive": "18:18",
+   "lishi": "06:30",
+   "minutes": 390
+  },
+  "普速": {
+   "train_code": "T381",
+   "depart": "18:37",
+   "arrive": "11:39",
+   "lishi": "17:02",
+   "minutes": 1022
+  }
+ },
+ "桂林-杭州": {
+  "高铁动车": {
+   "train_code": "G264",
+   "depart": "12:05",
+   "arrive": "18:41",
+   "lishi": "06:36",
+   "minutes": 396
+  },
+  "普速": {
+   "train_code": "T382",
+   "depart": "14:15",
+   "arrive": "08:51",
+   "lishi": "18:36",
+   "minutes": 1116
+  }
+ },
+ "杭州-济南": {
+  "普速": {
+   "train_code": "K348",
+   "depart": "01:55",
+   "arrive": "16:01",
+   "lishi": "14:06",
+   "minutes": 846
+  },
+  "高铁动车": {
+   "train_code": "G46",
+   "depart": "18:00",
+   "arrive": "21:04",
+   "lishi": "03:04",
+   "minutes": 184
+  }
+ },
+ "济南-杭州": {
+  "普速": {
+   "train_code": "K335",
+   "depart": "16:56",
+   "arrive": "07:10",
+   "lishi": "14:14",
+   "minutes": 854
+  },
+  "高铁动车": {
+   "train_code": "G41",
+   "depart": "10:21",
+   "arrive": "13:24",
+   "lishi": "03:03",
+   "minutes": 183
+  }
+ },
+ "武汉-长沙": {
+  "普速": {
+   "train_code": "Z13",
+   "depart": "01:27",
+   "arrive": "04:43",
+   "lishi": "03:16",
+   "minutes": 196
+  },
+  "高铁动车": {
+   "train_code": "G391",
+   "depart": "09:00",
+   "arrive": "10:11",
+   "lishi": "01:11",
+   "minutes": 71
+  }
+ },
+ "长沙-武汉": {
+  "普速": {
+   "train_code": "Z54",
+   "depart": "02:38",
+   "arrive": "05:58",
+   "lishi": "03:20",
+   "minutes": 200
+  },
+  "高铁动车": {
+   "train_code": "G392",
+   "depart": "14:15",
+   "arrive": "15:27",
+   "lishi": "01:12",
+   "minutes": 72
+  }
+ },
+ "武汉-西安": {
+  "普速": {
+   "train_code": "Z230",
+   "depart": "22:54",
+   "arrive": "08:56",
+   "lishi": "10:02",
+   "minutes": 602
+  },
+  "高铁动车": {
+   "train_code": "G411",
+   "depart": "19:21",
+   "arrive": "22:03",
+   "lishi": "02:42",
+   "minutes": 162
+  }
+ },
+ "西安-武汉": {
+  "高铁动车": {
+   "train_code": "G412",
+   "depart": "07:54",
+   "arrive": "10:35",
+   "lishi": "02:41",
+   "minutes": 161
+  },
+  "普速": {
+   "train_code": "Z232",
+   "depart": "20:01",
+   "arrive": "05:57",
+   "lishi": "09:56",
+   "minutes": 596
+  }
+ },
+ "武汉-重庆": {
+  "普速": {
+   "train_code": "K1256",
+   "depart": "17:30",
+   "arrive": "05:03",
+   "lishi": "11:33",
+   "minutes": 693
+  },
+  "高铁动车": {
+   "train_code": "G3981",
+   "depart": "16:33",
+   "arrive": "20:27",
+   "lishi": "03:54",
+   "minutes": 234
+  }
+ },
+ "重庆-武汉": {
+  "高铁动车": {
+   "train_code": "G3982",
+   "depart": "09:52",
+   "arrive": "13:45",
+   "lishi": "03:53",
+   "minutes": 233
+  },
+  "普速": {
+   "train_code": "K1258",
+   "depart": "14:34",
+   "arrive": "04:38",
+   "lishi": "14:04",
+   "minutes": 844
+  }
+ },
+ "武汉-厦门": {
+  "高铁动车": {
+   "train_code": "D3287",
+   "depart": "11:00",
+   "arrive": "17:55",
+   "lishi": "06:55",
+   "minutes": 415
+  },
+  "普速": {
+   "train_code": "Z125",
+   "depart": "12:07",
+   "arrive": "21:23",
+   "lishi": "09:16",
+   "minutes": 556
+  }
+ },
+ "厦门-武汉": {
+  "高铁动车": {
+   "train_code": "G2046",
+   "depart": "07:23",
+   "arrive": "14:05",
+   "lishi": "06:42",
+   "minutes": 402
+  },
+  "普速": {
+   "train_code": "Z126",
+   "depart": "07:25",
+   "arrive": "16:35",
+   "lishi": "09:10",
+   "minutes": 550
+  }
+ },
+ "武汉-三亚": {
+  "普速": {
+   "train_code": "Z501",
+   "depart": "07:15",
+   "arrive": "10:50",
+   "lishi": "27:35",
+   "minutes": 1655
+  }
+ },
+ "三亚-武汉": {
+  "普速": {
+   "train_code": "Z502",
+   "depart": "16:26",
+   "arrive": "19:51",
+   "lishi": "27:25",
+   "minutes": 1645
+  }
+ },
+ "武汉-桂林": {
+  "普速": {
+   "train_code": "Z285",
+   "depart": "08:27",
+   "arrive": "16:36",
+   "lishi": "08:09",
+   "minutes": 489
+  },
+  "高铁动车": {
+   "train_code": "G311",
+   "depart": "15:14",
+   "arrive": "19:03",
+   "lishi": "03:49",
+   "minutes": 229
+  }
+ },
+ "桂林-武汉": {
+  "普速": {
+   "train_code": "Z6",
+   "depart": "14:25",
+   "arrive": "22:54",
+   "lishi": "08:29",
+   "minutes": 509
+  },
+  "高铁动车": {
+   "train_code": "G310",
+   "depart": "12:45",
+   "arrive": "16:38",
+   "lishi": "03:53",
+   "minutes": 233
+  }
+ },
+ "武汉-济南": {
+  "高铁动车": {
+   "train_code": "G416",
+   "depart": "19:48",
+   "arrive": "23:28",
+   "lishi": "03:40",
+   "minutes": 220
+  },
+  "普速": {
+   "train_code": "Z168",
+   "depart": "07:56",
+   "arrive": "19:35",
+   "lishi": "11:39",
+   "minutes": 699
+  }
+ },
+ "济南-武汉": {
+  "高铁动车": {
+   "train_code": "G415",
+   "depart": "08:03",
+   "arrive": "11:58",
+   "lishi": "03:55",
+   "minutes": 235
+  },
+  "普速": {
+   "train_code": "Z167",
+   "depart": "17:08",
+   "arrive": "04:01",
+   "lishi": "10:53",
+   "minutes": 653
+  }
+ },
+ "长沙-西安": {
+  "普速": {
+   "train_code": "Z230",
+   "depart": "18:54",
+   "arrive": "08:56",
+   "lishi": "14:02",
+   "minutes": 842
+  },
+  "高铁动车": {
+   "train_code": "G410",
+   "depart": "17:26",
+   "arrive": "22:03",
+   "lishi": "04:37",
+   "minutes": 277
+  }
+ },
+ "西安-长沙": {
+  "普速": {
+   "train_code": "Z232",
+   "depart": "20:01",
+   "arrive": "09:45",
+   "lishi": "13:44",
+   "minutes": 824
+  },
+  "高铁动车": {
+   "train_code": "G412",
+   "depart": "07:54",
+   "arrive": "12:32",
+   "lishi": "04:38",
+   "minutes": 278
+  }
+ },
+ "长沙-重庆": {
+  "高铁动车": {
+   "train_code": "G2446",
+   "depart": "14:06",
+   "arrive": "17:59",
+   "lishi": "03:53",
+   "minutes": 233
+  },
+  "普速": {
+   "train_code": "Z332",
+   "depart": "16:55",
+   "arrive": "05:28",
+   "lishi": "12:33",
+   "minutes": 753
+  }
+ },
+ "重庆-长沙": {
+  "高铁动车": {
+   "train_code": "G2445",
+   "depart": "09:52",
+   "arrive": "13:45",
+   "lishi": "03:53",
+   "minutes": 233
+  },
+  "普速": {
+   "train_code": "Z334",
+   "depart": "16:52",
+   "arrive": "04:37",
+   "lishi": "11:45",
+   "minutes": 705
+  }
+ },
+ "长沙-厦门": {
+  "高铁动车": {
+   "train_code": "G1646",
+   "depart": "12:02",
+   "arrive": "18:09",
+   "lishi": "06:07",
+   "minutes": 367
+  }
+ },
+ "厦门-长沙": {
+  "高铁动车": {
+   "train_code": "G3340",
+   "depart": "09:30",
+   "arrive": "15:46",
+   "lishi": "06:16",
+   "minutes": 376
+  }
+ },
+ "长沙-三亚": {
+  "普速": {
+   "train_code": "Z501",
+   "depart": "10:38",
+   "arrive": "10:50",
+   "lishi": "24:12",
+   "minutes": 1452
+  }
+ },
+ "三亚-长沙": {
+  "普速": {
+   "train_code": "Z502",
+   "depart": "16:26",
+   "arrive": "16:10",
+   "lishi": "23:44",
+   "minutes": 1424
+  }
+ },
+ "长沙-桂林": {
+  "普速": {
+   "train_code": "Z285",
+   "depart": "11:51",
+   "arrive": "16:36",
+   "lishi": "04:45",
+   "minutes": 285
+  },
+  "高铁动车": {
+   "train_code": "G309",
+   "depart": "14:23",
+   "arrive": "16:58",
+   "lishi": "02:35",
+   "minutes": 155
+  }
+ },
+ "桂林-长沙": {
+  "普速": {
+   "train_code": "Z6",
+   "depart": "14:25",
+   "arrive": "19:26",
+   "lishi": "05:01",
+   "minutes": 301
+  },
+  "高铁动车": {
+   "train_code": "G310",
+   "depart": "12:45",
+   "arrive": "15:23",
+   "lishi": "02:38",
+   "minutes": 158
+  }
+ },
+ "长沙-济南": {
+  "普速": {
+   "train_code": "Z168",
+   "depart": "03:39",
+   "arrive": "19:35",
+   "lishi": "15:56",
+   "minutes": 956
+  },
+  "高铁动车": {
+   "train_code": "G416",
+   "depart": "18:32",
+   "arrive": "23:28",
+   "lishi": "04:56",
+   "minutes": 296
+  }
+ },
+ "济南-长沙": {
+  "高铁动车": {
+   "train_code": "G415",
+   "depart": "08:03",
+   "arrive": "13:14",
+   "lishi": "05:11",
+   "minutes": 311
+  },
+  "普速": {
+   "train_code": "Z167",
+   "depart": "17:08",
+   "arrive": "08:01",
+   "lishi": "14:53",
+   "minutes": 893
+  }
+ },
+ "西安-重庆": {
+  "高铁动车": {
+   "train_code": "D1979",
+   "depart": "12:07",
+   "arrive": "17:19",
+   "lishi": "05:12",
+   "minutes": 312
+  },
+  "普速": {
+   "train_code": "K507",
+   "depart": "23:06",
+   "arrive": "08:28",
+   "lishi": "09:22",
+   "minutes": 562
+  }
+ },
+ "重庆-西安": {
+  "高铁动车": {
+   "train_code": "D1985",
+   "depart": "17:59",
+   "arrive": "23:05",
+   "lishi": "05:06",
+   "minutes": 306
+  },
+  "普速": {
+   "train_code": "Z140",
+   "depart": "22:09",
+   "arrive": "06:15",
+   "lishi": "08:06",
+   "minutes": 486
+  }
+ },
+ "西安-厦门": {
+  "普速": {
+   "train_code": "Z128",
+   "depart": "23:44",
+   "arrive": "21:23",
+   "lishi": "21:39",
+   "minutes": 1299
+  }
+ },
+ "厦门-西安": {
+  "普速": {
+   "train_code": "Z126",
+   "depart": "07:25",
+   "arrive": "04:39",
+   "lishi": "21:14",
+   "minutes": 1274
+  }
+ },
+ "西安-桂林": {
+  "高铁动车": {
+   "train_code": "G3739",
+   "depart": "08:07",
+   "arrive": "18:05",
+   "lishi": "09:58",
+   "minutes": 598
+  }
+ },
+ "桂林-西安": {
+  "高铁动车": {
+   "train_code": "G2240",
+   "depart": "13:03",
+   "arrive": "22:38",
+   "lishi": "09:35",
+   "minutes": 575
+  }
+ },
+ "西安-济南": {
+  "高铁动车": {
+   "train_code": "G2004",
+   "depart": "18:42",
+   "arrive": "22:36",
+   "lishi": "03:54",
+   "minutes": 234
+  },
+  "普速": {
+   "train_code": "Z106",
+   "depart": "21:29",
+   "arrive": "10:28",
+   "lishi": "12:59",
+   "minutes": 779
+  }
+ },
+ "济南-西安": {
+  "高铁动车": {
+   "train_code": "G2051",
+   "depart": "10:01",
+   "arrive": "13:57",
+   "lishi": "03:56",
+   "minutes": 236
+  },
+  "普速": {
+   "train_code": "Z105",
+   "depart": "18:42",
+   "arrive": "07:28",
+   "lishi": "12:46",
+   "minutes": 766
+  }
+ },
+ "重庆-厦门": {
+  "高铁动车": {
+   "train_code": "G2371",
+   "depart": "08:05",
+   "arrive": "20:51",
+   "lishi": "12:46",
+   "minutes": 766
+  },
+  "普速": {
+   "train_code": "K403",
+   "depart": "22:58",
+   "arrive": "06:25",
+   "lishi": "31:27",
+   "minutes": 1887
+  }
+ },
+ "厦门-重庆": {
+  "高铁动车": {
+   "train_code": "G2372",
+   "depart": "06:48",
+   "arrive": "19:17",
+   "lishi": "12:29",
+   "minutes": 749
+  }
+ },
+ "重庆-桂林": {
+  "高铁动车": {
+   "train_code": "G3723",
+   "depart": "10:06",
+   "arrive": "13:49",
+   "lishi": "03:43",
+   "minutes": 223
+  }
+ },
+ "桂林-重庆": {
+  "高铁动车": {
+   "train_code": "G906",
+   "depart": "15:04",
+   "arrive": "18:59",
+   "lishi": "03:55",
+   "minutes": 235
+  }
+ },
+ "重庆-济南": {
+  "高铁动车": {
+   "train_code": "G974",
+   "depart": "14:38",
+   "arrive": "21:38",
+   "lishi": "07:00",
+   "minutes": 420
+  },
+  "普速": {
+   "train_code": "K16",
+   "depart": "11:38",
+   "arrive": "15:33",
+   "lishi": "27:55",
+   "minutes": 1675
+  }
+ },
+ "济南-重庆": {
+  "高铁动车": {
+   "train_code": "G973",
+   "depart": "07:28",
+   "arrive": "14:12",
+   "lishi": "06:44",
+   "minutes": 404
+  },
+  "普速": {
+   "train_code": "K15",
+   "depart": "07:55",
+   "arrive": "10:29",
+   "lishi": "26:34",
+   "minutes": 1594
+  }
+ },
+ "厦门-桂林": {
+  "高铁动车": {
+   "train_code": "G3743",
+   "depart": "13:30",
+   "arrive": "19:58",
+   "lishi": "06:28",
+   "minutes": 388
+  }
+ },
+ "桂林-厦门": {
+  "高铁动车": {
+   "train_code": "G3741",
+   "depart": "09:51",
+   "arrive": "16:26",
+   "lishi": "06:35",
+   "minutes": 395
+  }
+ },
+ "厦门-济南": {
+  "高铁动车": {
+   "train_code": "G982",
+   "depart": "07:45",
+   "arrive": "16:33",
+   "lishi": "08:48",
+   "minutes": 528
+  }
+ },
+ "济南-厦门": {
+  "高铁动车": {
+   "train_code": "G679",
+   "depart": "11:47",
+   "arrive": "20:25",
+   "lishi": "08:38",
+   "minutes": 518
+  }
+ },
+ "三亚-桂林": {
+  "普速": {
+   "train_code": "K458",
+   "depart": "09:06",
+   "arrive": "03:23",
+   "lishi": "18:17",
+   "minutes": 1097
+  }
+ },
+ "桂林-三亚": {
+  "普速": {
+   "train_code": "K457",
+   "depart": "04:21",
+   "arrive": "22:17",
+   "lishi": "17:56",
+   "minutes": 1076
+  }
+ },
+ "桂林-济南": {
+  "高铁动车": {
+   "train_code": "G1462",
+   "depart": "09:19",
+   "arrive": "18:24",
+   "lishi": "09:05",
+   "minutes": 545
+  }
+ },
+ "济南-桂林": {
+  "高铁动车": {
+   "train_code": "G3617",
+   "depart": "13:34",
+   "arrive": "22:36",
+   "lishi": "09:02",
+   "minutes": 542
+  }
+ },
+ "北京-福州": {
+  "高铁动车": {
+   "train_code": "G87",
+   "depart": "06:56",
+   "arrive": "14:47",
+   "lishi": "07:51",
+   "minutes": 471
+  }
+ },
+ "福州-北京": {
+  "高铁动车": {
+   "train_code": "G88",
+   "depart": "15:06",
+   "arrive": "22:41",
+   "lishi": "07:35",
+   "minutes": 455
+  }
+ },
+ "上海-福州": {
+  "高铁动车": {
+   "train_code": "G257",
+   "depart": "12:00",
+   "arrive": "15:40",
+   "lishi": "03:40",
+   "minutes": 220
+  }
+ },
+ "福州-上海": {
+  "高铁动车": {
+   "train_code": "G258",
+   "depart": "13:06",
+   "arrive": "16:47",
+   "lishi": "03:41",
+   "minutes": 221
+  }
+ },
+ "广州-福州": {
+  "高铁动车": {
+   "train_code": "G3044",
+   "depart": "08:18",
+   "arrive": "12:26",
+   "lishi": "04:08",
+   "minutes": 248
+  }
+ },
+ "福州-广州": {
+  "高铁动车": {
+   "train_code": "G3043",
+   "depart": "08:15",
+   "arrive": "12:31",
+   "lishi": "04:16",
+   "minutes": 256
+  }
+ },
+ "深圳-福州": {
+  "高铁动车": {
+   "train_code": "G1022",
+   "depart": "09:54",
+   "arrive": "13:53",
+   "lishi": "03:59",
+   "minutes": 239
+  }
+ },
+ "福州-深圳": {
+  "高铁动车": {
+   "train_code": "G1021",
+   "depart": "14:11",
+   "arrive": "18:13",
+   "lishi": "04:02",
+   "minutes": 242
+  }
+ },
+ "成都-福州": {
+  "高铁动车": {
+   "train_code": "G1755",
+   "depart": "07:16",
+   "arrive": "19:43",
+   "lishi": "12:27",
+   "minutes": 747
+  },
+  "普速": {
+   "train_code": "Z390",
+   "depart": "13:56",
+   "arrive": "18:40",
+   "lishi": "28:44",
+   "minutes": 1724
+  }
+ },
+ "福州-成都": {
+  "高铁动车": {
+   "train_code": "G1756",
+   "depart": "06:57",
+   "arrive": "19:18",
+   "lishi": "12:21",
+   "minutes": 741
+  },
+  "普速": {
+   "train_code": "Z392",
+   "depart": "10:01",
+   "arrive": "12:40",
+   "lishi": "26:39",
+   "minutes": 1599
+  }
+ },
+ "杭州-福州": {
+  "高铁动车": {
+   "train_code": "G255",
+   "depart": "09:58",
+   "arrive": "12:50",
+   "lishi": "02:52",
+   "minutes": 172
+  }
+ },
+ "福州-杭州": {
+  "高铁动车": {
+   "train_code": "G258",
+   "depart": "13:06",
+   "arrive": "15:55",
+   "lishi": "02:49",
+   "minutes": 169
+  }
+ },
+ "武汉-福州": {
+  "普速": {
+   "train_code": "Z217",
+   "depart": "02:09",
+   "arrive": "10:16",
+   "lishi": "08:07",
+   "minutes": 487
+  },
+  "高铁动车": {
+   "train_code": "D2241",
+   "depart": "16:28",
+   "arrive": "22:06",
+   "lishi": "05:38",
+   "minutes": 338
+  }
+ },
+ "福州-武汉": {
+  "普速": {
+   "train_code": "Z392",
+   "depart": "10:01",
+   "arrive": "18:06",
+   "lishi": "08:05",
+   "minutes": 485
+  },
+  "高铁动车": {
+   "train_code": "G2046",
+   "depart": "08:49",
+   "arrive": "14:05",
+   "lishi": "05:16",
+   "minutes": 316
+  }
+ },
+ "长沙-福州": {
+  "高铁动车": {
+   "train_code": "G1646",
+   "depart": "12:02",
+   "arrive": "16:30",
+   "lishi": "04:28",
+   "minutes": 268
+  }
+ },
+ "福州-长沙": {
+  "高铁动车": {
+   "train_code": "G1644",
+   "depart": "06:52",
+   "arrive": "11:38",
+   "lishi": "04:46",
+   "minutes": 286
+  }
+ },
+ "西安-福州": {
+  "普速": {
+   "train_code": "K1086",
+   "depart": "19:37",
+   "arrive": "18:31",
+   "lishi": "22:54",
+   "minutes": 1374
+  },
+  "高铁动车": {
+   "train_code": "G862",
+   "depart": "11:50",
+   "arrive": "21:57",
+   "lishi": "10:07",
+   "minutes": 607
+  }
+ },
+ "福州-西安": {
+  "普速": {
+   "train_code": "K1088",
+   "depart": "06:15",
+   "arrive": "05:05",
+   "lishi": "22:50",
+   "minutes": 1370
+  },
+  "高铁动车": {
+   "train_code": "G860",
+   "depart": "11:30",
+   "arrive": "21:03",
+   "lishi": "09:33",
+   "minutes": 573
+  }
+ },
+ "重庆-福州": {
+  "普速": {
+   "train_code": "Z220",
+   "depart": "08:29",
+   "arrive": "10:16",
+   "lishi": "25:47",
+   "minutes": 1547
+  },
+  "高铁动车": {
+   "train_code": "G1755",
+   "depart": "08:59",
+   "arrive": "19:43",
+   "lishi": "10:44",
+   "minutes": 644
+  }
+ },
+ "福州-重庆": {
+  "高铁动车": {
+   "train_code": "G1756",
+   "depart": "06:57",
+   "arrive": "17:43",
+   "lishi": "10:46",
+   "minutes": 646
+  },
+  "普速": {
+   "train_code": "K804",
+   "depart": "11:50",
+   "arrive": "13:38",
+   "lishi": "25:48",
+   "minutes": 1548
+  }
+ },
+ "厦门-福州": {
+  "高铁动车": {
+   "train_code": "G5108",
+   "depart": "21:13",
+   "arrive": "22:09",
+   "lishi": "00:56",
+   "minutes": 56
+  }
+ },
+ "福州-厦门": {
+  "高铁动车": {
+   "train_code": "G5315",
+   "depart": "17:34",
+   "arrive": "18:37",
+   "lishi": "01:03",
+   "minutes": 63
+  }
+ },
+ "桂林-福州": {
+  "高铁动车": {
+   "train_code": "G3741",
+   "depart": "09:51",
+   "arrive": "17:40",
+   "lishi": "07:49",
+   "minutes": 469
+  }
+ },
+ "福州-桂林": {
+  "高铁动车": {
+   "train_code": "G3743",
+   "depart": "12:17",
+   "arrive": "19:58",
+   "lishi": "07:41",
+   "minutes": 461
+  }
+ },
+ "济南-福州": {
+  "高铁动车": {
+   "train_code": "G87",
+   "depart": "08:30",
+   "arrive": "14:47",
+   "lishi": "06:17",
+   "minutes": 377
+  }
+ },
+ "福州-济南": {
+  "高铁动车": {
+   "train_code": "G88",
+   "depart": "15:06",
+   "arrive": "21:11",
+   "lishi": "06:05",
+   "minutes": 365
+  }
+ },
+ "洛阳-开封": {
+  "普速": {
+   "train_code": "Z378",
+   "depart": "01:19",
+   "arrive": "03:29",
+   "lishi": "02:10",
+   "minutes": 130
+  },
+  "高铁动车": {
+   "train_code": "G1820",
+   "depart": "12:38",
+   "arrive": "13:39",
+   "lishi": "01:01",
+   "minutes": 61
+  }
+ },
+ "开封-洛阳": {
+  "普速": {
+   "train_code": "Z273",
+   "depart": "00:15",
+   "arrive": "02:26",
+   "lishi": "02:11",
+   "minutes": 131
+  },
+  "高铁动车": {
+   "train_code": "G2207",
+   "depart": "09:54",
+   "arrive": "10:59",
+   "lishi": "01:05",
+   "minutes": 65
+  }
+ },
+ "洛阳-郑州": {
+  "普速": {
+   "train_code": "Z136",
+   "depart": "03:05",
+   "arrive": "04:28",
+   "lishi": "01:23",
+   "minutes": 83
+  },
+  "高铁动车": {
+   "train_code": "G7954",
+   "depart": "07:12",
+   "arrive": "07:37",
+   "lishi": "00:25",
+   "minutes": 25
+  }
+ },
+ "郑州-洛阳": {
+  "普速": {
+   "train_code": "Z41",
+   "depart": "02:16",
+   "arrive": "03:39",
+   "lishi": "01:23",
+   "minutes": 83
+  },
+  "高铁动车": {
+   "train_code": "G2111",
+   "depart": "08:08",
+   "arrive": "08:33",
+   "lishi": "00:25",
+   "minutes": 25
+  }
+ },
+ "洛阳-深圳": {
+  "高铁动车": {
+   "train_code": "G840",
+   "depart": "11:46",
+   "arrive": "19:52",
+   "lishi": "08:06",
+   "minutes": 486
+  },
+  "普速": {
+   "train_code": "K538",
+   "depart": "18:20",
+   "arrive": "18:01",
+   "lishi": "23:41",
+   "minutes": 1421
+  }
+ },
+ "深圳-洛阳": {
+  "普速": {
+   "train_code": "K1348",
+   "depart": "08:00",
+   "arrive": "07:39",
+   "lishi": "23:39",
+   "minutes": 1419
+  },
+  "高铁动车": {
+   "train_code": "G846",
+   "depart": "09:20",
+   "arrive": "17:46",
+   "lishi": "08:26",
+   "minutes": 506
+  }
+ },
+ "洛阳-广州": {
+  "普速": {
+   "train_code": "Z136",
+   "depart": "03:05",
+   "arrive": "21:12",
+   "lishi": "18:07",
+   "minutes": 1087
+  },
+  "高铁动车": {
+   "train_code": "G406",
+   "depart": "13:42",
+   "arrive": "19:30",
+   "lishi": "05:48",
+   "minutes": 348
+  }
+ },
+ "广州-洛阳": {
+  "普速": {
+   "train_code": "Z264",
+   "depart": "09:26",
+   "arrive": "03:06",
+   "lishi": "17:40",
+   "minutes": 1060
+  },
+  "高铁动车": {
+   "train_code": "G404",
+   "depart": "09:49",
+   "arrive": "15:33",
+   "lishi": "05:44",
+   "minutes": 344
+  }
+ },
+ "洛阳-乌鲁木齐": {
+  "普速": {
+   "train_code": "Z41",
+   "depart": "03:45",
+   "arrive": "08:20",
+   "lishi": "28:35",
+   "minutes": 1715
+  }
+ },
+ "乌鲁木齐-洛阳": {
+  "普速": {
+   "train_code": "Z42",
+   "depart": "19:35",
+   "arrive": "01:44",
+   "lishi": "30:09",
+   "minutes": 1809
+  }
+ },
+ "洛阳-武汉": {
+  "普速": {
+   "train_code": "Z136",
+   "depart": "03:05",
+   "arrive": "09:28",
+   "lishi": "06:23",
+   "minutes": 383
+  },
+  "高铁动车": {
+   "train_code": "G406",
+   "depart": "13:42",
+   "arrive": "16:04",
+   "lishi": "02:22",
+   "minutes": 142
+  }
+ },
+ "武汉-洛阳": {
+  "普速": {
+   "train_code": "Z264",
+   "depart": "20:44",
+   "arrive": "03:06",
+   "lishi": "06:22",
+   "minutes": 382
+  },
+  "高铁动车": {
+   "train_code": "G404",
+   "depart": "13:10",
+   "arrive": "15:33",
+   "lishi": "02:23",
+   "minutes": 143
+  }
+ },
+ "洛阳-大连": {
+  "高铁动车": {
+   "train_code": "G1294",
+   "depart": "12:52",
+   "arrive": "22:19",
+   "lishi": "09:27",
+   "minutes": 567
+  }
+ },
+ "洛阳-沈阳": {
+  "普速": {
+   "train_code": "K126",
+   "depart": "03:57",
+   "arrive": "01:52",
+   "lishi": "21:55",
+   "minutes": 1315
+  },
+  "高铁动车": {
+   "train_code": "G1282",
+   "depart": "12:57",
+   "arrive": "22:17",
+   "lishi": "09:20",
+   "minutes": 560
+  }
+ },
+ "沈阳-洛阳": {
+  "高铁动车": {
+   "train_code": "G1284",
+   "depart": "06:36",
+   "arrive": "16:18",
+   "lishi": "09:42",
+   "minutes": 582
+  },
+  "普速": {
+   "train_code": "K128",
+   "depart": "17:11",
+   "arrive": "15:15",
+   "lishi": "22:04",
+   "minutes": 1324
+  }
+ },
+ "洛阳-鞍山": {
+  "普速": {
+   "train_code": "K386",
+   "depart": "06:11",
+   "arrive": "04:45",
+   "lishi": "22:34",
+   "minutes": 1354
+  },
+  "高铁动车": {
+   "train_code": "G1282",
+   "depart": "12:57",
+   "arrive": "21:40",
+   "lishi": "08:43",
+   "minutes": 523
+  }
+ },
+ "鞍山-洛阳": {
+  "高铁动车": {
+   "train_code": "G1284",
+   "depart": "07:19",
+   "arrive": "16:18",
+   "lishi": "08:59",
+   "minutes": 539
+  },
+  "普速": {
+   "train_code": "K388",
+   "depart": "17:47",
+   "arrive": "14:57",
+   "lishi": "21:10",
+   "minutes": 1270
+  }
+ },
+ "洛阳-烟台": {
+  "高铁动车": {
+   "train_code": "G2686",
+   "depart": "11:41",
+   "arrive": "19:05",
+   "lishi": "07:24",
+   "minutes": 444
+  },
+  "普速": {
+   "train_code": "K1132",
+   "depart": "18:28",
+   "arrive": "09:50",
+   "lishi": "15:22",
+   "minutes": 922
+  }
+ },
+ "烟台-洛阳": {
+  "高铁动车": {
+   "train_code": "G3170",
+   "depart": "09:51",
+   "arrive": "16:33",
+   "lishi": "06:42",
+   "minutes": 402
+  },
+  "普速": {
+   "train_code": "K1130",
+   "depart": "14:34",
+   "arrive": "06:30",
+   "lishi": "15:56",
+   "minutes": 956
+  }
+ },
+ "洛阳-威海": {
+  "普速": {
+   "train_code": "K396",
+   "depart": "02:23",
+   "arrive": "21:26",
+   "lishi": "19:03",
+   "minutes": 1143
+  },
+  "高铁动车": {
+   "train_code": "G3168",
+   "depart": "15:20",
+   "arrive": "21:30",
+   "lishi": "06:10",
+   "minutes": 370
+  }
+ },
+ "威海-洛阳": {
+  "高铁动车": {
+   "train_code": "G2148",
+   "depart": "09:49",
+   "arrive": "16:00",
+   "lishi": "06:11",
+   "minutes": 371
+  },
+  "普速": {
+   "train_code": "K398",
+   "depart": "11:30",
+   "arrive": "05:23",
+   "lishi": "17:53",
+   "minutes": 1073
+  }
+ },
+ "洛阳-青岛": {
+  "高铁动车": {
+   "train_code": "G3168",
+   "depart": "15:20",
+   "arrive": "19:24",
+   "lishi": "04:04",
+   "minutes": 244
+  },
+  "普速": {
+   "train_code": "Z274",
+   "depart": "15:18",
+   "arrive": "05:07",
+   "lishi": "13:49",
+   "minutes": 829
+  }
+ },
+ "青岛-洛阳": {
+  "高铁动车": {
+   "train_code": "G3167",
+   "depart": "12:18",
+   "arrive": "16:33",
+   "lishi": "04:15",
+   "minutes": 255
+  },
+  "普速": {
+   "train_code": "Z272",
+   "depart": "14:42",
+   "arrive": "02:26",
+   "lishi": "11:44",
+   "minutes": 704
+  }
+ },
+ "洛阳-泰安": {
+  "普速": {
+   "train_code": "Z274",
+   "depart": "15:18",
+   "arrive": "00:03",
+   "lishi": "08:45",
+   "minutes": 525
+  }
+ },
+ "泰安-洛阳": {
+  "高铁动车": {
+   "train_code": "G1839",
+   "depart": "07:19",
+   "arrive": "10:05",
+   "lishi": "02:46",
+   "minutes": 166
+  },
+  "普速": {
+   "train_code": "Z105",
+   "depart": "19:29",
+   "arrive": "02:52",
+   "lishi": "07:23",
+   "minutes": 443
+  }
+ },
+ "洛阳-济南": {
+  "高铁动车": {
+   "train_code": "G2052",
+   "depart": "18:41",
+   "arrive": "21:03",
+   "lishi": "02:22",
+   "minutes": 142
+  },
+  "普速": {
+   "train_code": "Z274",
+   "depart": "15:18",
+   "arrive": "01:12",
+   "lishi": "09:54",
+   "minutes": 594
+  }
+ },
+ "济南-洛阳": {
+  "高铁动车": {
+   "train_code": "G2051",
+   "depart": "10:01",
+   "arrive": "12:40",
+   "lishi": "02:39",
+   "minutes": 159
+  },
+  "普速": {
+   "train_code": "Z105",
+   "depart": "18:42",
+   "arrive": "02:52",
+   "lishi": "08:10",
+   "minutes": 490
+  }
+ },
+ "洛阳-上海": {
+  "普速": {
+   "train_code": "Z42",
+   "depart": "01:57",
+   "arrive": "12:15",
+   "lishi": "10:18",
+   "minutes": 618
+  },
+  "高铁动车": {
+   "train_code": "G96",
+   "depart": "16:57",
+   "arrive": "21:22",
+   "lishi": "04:25",
+   "minutes": 265
+  }
+ },
+ "上海-洛阳": {
+  "高铁动车": {
+   "train_code": "G1916",
+   "depart": "16:09",
+   "arrive": "21:35",
+   "lishi": "05:26",
+   "minutes": 326
+  },
+  "普速": {
+   "train_code": "Z164",
+   "depart": "18:33",
+   "arrive": "04:49",
+   "lishi": "10:16",
+   "minutes": 616
+  }
+ },
+ "洛阳-遵义": {
+  "高铁动车": {
+   "train_code": "G2207",
+   "depart": "11:09",
+   "arrive": "20:27",
+   "lishi": "09:18",
+   "minutes": 558
+  }
+ },
+ "遵义-洛阳": {
+  "高铁动车": {
+   "train_code": "G2206",
+   "depart": "09:55",
+   "arrive": "18:56",
+   "lishi": "09:01",
+   "minutes": 541
+  }
+ },
+ "洛阳-安顺": {
+  "高铁动车": {
+   "train_code": "G2831",
+   "depart": "09:08",
+   "arrive": "19:50",
+   "lishi": "10:42",
+   "minutes": 642
+  }
+ },
+ "安顺-洛阳": {
+  "高铁动车": {
+   "train_code": "G2832",
+   "depart": "09:02",
+   "arrive": "19:31",
+   "lishi": "10:29",
+   "minutes": 629
+  }
+ },
+ "洛阳-贵阳": {
+  "高铁动车": {
+   "train_code": "G2831",
+   "depart": "09:08",
+   "arrive": "19:15",
+   "lishi": "10:07",
+   "minutes": 607
+  }
+ },
+ "贵阳-洛阳": {
+  "高铁动车": {
+   "train_code": "G2206",
+   "depart": "09:02",
+   "arrive": "18:56",
+   "lishi": "09:54",
+   "minutes": 594
+  }
+ },
+ "洛阳-重庆": {
+  "高铁动车": {
+   "train_code": "G1975",
+   "depart": "13:01",
+   "arrive": "19:54",
+   "lishi": "06:53",
+   "minutes": 413
+  },
+  "普速": {
+   "train_code": "K507",
+   "depart": "17:59",
+   "arrive": "08:28",
+   "lishi": "14:29",
+   "minutes": 869
+  }
+ },
+ "重庆-洛阳": {
+  "高铁动车": {
+   "train_code": "G1308",
+   "depart": "08:36",
+   "arrive": "15:35",
+   "lishi": "06:59",
+   "minutes": 419
+  },
+  "普速": {
+   "train_code": "K508",
+   "depart": "20:14",
+   "arrive": "11:37",
+   "lishi": "15:23",
+   "minutes": 923
+  }
+ },
+ "洛阳-黄山": {
+  "高铁动车": {
+   "train_code": "G862",
+   "depart": "13:16",
+   "arrive": "19:16",
+   "lishi": "06:00",
+   "minutes": 360
+  }
+ },
+ "黄山-洛阳": {
+  "高铁动车": {
+   "train_code": "G3184",
+   "depart": "11:28",
+   "arrive": "17:16",
+   "lishi": "05:48",
+   "minutes": 348
+  }
+ },
+ "洛阳-合肥": {
+  "普速": {
+   "train_code": "K608",
+   "depart": "18:50",
+   "arrive": "04:47",
+   "lishi": "09:57",
+   "minutes": 597
+  },
+  "高铁动车": {
+   "train_code": "G466",
+   "depart": "17:07",
+   "arrive": "20:38",
+   "lishi": "03:31",
+   "minutes": 211
+  }
+ },
+ "合肥-洛阳": {
+  "普速": {
+   "train_code": "K2906",
+   "depart": "19:10",
+   "arrive": "04:57",
+   "lishi": "09:47",
+   "minutes": 587
+  },
+  "高铁动车": {
+   "train_code": "G464",
+   "depart": "09:08",
+   "arrive": "12:20",
+   "lishi": "03:12",
+   "minutes": 192
+  }
+ },
+ "洛阳-福州": {
+  "高铁动车": {
+   "train_code": "G1904",
+   "depart": "12:29",
+   "arrive": "21:05",
+   "lishi": "08:36",
+   "minutes": 516
+  },
+  "普速": {
+   "train_code": "K32",
+   "depart": "12:58",
+   "arrive": "13:59",
+   "lishi": "25:01",
+   "minutes": 1501
+  }
+ },
+ "福州-洛阳": {
+  "高铁动车": {
+   "train_code": "G1902",
+   "depart": "08:12",
+   "arrive": "16:49",
+   "lishi": "08:37",
+   "minutes": 517
+  },
+  "普速": {
+   "train_code": "K30",
+   "depart": "15:11",
+   "arrive": "17:32",
+   "lishi": "26:21",
+   "minutes": 1581
+  }
+ },
+ "洛阳-厦门": {
+  "普速": {
+   "train_code": "Z128",
+   "depart": "04:26",
+   "arrive": "21:23",
+   "lishi": "16:57",
+   "minutes": 1017
+  }
+ },
+ "厦门-洛阳": {
+  "普速": {
+   "train_code": "Z126",
+   "depart": "07:25",
+   "arrive": "00:04",
+   "lishi": "16:39",
+   "minutes": 999
+  }
+ },
+ "洛阳-张家界": {
+  "普速": {
+   "train_code": "K267",
+   "depart": "01:27",
+   "arrive": "12:51",
+   "lishi": "11:24",
+   "minutes": 684
+  }
+ },
+ "洛阳-长沙": {
+  "普速": {
+   "train_code": "Z136",
+   "depart": "03:05",
+   "arrive": "13:08",
+   "lishi": "10:03",
+   "minutes": 603
+  },
+  "高铁动车": {
+   "train_code": "G406",
+   "depart": "13:42",
+   "arrive": "17:19",
+   "lishi": "03:37",
+   "minutes": 217
+  }
+ },
+ "长沙-洛阳": {
+  "普速": {
+   "train_code": "Z264",
+   "depart": "17:02",
+   "arrive": "03:06",
+   "lishi": "10:04",
+   "minutes": 604
+  },
+  "高铁动车": {
+   "train_code": "G404",
+   "depart": "11:54",
+   "arrive": "15:33",
+   "lishi": "03:39",
+   "minutes": 219
+  }
+ },
+ "洛阳-南京": {
+  "普速": {
+   "train_code": "Z42",
+   "depart": "01:57",
+   "arrive": "09:21",
+   "lishi": "07:24",
+   "minutes": 444
+  },
+  "高铁动车": {
+   "train_code": "G96",
+   "depart": "16:57",
+   "arrive": "20:19",
+   "lishi": "03:22",
+   "minutes": 202
+  }
+ },
+ "南京-洛阳": {
+  "高铁动车": {
+   "train_code": "G1932",
+   "depart": "15:28",
+   "arrive": "19:17",
+   "lishi": "03:49",
+   "minutes": 229
+  },
+  "普速": {
+   "train_code": "Z304",
+   "depart": "20:48",
+   "arrive": "04:04",
+   "lishi": "07:16",
+   "minutes": 436
+  }
+ },
+ "洛阳-苏州": {
+  "普速": {
+   "train_code": "Z42",
+   "depart": "01:57",
+   "arrive": "11:14",
+   "lishi": "09:17",
+   "minutes": 557
+  },
+  "高铁动车": {
+   "train_code": "G1820",
+   "depart": "12:38",
+   "arrive": "17:45",
+   "lishi": "05:07",
+   "minutes": 307
+  }
+ },
+ "苏州-洛阳": {
+  "高铁动车": {
+   "train_code": "G1970",
+   "depart": "06:34",
+   "arrive": "11:41",
+   "lishi": "05:07",
+   "minutes": 307
+  },
+  "普速": {
+   "train_code": "Z164",
+   "depart": "19:24",
+   "arrive": "04:49",
+   "lishi": "09:25",
+   "minutes": 565
+  }
+ },
+ "洛阳-常州": {
+  "普速": {
+   "train_code": "Z42",
+   "depart": "01:57",
+   "arrive": "10:31",
+   "lishi": "08:34",
+   "minutes": 514
+  },
+  "高铁动车": {
+   "train_code": "G2196",
+   "depart": "13:33",
+   "arrive": "18:26",
+   "lishi": "04:53",
+   "minutes": 293
+  }
+ },
+ "常州-洛阳": {
+  "高铁动车": {
+   "train_code": "G1932",
+   "depart": "14:50",
+   "arrive": "19:17",
+   "lishi": "04:27",
+   "minutes": 267
+  },
+  "普速": {
+   "train_code": "Z40",
+   "depart": "18:37",
+   "arrive": "03:39",
+   "lishi": "09:02",
+   "minutes": 542
+  }
+ },
+ "洛阳-无锡": {
+  "普速": {
+   "train_code": "Z378",
+   "depart": "01:19",
+   "arrive": "12:04",
+   "lishi": "10:45",
+   "minutes": 645
+  },
+  "高铁动车": {
+   "train_code": "G1820",
+   "depart": "12:38",
+   "arrive": "17:32",
+   "lishi": "04:54",
+   "minutes": 294
+  }
+ },
+ "无锡-洛阳": {
+  "高铁动车": {
+   "train_code": "G1932",
+   "depart": "14:28",
+   "arrive": "19:17",
+   "lishi": "04:49",
+   "minutes": 289
+  },
+  "普速": {
+   "train_code": "Z304",
+   "depart": "19:06",
+   "arrive": "04:04",
+   "lishi": "08:58",
+   "minutes": 538
+  }
+ },
+ "洛阳-镇江": {
+  "高铁动车": {
+   "train_code": "G1812",
+   "depart": "08:05",
+   "arrive": "12:34",
+   "lishi": "04:29",
+   "minutes": 269
+  },
+  "普速": {
+   "train_code": "K558",
+   "depart": "22:36",
+   "arrive": "09:34",
+   "lishi": "10:58",
+   "minutes": 658
+  }
+ },
+ "镇江-洛阳": {
+  "高铁动车": {
+   "train_code": "G1970",
+   "depart": "07:18",
+   "arrive": "11:41",
+   "lishi": "04:23",
+   "minutes": 263
+  },
+  "普速": {
+   "train_code": "Z304",
+   "depart": "20:01",
+   "arrive": "04:04",
+   "lishi": "08:03",
+   "minutes": 483
+  }
+ },
+ "洛阳-扬州": {
+  "普速": {
+   "train_code": "K246",
+   "depart": "18:42",
+   "arrive": "08:00",
+   "lishi": "13:18",
+   "minutes": 798
+  },
+  "高铁动车": {
+   "train_code": "G3294",
+   "depart": "14:19",
+   "arrive": "18:22",
+   "lishi": "04:03",
+   "minutes": 243
+  }
+ },
+ "扬州-洛阳": {
+  "普速": {
+   "train_code": "Z364",
+   "depart": "15:43",
+   "arrive": "00:34",
+   "lishi": "08:51",
+   "minutes": 531
+  },
+  "高铁动车": {
+   "train_code": "G3292",
+   "depart": "10:57",
+   "arrive": "15:03",
+   "lishi": "04:06",
+   "minutes": 246
+  }
+ },
+ "洛阳-西宁": {
+  "普速": {
+   "train_code": "Z41",
+   "depart": "03:45",
+   "arrive": "17:35",
+   "lishi": "13:50",
+   "minutes": 830
+  },
+  "高铁动车": {
+   "train_code": "G671",
+   "depart": "15:39",
+   "arrive": "21:14",
+   "lishi": "05:35",
+   "minutes": 335
+  }
+ },
+ "西宁-洛阳": {
+  "普速": {
+   "train_code": "Z42",
+   "depart": "10:03",
+   "arrive": "01:44",
+   "lishi": "15:41",
+   "minutes": 941
+  },
+  "高铁动车": {
+   "train_code": "G3178",
+   "depart": "09:30",
+   "arrive": "15:08",
+   "lishi": "05:38",
+   "minutes": 338
+  }
+ },
+ "洛阳-银川": {
+  "普速": {
+   "train_code": "K361",
+   "depart": "01:09",
+   "arrive": "19:23",
+   "lishi": "18:14",
+   "minutes": 1094
+  },
+  "高铁动车": {
+   "train_code": "G1909",
+   "depart": "11:23",
+   "arrive": "16:06",
+   "lishi": "04:43",
+   "minutes": 283
+  }
+ },
+ "银川-洛阳": {
+  "高铁动车": {
+   "train_code": "G355",
+   "depart": "08:56",
+   "arrive": "13:22",
+   "lishi": "04:26",
+   "minutes": 266
+  },
+  "普速": {
+   "train_code": "K359",
+   "depart": "20:35",
+   "arrive": "15:43",
+   "lishi": "19:08",
+   "minutes": 1148
+  }
+ },
+ "洛阳-嘉兴": {
+  "高铁动车": {
+   "train_code": "D114",
+   "depart": "05:09",
+   "arrive": "16:57",
+   "lishi": "11:48",
+   "minutes": 708
+  }
+ },
+ "嘉兴-洛阳": {
+  "高铁动车": {
+   "train_code": "D112",
+   "depart": "11:21",
+   "arrive": "23:01",
+   "lishi": "11:40",
+   "minutes": 700
+  }
+ },
+ "洛阳-宁波": {
+  "普速": {
+   "train_code": "K168",
+   "depart": "19:19",
+   "arrive": "16:36",
+   "lishi": "21:17",
+   "minutes": 1277
+  }
+ },
+ "宁波-洛阳": {
+  "高铁动车": {
+   "train_code": "G1894",
+   "depart": "10:14",
+   "arrive": "17:41",
+   "lishi": "07:27",
+   "minutes": 447
+  },
+  "普速": {
+   "train_code": "K166",
+   "depart": "18:00",
+   "arrive": "16:13",
+   "lishi": "22:13",
+   "minutes": 1333
+  }
+ },
+ "洛阳-温州": {
+  "普速": {
+   "train_code": "K2908",
+   "depart": "03:13",
+   "arrive": "05:00",
+   "lishi": "25:47",
+   "minutes": 1547
+  },
+  "高铁动车": {
+   "train_code": "G2390",
+   "depart": "10:45",
+   "arrive": "18:36",
+   "lishi": "07:51",
+   "minutes": 471
+  }
+ },
+ "温州-洛阳": {
+  "普速": {
+   "train_code": "K2906",
+   "depart": "06:40",
+   "arrive": "04:57",
+   "lishi": "22:17",
+   "minutes": 1337
+  },
+  "高铁动车": {
+   "train_code": "G1894",
+   "depart": "08:19",
+   "arrive": "17:41",
+   "lishi": "09:22",
+   "minutes": 562
+  }
+ },
+ "洛阳-湖州": {
+  "高铁动车": {
+   "train_code": "G3162",
+   "depart": "09:46",
+   "arrive": "15:34",
+   "lishi": "05:48",
+   "minutes": 348
+  }
+ },
+ "湖州-洛阳": {
+  "高铁动车": {
+   "train_code": "G1894",
+   "depart": "11:42",
+   "arrive": "17:41",
+   "lishi": "05:59",
+   "minutes": 359
+  }
+ },
+ "洛阳-杭州": {
+  "普速": {
+   "train_code": "K2908",
+   "depart": "03:13",
+   "arrive": "19:08",
+   "lishi": "15:55",
+   "minutes": 955
+  },
+  "高铁动车": {
+   "train_code": "G1900",
+   "depart": "08:51",
+   "arrive": "14:44",
+   "lishi": "05:53",
+   "minutes": 353
+  }
+ },
+ "杭州-洛阳": {
+  "高铁动车": {
+   "train_code": "G2236",
+   "depart": "15:47",
+   "arrive": "21:25",
+   "lishi": "05:38",
+   "minutes": 338
+  },
+  "普速": {
+   "train_code": "K2906",
+   "depart": "13:28",
+   "arrive": "04:57",
+   "lishi": "15:29",
+   "minutes": 929
+  }
+ },
+ "洛阳-绍兴": {
+  "普速": {
+   "train_code": "K168",
+   "depart": "19:19",
+   "arrive": "14:39",
+   "lishi": "19:20",
+   "minutes": 1160
+  }
+ },
+ "绍兴-洛阳": {
+  "普速": {
+   "train_code": "K166",
+   "depart": "19:17",
+   "arrive": "16:13",
+   "lishi": "20:56",
+   "minutes": 1256
+  }
+ },
+ "洛阳-秦皇岛": {
+  "普速": {
+   "train_code": "K386",
+   "depart": "06:11",
+   "arrive": "22:32",
+   "lishi": "16:21",
+   "minutes": 981
+  },
+  "高铁动车": {
+   "train_code": "G1294",
+   "depart": "12:52",
+   "arrive": "18:46",
+   "lishi": "05:54",
+   "minutes": 354
+  }
+ },
+ "秦皇岛-洛阳": {
+  "高铁动车": {
+   "train_code": "G1284",
+   "depart": "09:57",
+   "arrive": "16:18",
+   "lishi": "06:21",
+   "minutes": 381
+  },
+  "普速": {
+   "train_code": "K388",
+   "depart": "23:07",
+   "arrive": "14:57",
+   "lishi": "15:50",
+   "minutes": 950
+  }
+ },
+ "洛阳-石家庄": {
+  "普速": {
+   "train_code": "Z180",
+   "depart": "05:28",
+   "arrive": "10:36",
+   "lishi": "05:08",
+   "minutes": 308
+  },
+  "高铁动车": {
+   "train_code": "G378",
+   "depart": "16:25",
+   "arrive": "18:21",
+   "lishi": "01:56",
+   "minutes": 116
+  }
+ },
+ "石家庄-洛阳": {
+  "普速": {
+   "train_code": "Z179",
+   "depart": "21:12",
+   "arrive": "02:05",
+   "lishi": "04:53",
+   "minutes": 293
+  },
+  "高铁动车": {
+   "train_code": "G361",
+   "depart": "16:08",
+   "arrive": "18:04",
+   "lishi": "01:56",
+   "minutes": 116
+  }
+ },
+ "洛阳-香港": {
+  "高铁动车": {
+   "train_code": "G916",
+   "depart": "12:33",
+   "arrive": "21:22",
+   "lishi": "08:49",
+   "minutes": 529
+  }
+ },
+ "香港-洛阳": {
+  "高铁动车": {
+   "train_code": "G914",
+   "depart": "09:02",
+   "arrive": "18:37",
+   "lishi": "09:35",
+   "minutes": 575
+  }
+ },
+ "洛阳-嘉峪关": {
+  "普速": {
+   "train_code": "Z305",
+   "depart": "04:13",
+   "arrive": "22:43",
+   "lishi": "18:30",
+   "minutes": 1110
+  }
+ },
+ "嘉峪关-洛阳": {
+  "普速": {
+   "train_code": "Z42",
+   "depart": "06:04",
+   "arrive": "01:44",
+   "lishi": "19:40",
+   "minutes": 1180
+  }
+ },
+ "洛阳-兰州": {
+  "普速": {
+   "train_code": "Z165",
+   "depart": "04:52",
+   "arrive": "16:05",
+   "lishi": "11:13",
+   "minutes": 673
+  },
+  "高铁动车": {
+   "train_code": "G465",
+   "depart": "12:24",
+   "arrive": "16:25",
+   "lishi": "04:01",
+   "minutes": 241
+  }
+ },
+ "兰州-洛阳": {
+  "普速": {
+   "train_code": "Z378",
+   "depart": "11:49",
+   "arrive": "01:14",
+   "lishi": "13:25",
+   "minutes": 805
+  },
+  "高铁动车": {
+   "train_code": "G406",
+   "depart": "09:35",
+   "arrive": "13:39",
+   "lishi": "04:04",
+   "minutes": 244
+  }
+ },
+ "洛阳-张掖": {
+  "普速": {
+   "train_code": "Z41",
+   "depart": "03:45",
+   "arrive": "20:16",
+   "lishi": "16:31",
+   "minutes": 991
+  }
+ },
+ "张掖-洛阳": {
+  "普速": {
+   "train_code": "Z42",
+   "depart": "07:41",
+   "arrive": "01:44",
+   "lishi": "18:03",
+   "minutes": 1083
+  }
+ },
+ "洛阳-成都": {
+  "普速": {
+   "train_code": "K385",
+   "depart": "15:01",
+   "arrive": "08:00",
+   "lishi": "16:59",
+   "minutes": 1019
+  },
+  "高铁动车": {
+   "train_code": "G321",
+   "depart": "10:02",
+   "arrive": "14:30",
+   "lishi": "04:28",
+   "minutes": 268
+  }
+ },
+ "成都-洛阳": {
+  "高铁动车": {
+   "train_code": "G322",
+   "depart": "06:56",
+   "arrive": "11:24",
+   "lishi": "04:28",
+   "minutes": 268
+  },
+  "普速": {
+   "train_code": "K386",
+   "depart": "13:09",
+   "arrive": "06:07",
+   "lishi": "16:58",
+   "minutes": 1018
+  }
+ },
+ "洛阳-天津": {
+  "普速": {
+   "train_code": "T56",
+   "depart": "01:31",
+   "arrive": "12:58",
+   "lishi": "11:27",
+   "minutes": 687
+  },
+  "高铁动车": {
+   "train_code": "G1714",
+   "depart": "14:45",
+   "arrive": "19:06",
+   "lishi": "04:21",
+   "minutes": 261
+  }
+ },
+ "天津-洛阳": {
+  "普速": {
+   "train_code": "T58",
+   "depart": "14:04",
+   "arrive": "00:14",
+   "lishi": "10:10",
+   "minutes": 610
+  },
+  "高铁动车": {
+   "train_code": "G1281",
+   "depart": "11:39",
+   "arrive": "16:18",
+   "lishi": "04:39",
+   "minutes": 279
+  }
+ },
+ "洛阳-运城": {
+  "普速": {
+   "train_code": "K239",
+   "depart": "17:07",
+   "arrive": "23:54",
+   "lishi": "06:47",
+   "minutes": 407
+  }
+ },
+ "运城-洛阳": {
+  "普速": {
+   "train_code": "K237",
+   "depart": "05:02",
+   "arrive": "11:05",
+   "lishi": "06:03",
+   "minutes": 363
+  }
+ },
+ "洛阳-太原": {
+  "普速": {
+   "train_code": "K239",
+   "depart": "17:07",
+   "arrive": "06:05",
+   "lishi": "12:58",
+   "minutes": 778
+  }
+ },
+ "太原-洛阳": {
+  "普速": {
+   "train_code": "K237",
+   "depart": "23:01",
+   "arrive": "11:05",
+   "lishi": "12:04",
+   "minutes": 724
+  }
+ },
+ "洛阳-西安": {
+  "普速": {
+   "train_code": "Z165",
+   "depart": "04:52",
+   "arrive": "09:19",
+   "lishi": "04:27",
+   "minutes": 267
+  },
+  "高铁动车": {
+   "train_code": "G2003",
+   "depart": "10:54",
+   "arrive": "12:09",
+   "lishi": "01:15",
+   "minutes": 75
+  }
+ },
+ "西安-洛阳": {
+  "普速": {
+   "train_code": "Z180",
+   "depart": "00:27",
+   "arrive": "04:58",
+   "lishi": "04:31",
+   "minutes": 271
+  },
+  "高铁动车": {
+   "train_code": "G652",
+   "depart": "07:07",
+   "arrive": "08:22",
+   "lishi": "01:15",
+   "minutes": 75
+  }
+ },
+ "洛阳-拉萨": {
+  "普速": {
+   "train_code": "Z165",
+   "depart": "04:52",
+   "arrive": "15:36",
+   "lishi": "34:44",
+   "minutes": 2084
+  }
+ },
+ "洛阳-昆明": {
+  "高铁动车": {
+   "train_code": "G2831",
+   "depart": "09:08",
+   "arrive": "22:10",
+   "lishi": "13:02",
+   "minutes": 782
+  }
+ },
+ "昆明-洛阳": {
+  "高铁动车": {
+   "train_code": "G2832",
+   "depart": "07:00",
+   "arrive": "19:31",
+   "lishi": "12:31",
+   "minutes": 751
+  }
+ },
+ "洛阳-北京": {
+  "普速": {
+   "train_code": "Z180",
+   "depart": "05:28",
+   "arrive": "13:33",
+   "lishi": "08:05",
+   "minutes": 485
+  },
+  "高铁动车": {
+   "train_code": "G358",
+   "depart": "11:21",
+   "arrive": "14:21",
+   "lishi": "03:00",
+   "minutes": 180
+  }
+ },
+ "北京-洛阳": {
+  "高铁动车": {
+   "train_code": "G361",
+   "depart": "15:05",
+   "arrive": "18:04",
+   "lishi": "02:59",
+   "minutes": 179
+  },
+  "普速": {
+   "train_code": "Z179",
+   "depart": "18:20",
+   "arrive": "02:05",
+   "lishi": "07:45",
+   "minutes": 465
+  }
+ },
+ "洛阳-长春": {
+  "普速": {
+   "train_code": "K126",
+   "depart": "03:57",
+   "arrive": "06:01",
+   "lishi": "26:04",
+   "minutes": 1564
+  }
+ },
+ "长春-洛阳": {
+  "普速": {
+   "train_code": "K128",
+   "depart": "13:40",
+   "arrive": "15:15",
+   "lishi": "25:35",
+   "minutes": 1535
+  }
+ },
+ "洛阳-南昌": {
+  "普速": {
+   "train_code": "Z128",
+   "depart": "04:26",
+   "arrive": "15:13",
+   "lishi": "10:47",
+   "minutes": 647
+  },
+  "高铁动车": {
+   "train_code": "G642",
+   "depart": "13:20",
+   "arrive": "18:56",
+   "lishi": "05:36",
+   "minutes": 336
+  }
+ },
+ "南昌-洛阳": {
+  "普速": {
+   "train_code": "Z126",
+   "depart": "13:29",
+   "arrive": "00:04",
+   "lishi": "10:35",
+   "minutes": 635
+  },
+  "高铁动车": {
+   "train_code": "G640",
+   "depart": "07:46",
+   "arrive": "13:20",
+   "lishi": "05:34",
+   "minutes": 334
+  }
+ },
+ "洛阳-九江": {
+  "普速": {
+   "train_code": "K32",
+   "depart": "12:58",
+   "arrive": "02:06",
+   "lishi": "13:08",
+   "minutes": 788
+  }
+ },
+ "九江-洛阳": {
+  "普速": {
+   "train_code": "K30",
+   "depart": "03:22",
+   "arrive": "17:32",
+   "lishi": "14:10",
+   "minutes": 850
+  },
+  "高铁动车": {
+   "train_code": "G3156",
+   "depart": "10:55",
+   "arrive": "16:44",
+   "lishi": "05:49",
+   "minutes": 349
+  }
+ },
+ "开封-郑州": {
+  "普速": {
+   "train_code": "Z273",
+   "depart": "00:15",
+   "arrive": "00:54",
+   "lishi": "00:39",
+   "minutes": 39
+  },
+  "高铁动车": {
+   "train_code": "C2879",
+   "depart": "16:44",
+   "arrive": "17:03",
+   "lishi": "00:19",
+   "minutes": 19
+  }
+ },
+ "郑州-开封": {
+  "普速": {
+   "train_code": "Z274",
+   "depart": "17:11",
+   "arrive": "17:47",
+   "lishi": "00:36",
+   "minutes": 36
+  },
+  "高铁动车": {
+   "train_code": "C2984",
+   "depart": "12:29",
+   "arrive": "12:46",
+   "lishi": "00:17",
+   "minutes": 17
+  }
+ },
+ "开封-惠州": {
+  "普速": {
+   "train_code": "K132",
+   "depart": "07:46",
+   "arrive": "05:32",
+   "lishi": "21:46",
+   "minutes": 1306
+  },
+  "高铁动车": {
+   "train_code": "D146",
+   "depart": "23:39",
+   "arrive": "16:02",
+   "lishi": "16:23",
+   "minutes": 983
+  }
+ },
+ "惠州-开封": {
+  "普速": {
+   "train_code": "K134",
+   "depart": "11:49",
+   "arrive": "12:06",
+   "lishi": "24:17",
+   "minutes": 1457
+  },
+  "高铁动车": {
+   "train_code": "D148",
+   "depart": "19:54",
+   "arrive": "12:44",
+   "lishi": "16:50",
+   "minutes": 1010
+  }
+ },
+ "开封-深圳": {
+  "普速": {
+   "train_code": "K132",
+   "depart": "07:46",
+   "arrive": "07:55",
+   "lishi": "24:09",
+   "minutes": 1449
+  },
+  "高铁动车": {
+   "train_code": "G1311",
+   "depart": "11:35",
+   "arrive": "19:04",
+   "lishi": "07:29",
+   "minutes": 449
+  }
+ },
+ "深圳-开封": {
+  "高铁动车": {
+   "train_code": "G3786",
+   "depart": "08:04",
+   "arrive": "15:56",
+   "lishi": "07:52",
+   "minutes": 472
+  },
+  "普速": {
+   "train_code": "K134",
+   "depart": "10:15",
+   "arrive": "12:06",
+   "lishi": "25:51",
+   "minutes": 1551
+  }
+ },
+ "开封-广州": {
+  "高铁动车": {
+   "train_code": "G1311",
+   "depart": "11:35",
+   "arrive": "18:01",
+   "lishi": "06:26",
+   "minutes": 386
+  }
+ },
+ "广州-开封": {
+  "普速": {
+   "train_code": "K1160",
+   "depart": "08:12",
+   "arrive": "06:12",
+   "lishi": "22:00",
+   "minutes": 1320
+  },
+  "高铁动车": {
+   "train_code": "G3786",
+   "depart": "08:47",
+   "arrive": "15:56",
+   "lishi": "07:09",
+   "minutes": 429
+  }
+ },
+ "开封-哈尔滨": {
+  "普速": {
+   "train_code": "K926",
+   "depart": "16:16",
+   "arrive": "18:10",
+   "lishi": "25:54",
+   "minutes": 1554
+  }
+ },
+ "哈尔滨-开封": {
+  "普速": {
+   "train_code": "K1062",
+   "depart": "15:03",
+   "arrive": "18:59",
+   "lishi": "27:56",
+   "minutes": 1676
+  }
+ },
+ "开封-乌鲁木齐": {
+  "普速": {
+   "train_code": "Z41",
+   "depart": "01:27",
+   "arrive": "08:20",
+   "lishi": "30:53",
+   "minutes": 1853
+  }
+ },
+ "开封-武汉": {
+  "高铁动车": {
+   "train_code": "G1311",
+   "depart": "11:35",
+   "arrive": "14:07",
+   "lishi": "02:32",
+   "minutes": 152
+  },
+  "普速": {
+   "train_code": "K925",
+   "depart": "12:59",
+   "arrive": "21:46",
+   "lishi": "08:47",
+   "minutes": 527
+  }
+ },
+ "武汉-开封": {
+  "普速": {
+   "train_code": "K1160",
+   "depart": "21:49",
+   "arrive": "06:12",
+   "lishi": "08:23",
+   "minutes": 503
+  },
+  "高铁动车": {
+   "train_code": "G3786",
+   "depart": "13:20",
+   "arrive": "15:56",
+   "lishi": "02:36",
+   "minutes": 156
+  }
+ },
+ "开封-沈阳": {
+  "普速": {
+   "train_code": "K926",
+   "depart": "16:16",
+   "arrive": "11:40",
+   "lishi": "19:24",
+   "minutes": 1164
+  }
+ },
+ "沈阳-开封": {
+  "普速": {
+   "train_code": "K128",
+   "depart": "17:11",
+   "arrive": "12:12",
+   "lishi": "19:01",
+   "minutes": 1141
+  }
+ },
+ "开封-鞍山": {
+  "普速": {
+   "train_code": "K2046",
+   "depart": "00:43",
+   "arrive": "22:08",
+   "lishi": "21:25",
+   "minutes": 1285
+  }
+ },
+ "鞍山-开封": {
+  "普速": {
+   "train_code": "K2048",
+   "depart": "09:26",
+   "arrive": "05:57",
+   "lishi": "20:31",
+   "minutes": 1231
+  }
+ },
+ "开封-烟台": {
+  "普速": {
+   "train_code": "K1132",
+   "depart": "21:22",
+   "arrive": "09:50",
+   "lishi": "12:28",
+   "minutes": 748
+  }
+ },
+ "烟台-开封": {
+  "高铁动车": {
+   "train_code": "G1850",
+   "depart": "09:46",
+   "arrive": "16:07",
+   "lishi": "06:21",
+   "minutes": 381
+  }
+ },
+ "开封-青岛": {
+  "高铁动车": {
+   "train_code": "G2260",
+   "depart": "12:22",
+   "arrive": "16:41",
+   "lishi": "04:19",
+   "minutes": 259
+  },
+  "普速": {
+   "train_code": "Z274",
+   "depart": "17:51",
+   "arrive": "05:07",
+   "lishi": "11:16",
+   "minutes": 676
+  }
+ },
+ "青岛-开封": {
+  "高铁动车": {
+   "train_code": "G2033",
+   "depart": "18:10",
+   "arrive": "21:47",
+   "lishi": "03:37",
+   "minutes": 217
+  },
+  "普速": {
+   "train_code": "Z272",
+   "depart": "14:42",
+   "arrive": "00:12",
+   "lishi": "09:30",
+   "minutes": 570
+  }
+ },
+ "开封-泰安": {
+  "普速": {
+   "train_code": "Z274",
+   "depart": "17:51",
+   "arrive": "00:03",
+   "lishi": "06:12",
+   "minutes": 372
+  }
+ },
+ "泰安-开封": {
+  "普速": {
+   "train_code": "Z273",
+   "depart": "18:44",
+   "arrive": "00:12",
+   "lishi": "05:28",
+   "minutes": 328
+  },
+  "高铁动车": {
+   "train_code": "D129",
+   "depart": "20:43",
+   "arrive": "02:02",
+   "lishi": "05:19",
+   "minutes": 319
+  }
+ },
+ "开封-济南": {
+  "普速": {
+   "train_code": "Z274",
+   "depart": "17:51",
+   "arrive": "01:12",
+   "lishi": "07:21",
+   "minutes": 441
+  }
+ },
+ "济南-开封": {
+  "普速": {
+   "train_code": "Z273",
+   "depart": "17:57",
+   "arrive": "00:12",
+   "lishi": "06:15",
+   "minutes": 375
+  },
+  "高铁动车": {
+   "train_code": "D129",
+   "depart": "19:53",
+   "arrive": "02:02",
+   "lishi": "06:09",
+   "minutes": 369
+  }
+ },
+ "开封-上海": {
+  "普速": {
+   "train_code": "Z378",
+   "depart": "03:40",
+   "arrive": "13:29",
+   "lishi": "09:49",
+   "minutes": 589
+  },
+  "高铁动车": {
+   "train_code": "G1820",
+   "depart": "13:41",
+   "arrive": "18:10",
+   "lishi": "04:29",
+   "minutes": 269
+  }
+ },
+ "上海-开封": {
+  "高铁动车": {
+   "train_code": "G80",
+   "depart": "14:04",
+   "arrive": "17:41",
+   "lishi": "03:37",
+   "minutes": 217
+  },
+  "普速": {
+   "train_code": "Z40",
+   "depart": "16:48",
+   "arrive": "01:24",
+   "lishi": "08:36",
+   "minutes": 516
+  }
+ },
+ "开封-遵义": {
+  "高铁动车": {
+   "train_code": "G2207",
+   "depart": "09:54",
+   "arrive": "20:27",
+   "lishi": "10:33",
+   "minutes": 633
+  }
+ },
+ "遵义-开封": {
+  "高铁动车": {
+   "train_code": "G2206",
+   "depart": "09:55",
+   "arrive": "20:00",
+   "lishi": "10:05",
+   "minutes": 605
+  }
+ },
+ "开封-贵阳": {
+  "高铁动车": {
+   "train_code": "G2207",
+   "depart": "09:54",
+   "arrive": "21:16",
+   "lishi": "11:22",
+   "minutes": 682
+  }
+ },
+ "贵阳-开封": {
+  "高铁动车": {
+   "train_code": "G2690",
+   "depart": "12:31",
+   "arrive": "20:18",
+   "lishi": "07:47",
+   "minutes": 467
+  }
+ },
+ "开封-合肥": {
+  "普速": {
+   "train_code": "T40",
+   "depart": "15:48",
+   "arrive": "21:47",
+   "lishi": "05:59",
+   "minutes": 359
+  },
+  "高铁动车": {
+   "train_code": "G3154",
+   "depart": "11:28",
+   "arrive": "14:03",
+   "lishi": "02:35",
+   "minutes": 155
+  }
+ },
+ "合肥-开封": {
+  "高铁动车": {
+   "train_code": "G3136",
+   "depart": "10:40",
+   "arrive": "13:45",
+   "lishi": "03:05",
+   "minutes": 185
+  },
+  "普速": {
+   "train_code": "T38",
+   "depart": "23:24",
+   "arrive": "05:20",
+   "lishi": "05:56",
+   "minutes": 356
+  }
+ },
+ "开封-长沙": {
+  "高铁动车": {
+   "train_code": "G1311",
+   "depart": "11:35",
+   "arrive": "15:45",
+   "lishi": "04:10",
+   "minutes": 250
+  }
+ },
+ "长沙-开封": {
+  "高铁动车": {
+   "train_code": "G2690",
+   "depart": "15:54",
+   "arrive": "20:18",
+   "lishi": "04:24",
+   "minutes": 264
+  },
+  "普速": {
+   "train_code": "K1160",
+   "depart": "16:49",
+   "arrive": "06:12",
+   "lishi": "13:23",
+   "minutes": 803
+  }
+ },
+ "开封-常州": {
+  "普速": {
+   "train_code": "K292",
+   "depart": "18:29",
+   "arrive": "03:23",
+   "lishi": "08:54",
+   "minutes": 534
+  },
+  "高铁动车": {
+   "train_code": "G1950",
+   "depart": "18:37",
+   "arrive": "21:57",
+   "lishi": "03:20",
+   "minutes": 200
+  }
+ },
+ "常州-开封": {
+  "普速": {
+   "train_code": "Z40",
+   "depart": "18:37",
+   "arrive": "01:24",
+   "lishi": "06:47",
+   "minutes": 407
+  },
+  "高铁动车": {
+   "train_code": "G1916",
+   "depart": "16:58",
+   "arrive": "20:23",
+   "lishi": "03:25",
+   "minutes": 205
+  }
+ },
+ "开封-镇江": {
+  "普速": {
+   "train_code": "K558",
+   "depart": "01:07",
+   "arrive": "09:34",
+   "lishi": "08:27",
+   "minutes": 507
+  },
+  "高铁动车": {
+   "train_code": "G1812",
+   "depart": "09:14",
+   "arrive": "12:34",
+   "lishi": "03:20",
+   "minutes": 200
+  }
+ },
+ "镇江-开封": {
+  "高铁动车": {
+   "train_code": "G1818",
+   "depart": "15:49",
+   "arrive": "18:59",
+   "lishi": "03:10",
+   "minutes": 190
+  },
+  "普速": {
+   "train_code": "K2186",
+   "depart": "11:53",
+   "arrive": "20:24",
+   "lishi": "08:31",
+   "minutes": 511
+  }
+ },
+ "开封-银川": {
+  "普速": {
+   "train_code": "K361",
+   "depart": "21:45",
+   "arrive": "19:23",
+   "lishi": "21:38",
+   "minutes": 1298
+  }
+ },
+ "银川-开封": {
+  "高铁动车": {
+   "train_code": "G2261",
+   "depart": "06:24",
+   "arrive": "12:19",
+   "lishi": "05:55",
+   "minutes": 355
+  },
+  "普速": {
+   "train_code": "K359",
+   "depart": "20:35",
+   "arrive": "18:14",
+   "lishi": "21:39",
+   "minutes": 1299
+  }
+ },
+ "开封-嘉兴": {
+  "高铁动车": {
+   "train_code": "D114",
+   "depart": "07:18",
+   "arrive": "16:57",
+   "lishi": "09:39",
+   "minutes": 579
+  }
+ },
+ "嘉兴-开封": {
+  "高铁动车": {
+   "train_code": "D126",
+   "depart": "17:33",
+   "arrive": "02:18",
+   "lishi": "08:45",
+   "minutes": 525
+  }
+ },
+ "开封-宁波": {
+  "高铁动车": {
+   "train_code": "D232",
+   "depart": "22:08",
+   "arrive": "11:00",
+   "lishi": "12:52",
+   "minutes": 772
+  }
+ },
+ "宁波-开封": {
+  "高铁动车": {
+   "train_code": "G3136",
+   "depart": "07:21",
+   "arrive": "13:45",
+   "lishi": "06:24",
+   "minutes": 384
+  }
+ },
+ "开封-温州": {
+  "普速": {
+   "train_code": "T40",
+   "depart": "15:48",
+   "arrive": "09:50",
+   "lishi": "18:02",
+   "minutes": 1082
+  },
+  "高铁动车": {
+   "train_code": "G2390",
+   "depart": "11:53",
+   "arrive": "18:36",
+   "lishi": "06:43",
+   "minutes": 403
+  }
+ },
+ "温州-开封": {
+  "普速": {
+   "train_code": "T38",
+   "depart": "11:08",
+   "arrive": "05:20",
+   "lishi": "18:12",
+   "minutes": 1092
+  }
+ },
+ "开封-绍兴": {
+  "高铁动车": {
+   "train_code": "D232",
+   "depart": "22:08",
+   "arrive": "09:24",
+   "lishi": "11:16",
+   "minutes": 676
+  }
+ },
+ "绍兴-开封": {
+  "高铁动车": {
+   "train_code": "G3136",
+   "depart": "07:58",
+   "arrive": "13:45",
+   "lishi": "05:47",
+   "minutes": 347
+  }
+ },
+ "开封-嘉峪关": {
+  "普速": {
+   "train_code": "Z41",
+   "depart": "01:27",
+   "arrive": "22:18",
+   "lishi": "20:51",
+   "minutes": 1251
+  }
+ },
+ "开封-兰州": {
+  "普速": {
+   "train_code": "Z41",
+   "depart": "01:27",
+   "arrive": "15:31",
+   "lishi": "14:04",
+   "minutes": 844
+  },
+  "高铁动车": {
+   "train_code": "G2685",
+   "depart": "16:30",
+   "arrive": "22:21",
+   "lishi": "05:51",
+   "minutes": 351
+  }
+ },
+ "兰州-开封": {
+  "普速": {
+   "train_code": "Z378",
+   "depart": "11:49",
+   "arrive": "03:29",
+   "lishi": "15:40",
+   "minutes": 940
+  },
+  "高铁动车": {
+   "train_code": "G1972",
+   "depart": "10:48",
+   "arrive": "16:42",
+   "lishi": "05:54",
+   "minutes": 354
+  }
+ },
+ "开封-张掖": {
+  "普速": {
+   "train_code": "Z41",
+   "depart": "01:27",
+   "arrive": "20:16",
+   "lishi": "18:49",
+   "minutes": 1129
+  }
+ },
+ "开封-成都": {
+  "普速": {
+   "train_code": "K283",
+   "depart": "08:06",
+   "arrive": "05:40",
+   "lishi": "21:34",
+   "minutes": 1294
+  },
+  "高铁动车": {
+   "train_code": "G3285",
+   "depart": "16:47",
+   "arrive": "23:17",
+   "lishi": "06:30",
+   "minutes": 390
+  }
+ },
+ "成都-开封": {
+  "高铁动车": {
+   "train_code": "G1976",
+   "depart": "11:01",
+   "arrive": "17:39",
+   "lishi": "06:38",
+   "minutes": 398
+  },
+  "普速": {
+   "train_code": "K284",
+   "depart": "22:23",
+   "arrive": "20:09",
+   "lishi": "21:46",
+   "minutes": 1306
+  }
+ },
+ "开封-天津": {
+  "普速": {
+   "train_code": "K926",
+   "depart": "16:16",
+   "arrive": "02:21",
+   "lishi": "10:05",
+   "minutes": 605
+  }
+ },
+ "天津-开封": {
+  "普速": {
+   "train_code": "K128",
+   "depart": "02:00",
+   "arrive": "12:12",
+   "lishi": "10:12",
+   "minutes": 612
+  }
+ },
+ "开封-太原": {
+  "高铁动车": {
+   "train_code": "D3391",
+   "depart": "08:34",
+   "arrive": "12:16",
+   "lishi": "03:42",
+   "minutes": 222
+  }
+ },
+ "太原-开封": {
+  "高铁动车": {
+   "train_code": "G3753",
+   "depart": "12:44",
+   "arrive": "16:05",
+   "lishi": "03:21",
+   "minutes": 201
+  }
+ },
+ "开封-北京": {
+  "高铁动车": {
+   "train_code": "G1557",
+   "depart": "08:11",
+   "arrive": "12:19",
+   "lishi": "04:08",
+   "minutes": 248
+  }
+ },
+ "北京-开封": {
+  "高铁动车": {
+   "train_code": "G1495",
+   "depart": "17:30",
+   "arrive": "21:34",
+   "lishi": "04:04",
+   "minutes": 244
+  }
+ },
+ "开封-长春": {
+  "普速": {
+   "train_code": "K926",
+   "depart": "16:16",
+   "arrive": "15:09",
+   "lishi": "22:53",
+   "minutes": 1373
+  }
+ },
+ "长春-开封": {
+  "普速": {
+   "train_code": "K128",
+   "depart": "13:40",
+   "arrive": "12:12",
+   "lishi": "22:32",
+   "minutes": 1352
+  }
+ },
+ "开封-南昌": {
+  "普速": {
+   "train_code": "K132",
+   "depart": "07:46",
+   "arrive": "20:05",
+   "lishi": "12:19",
+   "minutes": 739
+  },
+  "高铁动车": {
+   "train_code": "D146",
+   "depart": "23:39",
+   "arrive": "07:30",
+   "lishi": "07:51",
+   "minutes": 471
+  }
+ },
+ "南昌-开封": {
+  "普速": {
+   "train_code": "K30",
+   "depart": "01:20",
+   "arrive": "14:18",
+   "lishi": "12:58",
+   "minutes": 778
+  },
+  "高铁动车": {
+   "train_code": "D228",
+   "depart": "22:42",
+   "arrive": "06:56",
+   "lishi": "08:14",
+   "minutes": 494
+  }
+ },
+ "开封-赣州": {
+  "普速": {
+   "train_code": "K132",
+   "depart": "07:46",
+   "arrive": "00:43",
+   "lishi": "16:57",
+   "minutes": 1017
+  },
+  "高铁动车": {
+   "train_code": "D146",
+   "depart": "23:39",
+   "arrive": "11:40",
+   "lishi": "12:01",
+   "minutes": 721
+  }
+ },
+ "赣州-开封": {
+  "高铁动车": {
+   "train_code": "D148",
+   "depart": "00:18",
+   "arrive": "12:44",
+   "lishi": "12:26",
+   "minutes": 746
+  },
+  "普速": {
+   "train_code": "K134",
+   "depart": "17:37",
+   "arrive": "12:06",
+   "lishi": "18:29",
+   "minutes": 1109
+  }
+ }
+}

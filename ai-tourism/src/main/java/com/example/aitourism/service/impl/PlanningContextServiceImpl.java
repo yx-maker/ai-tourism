@@ -1,11 +1,13 @@
 package com.example.aitourism.service.impl;
 
 import com.example.aitourism.dto.budget.BudgetEnvelope;
+import com.example.aitourism.dto.budget.TransportDuration;
 import com.example.aitourism.entity.UserPreference;
 import com.example.aitourism.mapper.POIMapper;
 import com.example.aitourism.service.BudgetEnvelopeService;
 import com.example.aitourism.service.PlanningContextService;
 import com.example.aitourism.service.PriceProxyService;
+import com.example.aitourism.service.TransportDurationService;
 import com.example.aitourism.service.UserPreferenceService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,6 +41,7 @@ public class PlanningContextServiceImpl implements PlanningContextService {
     private final PriceProxyService priceProxyService;
     private final POIMapper poiMapper;
     private final BudgetEnvelopeService envelopeService;
+    private final TransportDurationService durationService;
     private final UserPreferenceService userPreferenceService;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -54,10 +57,12 @@ public class PlanningContextServiceImpl implements PlanningContextService {
     public PlanningContextServiceImpl(PriceProxyService priceProxyService,
                                       POIMapper poiMapper,
                                       BudgetEnvelopeService envelopeService,
+                                      TransportDurationService durationService,
                                       UserPreferenceService userPreferenceService) {
         this.priceProxyService = priceProxyService;
         this.poiMapper = poiMapper;
         this.envelopeService = envelopeService;
+        this.durationService = durationService;
         this.userPreferenceService = userPreferenceService;
     }
 
@@ -147,10 +152,15 @@ public class PlanningContextServiceImpl implements PlanningContextService {
         sb.append("## 真实价格参考（来源可信，费用表请优先采用；拿不到真实价格的项会标注「系统估算」）\n");
         boolean anyReal = false;
 
-        // 往返大交通
+        // 往返大交通：票价与在途时长成对注入——时长取决于「按预算选出的座位类型」，
+        // 写在同一个句子里模型最容易原样采用（实测：分开写时它照抄票价、却自行改写时长）
         BigDecimal transport = null;
         String transportLabel = null;
         String routeDesc = (originCity != null ? originCity + "→" + destCity : "往返" + destCity);
+        double durationDist = originCity != null
+                ? com.example.aitourism.util.CityGeoUtil.distanceKm(originCity, destCity) : -1;
+        TransportDuration duration = null;
+
         if (originCity != null && priceProxyService.trainApiEnabled()) {
             List<PriceProxyService.SeatQuote> quotes =
                     priceProxyService.trainQuotes(originCity, destCity, LocalDate.now().toString());
@@ -158,24 +168,38 @@ public class PlanningContextServiceImpl implements PlanningContextService {
                 PriceProxyService.SeatQuote pick = pickSeat(quotes, budget);
                 transport = pick.price().multiply(BigDecimal.valueOf(2));
                 transportLabel = pick.seatType();
-                sb.append(String.format("- 往返大交通：%s %s 单程约 ¥%s（真实票价·12306同步聚合API，%s）%n",
-                        routeDesc, pick.seatType(), pick.price().toPlainString(), LocalDate.now()));
+                duration = durationService.resolve(pick.seatType(), originCity, destCity, durationDist);
+                String codePart = pick.trainCode() == null ? "" : pick.trainCode() + " ";
+                sb.append(String.format("- 往返大交通：%s %s%s 单程约 ¥%s，单程约 %s、往返在途约 %s"
+                                + "（12306 实爬票价与历时同源，%s；%s）%n",
+                        routeDesc, codePart, pick.seatType(), pick.price().toPlainString(),
+                        duration.textOneWay(), duration.textRoundTrip(),
+                        LocalDate.now(), duration.label()));
                 anyReal = true;
             }
         }
         if (transport == null) {
             // 系数模型兜底（与 BudgetServiceImpl.chooseTransport 同口径）
-            double dist = originCity != null
-                    ? com.example.aitourism.util.CityGeoUtil.distanceKm(originCity, destCity) : -1;
+            double dist = durationDist;
             if (dist > 50) {
                 double railKm = dist * 1.3;
                 double oneWay = Math.max(70, Math.min(railKm * 0.46, 900));
                 transport = BigDecimal.valueOf(Math.round(oneWay * 2));
                 transportLabel = "高铁二等座";
-                sb.append(String.format("- 往返大交通：%s 约 %s km，高铁二等座往返约 ¥%s（系统估算·里程系数模型）%n",
-                        routeDesc, Math.round(dist), transport.toPlainString()));
+                duration = durationService.resolve("高铁二等座", originCity, destCity, dist);
+                sb.append(String.format("- 往返大交通：%s 约 %s km，高铁二等座往返约 ¥%s，"
+                                + "单程约 %s、往返在途约 %s（系统估算·里程系数模型；%s）%n",
+                        routeDesc, Math.round(dist), transport.toPlainString(),
+                        duration.textOneWay(), duration.textRoundTrip(), duration.label()));
             }
         }
+        if (duration == null) {
+            duration = durationService.resolve(
+                    transportLabel == null ? "高铁二等座" : transportLabel, originCity, destCity, durationDist);
+        }
+        log.info("[DURATION-CTX] origin={} dest={} label={} -> {} 单程约 {}（{}）",
+                originCity, destCity, transportLabel, duration.getKind(),
+                duration.textOneWay(), duration.getSource());
 
         // 住宿快照（三档）
         Map<String, BigDecimal> hotelOverrides = new HashMap<>();
@@ -201,6 +225,26 @@ public class PlanningContextServiceImpl implements PlanningContextService {
                 anyReal = true;
             }
         } catch (Exception ignored) {
+        }
+
+        // 在途时长的落地要求（票价行已带上具体数值，这里给出可原样复制的成品行）
+        if (duration != null && duration.getMinutesOneWay() != null) {
+            String trainPart = (duration.getTrainCode() != null
+                    ? "（" + duration.getTrainCode() + " " + duration.getDepart() + "→" + duration.getArrive() + "）"
+                    : "");
+            sb.append(String.format(
+                    "- 行程总览的「出行方式建议」一行请原样输出下面这句（往返已按单程×2算好，禁止重新计算或改写数字）：%n"
+                            + "  「出行方式建议：%s%s 单程约 %s、往返在途约 %s」%n"
+                            + "  第1天抵达交通与最后一天返程，各再标注一次「单程约 %s」。%n",
+                    duration.getKind(), trainPart, duration.textOneWay(), duration.textRoundTrip(),
+                    duration.textOneWay()));
+            if (duration.getMinutesOneWay() >= 480) {
+                sb.append("- 单程在途已超过 8 小时：抵达当天不要再安排需要预约的景点，"
+                        + "并优先建议夕发朝至车次\n");
+            }
+            if (duration.isReal()) {
+                anyReal = true;
+            }
         }
 
         if (!anyReal) {

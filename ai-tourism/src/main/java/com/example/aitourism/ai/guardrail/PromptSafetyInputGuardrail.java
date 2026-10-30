@@ -15,6 +15,16 @@ import java.util.regex.Pattern;
 @Slf4j
 public class PromptSafetyInputGuardrail implements InputGuardrail {
 
+    /**
+     * 系统自动注入的规划上下文分隔符。
+     *
+     * <p>后端会把「真实票价 / 预算约束 / 交通时长 / 用户偏好」等参考数据拼在用户原始提问之后
+     * 一起发给模型。这些内容是服务端生成的常量模板，并非用户可控输入，因此不能参与
+     * 「用户输入」的长度上限与敏感词/注入检测——否则用户只要多打几个字就会被误判为
+     * 「输入内容过长」。护栏在校验时以该分隔符为界，只取前面的部分作为真正的用户输入。
+     */
+    public static final String CONTEXT_PREFIX = "\n\n[SYSTEM_CONTEXT_BEGIN]\n";
+
     // 敏感词列表，包含不允许出现在用户输入中的词语或短语。
     private static final List<String> SENSITIVE_WORDS = Arrays.asList(
             "忽略之前的指令", "ignore previous instructions", "ignore above",
@@ -37,7 +47,10 @@ public class PromptSafetyInputGuardrail implements InputGuardrail {
      */
     @Override
     public InputGuardrailResult validate(UserMessage userMessage) {
-        String userInput = userMessage.singleText();
+        String raw = userMessage.singleText();
+        // 只校验用户原始输入：分隔符之后是服务端注入的参考数据，不由用户控制
+        int ctxIdx = raw == null ? -1 : raw.indexOf(CONTEXT_PREFIX);
+        String userInput = ctxIdx >= 0 ? raw.substring(0, ctxIdx) : (raw == null ? "" : raw);
         String trimmedInput = userInput.trim();
         // 检查输入长度
         if (trimmedInput.length() > 1000) {

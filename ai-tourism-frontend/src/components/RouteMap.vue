@@ -96,9 +96,9 @@ function render() {
     overlays.push(
       new AMap.Polyline({
         path: pts.map((p) => [p.lng, p.lat]),
-        strokeColor: '#22D3EE',
+        strokeColor: '#0B6B63',
         strokeWeight: 3,
-        strokeOpacity: 0.85,
+        strokeOpacity: 0.9,
         strokeStyle: 'solid',
         lineJoin: 'round',
         showDir: true
@@ -121,7 +121,7 @@ async function boot() {
     map = new window.AMap.Map(el.value, {
       zoom: 6,
       center: [props.points[0].lng, props.points[0].lat],
-      mapStyle: 'amap://styles/dark',
+      mapStyle: 'amap://styles/normal',
       viewMode: '2D',
       zooms: [3, 18]
     })
@@ -156,7 +156,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <aside class="map">
+  <aside class="map" :class="{ 'is-empty': !points.length }">
     <header class="map__head">
       <div class="map__title">
         <Icon name="route" :size="16" />
@@ -182,7 +182,7 @@ onUnmounted(() => {
       </button>
     </div>
 
-    <div class="map__canvas-wrap">
+    <div class="map__canvas-wrap" :class="{ 'is-empty': !points.length }">
       <!-- 无坐标点位时的占位（尚未生成行程 / 该会话无路线） -->
       <div v-if="!points.length" class="map__overlay">
         <div class="map__fb-icon"><Icon name="compass" :size="24" /></div>
@@ -207,11 +207,6 @@ onUnmounted(() => {
 
     <!-- 点位清单（始终展示，作为地图的补充与降级） -->
     <div class="map__list">
-      <div v-if="!points.length" class="map__none">
-        <Icon name="info" :size="16" />
-        <span>该会话尚未生成带坐标的路线</span>
-      </div>
-
       <div v-for="(p, i) in visiblePoints" :key="`${p.name}-${i}`" class="poi">
         <span class="poi__idx">{{ i + 1 }}</span>
         <div class="poi__body">
@@ -233,72 +228,93 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   border-left: 1px solid var(--line);
-  background: rgba(8, 11, 20, 0.62);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: var(--paper);
 }
 
 .map__head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 16px;
-  border-bottom: 1px solid var(--line);
+  height: 58px;
+  flex: none;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--line-faint);
 }
 
 .map__title {
   display: flex;
   align-items: center;
-  gap: 9px;
-  font-size: 14px;
-  font-weight: 620;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
 }
 
-.map__title svg { color: var(--cyan); }
+.map__title svg { color: var(--ink-3); }
 
 .map__x {
-  color: var(--t3);
-  padding: 5px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  color: var(--ink-3);
   border-radius: var(--r-xs);
+  transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
 
-.map__x:hover { color: var(--t1); background: var(--glass-hover); }
+.map__x:hover { color: var(--ink); background: var(--paper-2); }
 
 .map__days {
   display: flex;
-  gap: 5px;
-  padding: 11px 16px 0;
+  gap: 4px;
+  padding: 12px 16px 0;
   flex-wrap: wrap;
+  flex: none;
 }
 
 .map__day {
-  height: 27px;
-  padding: 0 11px;
-  border-radius: var(--r-full);
-  font-size: 12.5px;
-  color: var(--t3);
+  height: 26px;
+  padding: 0 10px;
+  border-radius: var(--r-xs);
+  font-size: 11.5px;
+  font-family: var(--font-mono);
+  color: var(--ink-3);
   border: 1px solid var(--line);
-  background: var(--glass);
-  transition: all var(--dur) var(--ease);
+  background: var(--surface);
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    background var(--dur) var(--ease);
 }
 
-.map__day:hover { color: var(--t1); border-color: var(--line-strong); }
+.map__day:hover { color: var(--ink); border-color: var(--line-strong); }
 
 .map__day.is-on {
-  color: #CFFAFE;
-  border-color: rgba(34, 211, 238, 0.4);
-  background: var(--grad-brand-soft);
+  color: #FCFBF7;
+  border-color: var(--ink);
+  background: var(--ink);
 }
 
 .map__canvas-wrap {
   position: relative;
-  height: 268px;
+  height: 264px;
   margin: 12px 16px;
   border-radius: var(--r-md);
   overflow: hidden;
   border: 1px solid var(--line);
-  background: #0A0F1C;
+  background: #EFEDE5;
   flex: none;
+}
+
+/* 无路线时让占位区吃掉剩余高度，避免面板下半部空荡 */
+.map__canvas-wrap.is-empty {
+  flex: 1;
+  min-height: 240px;
+  height: auto;
+}
+
+/* 空态下点位清单没有内容，不再占位 */
+.map.is-empty .map__list {
+  flex: none;
+  padding-bottom: 0;
 }
 
 .map__canvas { width: 100%; height: 100%; }
@@ -311,9 +327,11 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  font-size: 13px;
-  color: var(--t3);
-  background: rgba(10, 15, 28, 0.9);
+  padding: 20px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  background: var(--surface);
 }
 
 .map__fallback {
@@ -323,7 +341,7 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: 6px;
   padding: 20px;
   text-align: center;
 }
@@ -331,83 +349,88 @@ onUnmounted(() => {
 .map__fb-icon {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--r-md);
-  background: var(--glass);
+  background: var(--surface);
   border: 1px solid var(--line);
-  color: var(--t3);
+  color: var(--ink-3);
   margin-bottom: 4px;
 }
 
-.map__fb-title { font-size: 13.5px; font-weight: 600; color: var(--t2); }
-.map__fb-desc { font-size: 12px; color: var(--t3); line-height: 1.6; }
-.map__fb-hint { font-size: 11.5px; color: var(--t4); }
+.map__fb-title { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.map__fb-desc { font-size: 11.5px; color: var(--ink-3); line-height: 1.65; }
+.map__fb-hint { font-size: 11px; color: var(--ink-4); }
 
 .map__list {
   flex: 1;
   overflow-y: auto;
-  padding: 4px 12px 16px;
+  padding: 4px 10px 16px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .map__none {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 18px 12px;
-  font-size: 12.8px;
-  color: var(--t4);
+  gap: 8px;
+  padding: 16px 10px;
+  font-size: 12px;
+  color: var(--ink-4);
+  line-height: 1.6;
 }
 
 .poi {
   display: flex;
   align-items: center;
-  gap: 11px;
-  padding: 8px 10px;
+  gap: 10px;
+  padding: 7px 9px;
   border-radius: var(--r-sm);
   transition: background var(--dur) var(--ease);
 }
 
-.poi:hover { background: var(--glass-hover); }
+.poi:hover { background: var(--surface); }
 
 .poi__idx {
   display: grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   flex: none;
   border-radius: 50%;
-  font-size: 11px;
-  font-weight: 700;
-  color: #CFFAFE;
-  background: rgba(34, 211, 238, 0.15);
-  border: 1px solid rgba(34, 211, 238, 0.35);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: #FCFBF7;
+  background: var(--accent);
 }
 
 .poi__body { min-width: 0; flex: 1; }
 
-.poi__name { font-size: 13px; color: var(--t1); }
+.poi__name { font-size: 12.5px; color: var(--ink); }
 
 .poi__meta {
   display: flex;
+  align-items: center;
   gap: 7px;
-  font-size: 11.5px;
-  color: var(--t4);
-  margin-top: 2px;
+  font-size: 11px;
+  color: var(--ink-4);
+  margin-top: 1px;
 }
 
 .poi__day {
-  padding: 0 6px;
-  border-radius: var(--r-full);
-  background: rgba(168, 85, 247, 0.14);
-  color: #D8B4FE;
+  padding: 0 5px;
+  border-radius: 3px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 10px;
 }
 
-@media (max-width: 1280px) {
-  .map { width: 320px; }
+@media (max-width: 1320px) {
+  .map { width: 330px; }
 }
 
 @media (max-width: 1080px) {
@@ -416,34 +439,36 @@ onUnmounted(() => {
 </style>
 
 <style>
-/* 高德 Marker 自定义内容（非 scoped，因为由 AMap 注入到地图容器内） */
+/* 高德 Marker 自定义内容（非 scoped：由 AMap 注入到地图容器内） */
 .amap-dot {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  font-size: 11.5px;
-  font-weight: 700;
-  color: #05070D;
-  background: linear-gradient(135deg, #22D3EE, #6366F1);
-  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.22), 0 4px 14px -4px rgba(0, 0, 0, 0.8);
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: #FCFBF7;
+  background: #0B6B63;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(23, 22, 15, 0.28);
 }
 
 .amap-label {
-  padding: 2px 7px;
-  border-radius: 5px;
-  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10.5px;
   white-space: nowrap;
-  color: #E9EFFA;
-  background: rgba(12, 17, 28, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #17160F;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid #E3E0D5;
+  box-shadow: 0 1px 3px rgba(23, 22, 15, 0.12);
 }
 
 .amap-info-content {
-  background: rgba(12, 17, 28, 0.96) !important;
-  color: #E9EFFA !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  border-radius: 10px !important;
+  background: #FFFFFF !important;
+  color: #17160F !important;
+  border: 1px solid #E3E0D5 !important;
+  border-radius: 8px !important;
 }
 </style>

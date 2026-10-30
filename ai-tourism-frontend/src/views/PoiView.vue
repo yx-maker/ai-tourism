@@ -255,7 +255,7 @@ watch(() => query.cityName, search)
       </div>
 
       <div v-else-if="!list.length" class="card empty">
-        <div class="empty__icon"><Icon name="pin" :size="27" /></div>
+        <div class="empty__icon"><Icon name="pin" :size="22" /></div>
         <div class="empty__title">没有匹配的景点</div>
         <p class="empty__desc">换个关键词或城市试试，或点击「重置」查看全部。</p>
       </div>
@@ -267,9 +267,25 @@ watch(() => query.cityName, search)
               <Icon name="pin" :size="13" />
               {{ p.city_name }}
             </div>
-            <div class="poi-card__tags">
-              <span v-if="p.poi_rank_in_china" class="badge badge--brand">全国 #{{ p.poi_rank_in_china }}</span>
-              <span v-if="p.poi_rank_in_city" class="badge badge--muted">本市 #{{ p.poi_rank_in_city }}</span>
+            <div class="poi-card__tools">
+              <template v-if="admin">
+                <button class="ico" title="编辑" aria-label="编辑" @click="openEdit(p)">
+                  <Icon name="edit" :size="14" />
+                </button>
+                <button class="ico ico--danger" title="删除" aria-label="删除" @click="deleting = p">
+                  <Icon name="trash" :size="14" />
+                </button>
+              </template>
+              <button
+                class="ico"
+                :class="{ 'is-on': favIds.has(p.id) }"
+                :title="favIds.has(p.id) ? '取消收藏' : '收藏'"
+                :aria-label="favIds.has(p.id) ? '取消收藏' : '收藏'"
+                :aria-pressed="favIds.has(p.id)"
+                @click="toggleFav(p)"
+              >
+                <Icon name="heart" :size="15" />
+              </button>
             </div>
           </div>
 
@@ -278,31 +294,13 @@ watch(() => query.cityName, search)
 
           <div class="poi-card__meta">
             <span class="poi-card__price" :class="{ 'is-free': !(Number(p.ticket_price) > 0) }">
-              <Icon name="coins" :size="13" />
               {{ priceText(p.ticket_price) }}
             </span>
-            <span v-if="p.poi_longitude && p.poi_latitude" class="mono t3" style="font-size: 11px">
-              {{ Number(p.poi_longitude).toFixed(2) }}, {{ Number(p.poi_latitude).toFixed(2) }}
+            <span v-if="p.poi_rank_in_china || p.poi_rank_in_city" class="poi-card__rank mono">
+              <template v-if="p.poi_rank_in_china">全国 #{{ p.poi_rank_in_china }}</template>
+              <template v-if="p.poi_rank_in_china && p.poi_rank_in_city"> · </template>
+              <template v-if="p.poi_rank_in_city">本市 #{{ p.poi_rank_in_city }}</template>
             </span>
-          </div>
-
-          <div class="poi-card__ops">
-            <button
-              class="btn btn--ghost btn--sm"
-              :class="{ 'is-fav': favIds.has(p.id) }"
-              @click="toggleFav(p)"
-            >
-              <Icon name="heart" :size="14" />
-              {{ favIds.has(p.id) ? '已收藏' : '收藏' }}
-            </button>
-            <template v-if="admin">
-              <button class="btn btn--quiet btn--sm" title="编辑" @click="openEdit(p)">
-                <Icon name="edit" :size="14" />
-              </button>
-              <button class="btn btn--quiet btn--sm danger" title="删除" @click="deleting = p">
-                <Icon name="trash" :size="14" />
-              </button>
-            </template>
           </div>
         </article>
       </div>
@@ -391,22 +389,25 @@ watch(() => query.cityName, search)
 </template>
 
 <style scoped>
-.page { height: 100%; overflow-y: auto; }
+.page { height: 100%; overflow-y: auto; background: var(--paper); }
 
 .page__inner {
-  max-width: 1380px;
+  max-width: var(--page-max);
   margin: 0 auto;
-  padding: 30px 32px 56px;
+  padding: 30px 32px 64px;
 }
 
-/* 筛选条 */
+/* ---------------- 筛选条：一条工具带，不拆成多张卡 ---------------- */
 .filters {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 13px 15px;
+  padding: 12px 14px;
   margin-bottom: 18px;
   flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
 }
 
 .filters__search {
@@ -416,17 +417,18 @@ watch(() => query.cityName, search)
   gap: 9px;
   flex: 1;
   min-width: 200px;
-  height: 40px;
-  padding: 0 13px;
+  height: 38px;
+  padding: 0 12px;
   border-radius: var(--r-sm);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--line);
-  color: var(--t3);
+  background: var(--paper);
+  border: 1px solid transparent;
+  color: var(--ink-4);
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
 
 .filters__search:focus-within {
-  border-color: rgba(34, 211, 238, 0.45);
-  background: rgba(34, 211, 238, 0.04);
+  background: var(--surface);
+  border-color: var(--accent);
 }
 
 .filters__input {
@@ -435,23 +437,32 @@ watch(() => query.cityName, search)
   border: 0;
   background: none;
   outline: none;
-  font-size: 13.5px;
-  color: var(--t1);
+  font-size: 13px;
+  color: var(--ink);
 }
 
-.filters__input::placeholder { color: var(--t4); }
+.filters__input::placeholder { color: var(--ink-4); }
 
-/* 卡片网格 */
+/* ---------------- 卡片网格 ---------------- */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 14px;
 }
 
 .poi-card {
   display: flex;
   flex-direction: column;
-  padding: 17px 18px 15px;
+  padding: 14px 16px 15px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.poi-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--sh-1);
 }
 
 .poi-card__top {
@@ -459,36 +470,55 @@ watch(() => query.cityName, search)
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin-bottom: 11px;
+  margin-bottom: 12px;
 }
 
 .poi-card__city {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  font-weight: 550;
-  color: #A5F3FC;
-  padding: 3px 9px;
-  border-radius: var(--r-full);
-  background: var(--grad-brand-soft);
-  border: 1px solid rgba(34, 211, 238, 0.25);
+  gap: 4px;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-3);
 }
 
-.poi-card__tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.poi-card__tools {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: -4px -6px -4px 0;
+}
+
+/* 卡片内侧的小图标动作：默认低调，收藏后只变颜色不换形状 */
+.ico {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-xs);
+  color: var(--ink-3);
+  transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+
+.ico:hover { color: var(--ink); background: var(--paper-2); }
+.ico.is-on { color: var(--accent); background: var(--accent-dim); }
+.ico--danger:hover { color: var(--danger); background: var(--danger-dim); }
 
 .poi-card__name {
-  font-size: 16px;
-  font-weight: 660;
-  letter-spacing: -0.2px;
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
   margin-bottom: 7px;
+  color: var(--ink);
 }
 
 .poi-card__desc {
   flex: 1;
-  font-size: 12.9px;
+  font-size: 12.5px;
   line-height: 1.7;
-  color: var(--t3);
+  color: var(--ink-3);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   line-clamp: 3;
@@ -498,42 +528,30 @@ watch(() => query.cityName, search)
 
 .poi-card__meta {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   gap: 10px;
-  margin: 14px 0 12px;
+  margin-top: 14px;
+  padding-top: 11px;
+  border-top: 1px solid var(--line-faint);
 }
 
 .poi-card__price {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 13px;
-  font-weight: 620;
-  color: #FCD34D;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
 }
 
-.poi-card__price.is-free { color: var(--teal); }
+.poi-card__price.is-free { color: var(--accent-text); }
 
-.poi-card__ops {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
+.poi-card__rank {
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0;
 }
 
-.poi-card__ops .btn:first-child { flex: 1; }
-
-.btn.is-fav {
-  color: #FCA5A5 !important;
-  border-color: rgba(248, 113, 113, 0.34) !important;
-  background: var(--danger-dim) !important;
-}
-
-.btn.danger:hover { color: var(--danger); background: var(--danger-dim); }
-
-/* 分页 */
+/* ---------------- 分页 ---------------- */
 .pager {
   display: flex;
   align-items: center;
@@ -543,13 +561,16 @@ watch(() => query.cityName, search)
 }
 
 .pager__info {
-  font-size: 13px;
-  color: var(--t3);
+  font-size: 12.5px;
+  color: var(--ink-3);
   font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
 }
 
 @media (max-width: 720px) {
-  .page__inner { padding: 22px 16px 44px; }
+  .page__inner { padding: 22px 16px 48px; }
   .grid { grid-template-columns: minmax(0, 1fr); }
+  .filters { padding: 10px; }
+  .filters select { width: 100% !important; }
 }
 </style>

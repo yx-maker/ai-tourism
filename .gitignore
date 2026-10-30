@@ -100,3 +100,6 @@ specs.zip
 # 临时测试脚本（根目录散落的调试文件）
 test_*.py
 test_*.js
+/shot_*.py
+/shot_*.png
+/verify_*.py

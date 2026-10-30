@@ -12,10 +12,19 @@ const form = reactive({ phone: '', password: '' })
 const loading = ref(false)
 const error = ref('')
 
-const HIGHLIGHTS = [
-  { icon: 'sparkle', title: '大模型驱动行程生成', desc: '自然语言描述需求，直接产出逐日行程与费用明细' },
-  { icon: 'wallet', title: '预算硬约束', desc: '给定预算反推档次，超支自动阶梯回退，只压不抬' },
-  { icon: 'route', title: '路线与景点联动', desc: '景点库 118 条真实 POI，按城市与热度智能编排' }
+/* 登录页用一段「产品正在工作」的演示行程作为证明，不让抽象图形代替内容。
+   数据为演示用途，页面上明确标注。 */
+const DEMO_DAYS = [
+  { d: 'D1', name: '镇北堡西部影城', extra: '西夏王陵 · 怀远夜市', cost: '¥ 486' },
+  { d: 'D2', name: '沙湖', extra: '贺兰山岩画 · 览山公园', cost: '¥ 412' },
+  { d: 'D3', name: '鼓楼', extra: '南关清真大寺 · 返程', cost: '¥ 398' }
+]
+
+const DEMO_SPLIT = [
+  { label: '交通', pct: 38, tone: 'a' },
+  { label: '住宿', pct: 26, tone: 'b' },
+  { label: '餐饮', pct: 20, tone: 'c' },
+  { label: '门票', pct: 16, tone: 'd' }
 ]
 
 async function submit() {
@@ -48,247 +57,475 @@ function fillDemo() {
 
 <template>
   <div class="auth">
-    <!-- 左侧品牌区 -->
-    <section class="auth__hero">
-      <div class="hero__badge">
-        <Icon name="sparkle" :size="14" />
-        <span>毕业论文演示系统</span>
-      </div>
+    <div class="auth__inner">
+      <!-- 左：主张 + 产品实证 -->
+      <section class="intro">
+        <div class="intro__brand rise">
+          <span class="intro__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none">
+              <path d="M4 17.2 9.4 7l3.6 6.2L15.4 9l4.6 8.2" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="9.4" cy="7" r="1.9" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="intro__name">旅途</span>
+          <span class="intro__tag">AI 智能旅游规划</span>
+        </div>
 
-      <h1 class="hero__title">
-        AI 智能旅游<br /><span class="grad-text">规划助手</span>
-      </h1>
+        <div class="intro__main">
+          <h1 class="intro__title rise rise-2">
+            把一趟旅行，<br />算清楚再出发。
+          </h1>
+          <p class="intro__lede rise rise-3">
+            说出目的地、天数与预算，得到逐日行程、真实票价与分项预算。
+            超支时会自动降档，而不是先给你一份漂亮却对不上的账单。
+          </p>
 
-      <p class="hero__desc">
-        用一句话描述你的旅行需求，系统自动生成逐日行程、路线与费用明细，
-        并在预算约束下自动匹配出行档次。
-      </p>
+          <!-- 产品实证：一段真实结构的行程预览 -->
+          <article class="preview rise rise-4" aria-label="行程示例（演示数据）">
+            <header class="preview__head">
+              <div class="preview__where">
+                <span class="preview__city">银川</span>
+                <span class="preview__meta">3 天 2 晚 · 2 人 · 高铁往返</span>
+              </div>
+              <div class="preview__sum">
+                <span class="preview__amount">2,868</span>
+                <span class="preview__cap">元 · 预算 3,000</span>
+              </div>
+            </header>
 
-      <ul class="hero__list">
-        <li v-for="h in HIGHLIGHTS" :key="h.title">
-          <span class="hero__icon"><Icon :name="h.icon" :size="16" /></span>
-          <div>
-            <div class="hero__h">{{ h.title }}</div>
-            <div class="hero__p">{{ h.desc }}</div>
+            <ol class="days">
+              <li v-for="day in DEMO_DAYS" :key="day.d" class="day">
+                <span class="day__no">{{ day.d }}</span>
+                <span class="day__line" aria-hidden="true" />
+                <div class="day__body">
+                  <span class="day__name">{{ day.name }}</span>
+                  <span class="day__extra">{{ day.extra }}</span>
+                </div>
+                <span class="day__cost">{{ day.cost }}</span>
+              </li>
+            </ol>
+
+            <div class="split">
+              <div
+                v-for="s in DEMO_SPLIT"
+                :key="s.label"
+                class="split__seg"
+                :class="`split__seg--${s.tone}`"
+                :style="{ width: s.pct + '%' }"
+              >
+                <span>{{ s.label }}</span>
+              </div>
+            </div>
+
+            <p class="preview__note">演示数据 · 由系统生成，非真实订单</p>
+          </article>
+        </div>
+
+        <p class="intro__foot">本科毕业设计 · 智能旅游规划助手</p>
+      </section>
+
+      <!-- 右：登录表单 -->
+      <section class="entry">
+        <form class="form" @submit.prevent="submit">
+          <header class="form__head">
+            <h2 class="form__title">登录</h2>
+            <p class="form__sub">使用手机号继续</p>
+          </header>
+
+          <div class="field">
+            <label class="field__label" for="phone">手机号</label>
+            <input
+              id="phone"
+              v-model="form.phone"
+              class="input"
+              type="tel"
+              inputmode="numeric"
+              autocomplete="username"
+              placeholder="请输入手机号"
+              :disabled="loading"
+            />
           </div>
-        </li>
-      </ul>
-    </section>
 
-    <!-- 右侧表单区 -->
-    <section class="auth__panel">
-      <form class="card card--lit auth__form" @submit.prevent="submit">
-        <header class="auth__head">
-          <h2>登录</h2>
-          <p>使用手机号继续</p>
-        </header>
+          <div class="field">
+            <label class="field__label" for="password">密码</label>
+            <input
+              id="password"
+              v-model="form.password"
+              class="input"
+              type="password"
+              autocomplete="current-password"
+              placeholder="请输入密码"
+              :disabled="loading"
+            />
+          </div>
 
-        <div class="field">
-          <label class="field__label" for="phone">手机号</label>
-          <input
-            id="phone"
-            v-model="form.phone"
-            class="input"
-            type="tel"
-            inputmode="numeric"
-            autocomplete="username"
-            placeholder="请输入手机号"
-            :disabled="loading"
-          />
-        </div>
+          <div v-if="error" class="alert alert--danger" role="alert">
+            <Icon name="alert" :size="15" />
+            <span>{{ error }}</span>
+          </div>
 
-        <div class="field">
-          <label class="field__label" for="password">密码</label>
-          <input
-            id="password"
-            v-model="form.password"
-            class="input"
-            type="password"
-            autocomplete="current-password"
-            placeholder="请输入密码"
-            :disabled="loading"
-          />
-        </div>
+          <button class="btn btn--primary btn--block form__submit" type="submit" :disabled="loading">
+            <span v-if="loading" class="spinner" />
+            <span>{{ loading ? '正在登录…' : '登录' }}</span>
+          </button>
 
-        <div v-if="error" class="alert alert--danger">
-          <Icon name="alert" :size="15" />
-          <span>{{ error }}</span>
-        </div>
+          <div class="form__foot">
+            <span class="t3">还没有账号？</span>
+            <RouterLink to="/register" class="form__link">创建账号</RouterLink>
+          </div>
 
-        <button class="btn btn--primary btn--block" type="submit" :disabled="loading">
-          <span v-if="loading" class="spinner" />
-          <span>{{ loading ? '登录中…' : '登 录' }}</span>
-        </button>
-
-        <div class="auth__foot">
-          <span class="t3">还没有账号？</span>
-          <RouterLink to="/register" class="auth__link">立即注册</RouterLink>
-        </div>
-
-        <button type="button" class="auth__demo" @click="fillDemo">
-          <Icon name="info" :size="13" />
-          填入演示账号
-        </button>
-      </form>
-    </section>
+          <button type="button" class="form__demo" @click="fillDemo">
+            填入演示账号
+            <span class="form__demo-id mono">13800001111</span>
+          </button>
+        </form>
+      </section>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .auth {
-  display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
   min-height: 100%;
+  display: flex;
+  justify-content: center;
+  background: var(--paper);
+}
+
+.auth__inner {
+  width: 100%;
+  max-width: 1320px;
+  min-height: 100vh;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 64px;
+  align-items: stretch;
 }
 
 /* ---------------- 左侧 ---------------- */
-.auth__hero {
+.intro {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 26px;
-  padding: 64px clamp(32px, 6vw, 88px);
+  padding: 34px 0 30px;
+  min-width: 0;
 }
 
-.hero__badge {
+.intro__brand {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  align-self: flex-start;
-  height: 29px;
-  padding: 0 13px;
-  border-radius: var(--r-full);
-  font-size: 12.5px;
-  font-weight: 550;
-  color: #A5F3FC;
-  background: var(--grad-brand-soft);
-  border: 1px solid rgba(34, 211, 238, 0.28);
+  gap: 9px;
+  flex: none;
 }
 
-.hero__title {
-  font-size: clamp(34px, 4.4vw, 52px);
-  font-weight: 780;
+.intro__mark {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--accent);
+  color: #F7FBF9;
+}
+
+.intro__name {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.intro__tag {
+  padding-left: 10px;
+  margin-left: 2px;
+  border-left: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
+}
+
+.intro__main {
+  margin: auto 0;
+  padding: 40px 0;
+  max-width: 620px;
+}
+
+.intro__title {
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 600;
   line-height: 1.16;
-  letter-spacing: -1.4px;
+  letter-spacing: -0.028em;
+  color: var(--ink);
 }
 
-.hero__desc {
-  max-width: 460px;
-  font-size: 14.5px;
-  line-height: 1.85;
-  color: var(--t2);
+.intro__lede {
+  margin-top: 22px;
+  max-width: 46ch;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-2);
 }
 
-.hero__list {
+/* 行程预览：白纸 + 发丝线，靠排版而非阴影 */
+.preview {
+  margin-top: 42px;
+  max-width: 560px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 20px 22px 16px;
+}
+
+.preview__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line-faint);
+}
+
+.preview__where {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.preview__city {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.preview__meta,
+.preview__cap {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.preview__sum {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex: none;
+}
+
+.preview__amount {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.days {
+  padding: 6px 0 0;
+}
+
+.day {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 0;
+}
+
+.day__no {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-3);
+  letter-spacing: 0.04em;
+}
+
+/* 序号前的定位点：整条行程只有一个视觉标记，不再画连线 */
+.day__no::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.day__line { display: none; }
+
+.day__body {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.day__name {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.day__extra {
+  font-size: 12px;
+  color: var(--ink-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.day__cost {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 预算构成：一条完整的横向条，不是四个卡片 */
+.split {
+  display: flex;
+  height: 30px;
+  margin-top: 14px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  border: 1px solid var(--line-faint);
+}
+
+.split__seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.split__seg--a { background: var(--accent); color: #F4FBF9; }
+.split__seg--b { background: #CFE3DE; color: #23443F; }
+.split__seg--c { background: #E6E3D6; color: #4B4838; }
+.split__seg--d { background: var(--paper-3); color: var(--ink-3); }
+
+.preview__note {
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0.01em;
+}
+
+.intro__foot {
+  font-size: 11.5px;
+  color: var(--ink-4);
+  letter-spacing: 0.02em;
+}
+
+/* ---------------- 右侧表单 ---------------- */
+.entry {
+  display: flex;
+  align-items: center;
+  border-left: 1px solid var(--line);
+  padding: 40px 0 40px 56px;
+}
+
+.form {
+  width: 100%;
+  max-width: 330px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  max-width: 470px;
+}
+
+.form__head { margin-bottom: 6px; }
+
+.form__title {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.form__sub {
   margin-top: 6px;
-}
-
-.hero__list li {
-  display: flex;
-  gap: 13px;
-  align-items: flex-start;
-}
-
-.hero__icon {
-  display: grid;
-  place-items: center;
-  width: 33px;
-  height: 33px;
-  flex: none;
-  border-radius: 10px;
-  color: var(--cyan);
-  background: rgba(34, 211, 238, 0.1);
-  border: 1px solid rgba(34, 211, 238, 0.22);
-}
-
-.hero__h {
-  font-size: 13.8px;
-  font-weight: 620;
-  margin-bottom: 2px;
-}
-
-.hero__p {
-  font-size: 12.8px;
-  color: var(--t3);
-  line-height: 1.6;
-}
-
-/* ---------------- 右侧 ---------------- */
-.auth__panel {
-  display: grid;
-  place-items: center;
-  padding: 40px 32px;
-  border-left: 1px solid var(--line);
-  background: rgba(6, 9, 16, 0.42);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.auth__form {
-  width: min(392px, 100%);
-  padding: 34px 30px 26px;
-  display: flex;
-  flex-direction: column;
-  gap: 17px;
-  box-shadow: var(--sh-3);
-  animation: pop-in 0.42s var(--ease-out) both;
-}
-
-.auth__head h2 {
-  font-size: 22px;
-  font-weight: 720;
-  letter-spacing: -0.4px;
-}
-
-.auth__head p {
-  margin-top: 5px;
   font-size: 13px;
-  color: var(--t3);
+  color: var(--ink-3);
 }
 
-.auth__foot {
+.form__submit {
+  height: 44px;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.form__foot {
   display: flex;
-  justify-content: center;
   gap: 6px;
+  padding-top: 4px;
   font-size: 13px;
 }
 
-.auth__link {
-  color: var(--cyan);
-  font-weight: 550;
+.form__link {
+  color: var(--accent-text);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--accent-line);
 }
 
-.auth__link:hover { text-decoration: underline; }
+.form__link:hover { text-decoration-color: var(--accent); }
 
-.auth__demo {
+.form__demo {
+  align-self: flex-start;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-top: -4px;
-  font-size: 12.5px;
-  color: var(--t3);
-  padding: 6px;
-  border-radius: var(--r-xs);
-  transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+  gap: 8px;
+  margin-top: 2px;
+  padding: 4px 0;
+  font-size: 12px;
+  color: var(--ink-4);
+  border-bottom: 1px dashed var(--line);
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 
-.auth__demo:hover { color: var(--cyan); background: var(--glass-hover); }
+.form__demo:hover {
+  color: var(--accent-text);
+  border-color: var(--accent-line);
+}
 
-@media (max-width: 940px) {
-  .auth { grid-template-columns: 1fr; }
-  .auth__hero { padding: 44px 26px 10px; gap: 20px; }
-  .hero__list { display: none; }
-  .hero__desc { display: none; }
-  .auth__panel {
+.form__demo-id {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+/* ---------------- 响应式 ---------------- */
+@media (max-width: 1040px) {
+  .auth__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    max-width: 620px;
+    padding: 0 28px 48px;
+  }
+
+  .intro { padding-bottom: 0; }
+  .intro__main { padding: 36px 0 32px; }
+  .intro__foot { display: none; }
+
+  .entry {
     border-left: 0;
     border-top: 1px solid var(--line);
-    padding: 26px 20px 44px;
-    align-items: start;
+    margin: 0;
+    padding: 32px 0 0;
+    display: block;
   }
+}
+
+@media (max-width: 560px) {
+  .auth__inner { padding: 0 20px 40px; }
+  .intro__title { font-size: 34px; }
+  .intro__lede { font-size: 14px; }
+  .preview { padding: 16px 16px 14px; }
+  .day { grid-template-columns: 32px minmax(0, 1fr) auto; gap: 10px; }
+  .day__extra { display: none; }
+  .preview__meta { font-size: 11.5px; }
 }
 </style>

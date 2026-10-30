@@ -194,12 +194,9 @@ onMounted(loadList)
     <div class="page__inner">
       <header class="page-head">
         <div>
-          <h1 class="page-head__title">
-            我的行程
-            <span class="badge badge--brand" style="margin-left: 10px; vertical-align: 4px">行程持久化</span>
-          </h1>
+          <h1 class="page-head__title">我的行程</h1>
           <p class="page-head__sub">
-            保存的旅行计划支持随时查看、编辑与重新计算预算；编辑保存采用乐观锁，防止并发覆盖
+            保存的旅行计划可随时查看、编辑并重算预算；编辑保存采用乐观锁，避免并发覆盖。
           </p>
         </div>
         <button class="btn btn--quiet" @click="router.push({ name: 'chat' })">
@@ -303,7 +300,7 @@ onMounted(loadList)
         </div>
 
         <div v-else-if="!plans.length" class="card panel empty">
-          <div class="empty__icon"><Icon name="route" :size="27" /></div>
+          <div class="empty__icon"><Icon name="route" :size="22" /></div>
           <div class="empty__title">还没有保存的行程</div>
           <p class="empty__desc">
             在「智能规划」生成攻略后，点击消息下方的「保存为行程」，或在「预算分析」页点击「保存为行程」。
@@ -314,19 +311,19 @@ onMounted(loadList)
           </button>
         </div>
 
-        <div v-else class="plan-grid">
-          <article v-for="p in plans" :key="p.plan_id" class="card card--solid plan-card" @click="openDetail(p)">
-            <div class="plan-card__head">
-              <span class="plan-card__badge">{{ p.dest_city || '旅行' }}</span>
-              <span class="plan-card__days">{{ p.days }} 天</span>
+        <div v-else class="plan-list">
+          <article v-for="p in plans" :key="p.plan_id" class="plan-row" @click="openDetail(p)">
+            <span class="plan-row__city">{{ p.dest_city || '旅行' }}</span>
+            <div class="plan-row__main">
+              <h3 class="plan-row__title truncate">{{ p.title || '未命名计划' }}</h3>
+              <div class="plan-row__meta">
+                <span>{{ p.budget_amount ? '预算 ' + money(p.budget_amount) : '未设预算' }}</span>
+                <span class="plan-row__sep">·</span>
+                <span>更新于 {{ fmtTime(p.modify_time) }}</span>
+              </div>
             </div>
-            <h3 class="plan-card__title truncate">{{ p.title || '未命名计划' }}</h3>
-            <div class="plan-card__meta">
-              <span v-if="p.budget_amount">预算 {{ money(p.budget_amount) }}</span>
-              <span v-else>未设预算</span>
-              <span class="plan-card__dot">·</span>
-              <span>更新于 {{ fmtTime(p.modify_time) }}</span>
-            </div>
+            <span class="plan-row__days">{{ p.days }} 天</span>
+            <Icon name="chevronRight" :size="15" class="plan-row__go" />
           </article>
         </div>
 
@@ -388,72 +385,99 @@ onMounted(loadList)
 </template>
 
 <style scoped>
-/* 页面滚动容器：缺失会导致父级 .app__main(overflow:hidden) 裁掉超出的行程内容 */
+/* 页面滚动容器：缺失会被父级 .app__main(overflow:hidden) 裁掉超出的行程内容 */
 .page {
   height: 100%;
   overflow-y: auto;
+  background: var(--paper);
 }
 
 .page__inner {
-  max-width: 1380px;
+  max-width: var(--page-max);
   margin: 0 auto;
-  padding: 30px 32px 56px;
+  padding: 30px 32px 64px;
 }
 
-.plan-grid {
+/* ---------------- 行程列表：一行一条，靠线分隔 ---------------- */
+.plan-list {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.plan-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
-  gap: 14px;
-}
-
-.plan-card {
-  padding: 16px;
-  cursor: pointer;
-  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
-}
-
-.plan-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(34, 211, 238, 0.35);
-}
-
-.plan-card__head {
-  display: flex;
-  justify-content: space-between;
+  grid-template-columns: 84px minmax(0, 1fr) auto 18px;
   align-items: center;
-  margin-bottom: 10px;
+  gap: 18px;
+  padding: 17px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--line-faint);
+  transition: background var(--dur) var(--ease);
 }
 
-.plan-card__badge {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #A5F3FC;
-  background: rgba(34, 211, 238, 0.12);
-  border: 1px solid rgba(34, 211, 238, 0.3);
-  border-radius: var(--r-full);
-  padding: 2px 10px;
+.plan-row:last-child { border-bottom: 0; }
+
+.plan-row:hover { background: var(--paper); }
+
+.plan-row__city {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--accent-text);
+  padding: 3px 8px;
+  border: 1px solid var(--accent-line);
+  border-radius: 3px;
+  background: var(--accent-dim);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.plan-card__days { font-size: 12px; color: var(--t4); }
+.plan-row__main { min-width: 0; }
 
-.plan-card__title { font-size: 15px; font-weight: 650; color: var(--t1); }
+.plan-row__title {
+  font-size: 14.5px;
+  font-weight: 550;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+}
 
-.plan-card__meta {
+.plan-row__meta {
   display: flex;
   gap: 6px;
-  margin-top: 8px;
-  font-size: 12px;
-  color: var(--t4);
+  margin-top: 3px;
+  font-size: 11.5px;
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
 }
 
-.plan-card__dot { color: var(--t4); }
+.plan-row__sep { color: var(--line-strong); }
+
+.plan-row__days {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-3);
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: var(--paper-2);
+}
+
+.plan-row__go {
+  color: var(--line-strong);
+  transition: color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.plan-row:hover .plan-row__go { color: var(--ink-3); transform: translateX(2px); }
 
 .pager {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
-  margin-top: 20px;
+  margin-top: 22px;
 }
 
 /* ---------------- 详情 ---------------- */
@@ -461,99 +485,143 @@ onMounted(loadList)
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .detail-bar__actions { display: flex; gap: 8px; }
 
-.danger { color: #FCA5A5; }
-.danger:hover { background: var(--danger-dim); }
+.danger { color: var(--danger); }
+.danger:hover { background: var(--danger-dim); border-color: var(--danger-line); }
 
 .detail-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 400px;
-  gap: 16px;
+  gap: 18px;
   align-items: start;
 }
 
-.detail-main { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.detail-main { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
 
 .detail-content { font-size: 14px; line-height: 1.8; }
+
+.detail-side { position: sticky; top: 0; }
 
 .detail-map {
   border-radius: var(--r-lg);
   overflow: hidden;
   border: 1px solid var(--line);
-  height: 560px;
+  height: 580px;
   display: flex;
+  background: var(--surface);
 }
 
-.detail-map > :deep(.map) { width: 100%; }
+.detail-map > :deep(.map) {
+  width: 100%;
+  border-left: 0;
+}
 
+/* ---------------- 预算快照 ---------------- */
 .budget-figs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px 14px;
-  margin-bottom: 14px;
+  gap: 16px 20px;
+  padding: 18px 0;
+  margin-bottom: 6px;
+  border-top: 1px solid var(--line-faint);
+  border-bottom: 1px solid var(--line-faint);
 }
 
-.budget-figs .fig__k { font-size: 11.5px; color: var(--t4); }
-.budget-figs .fig__v { font-size: 15px; font-weight: 650; color: var(--t1); font-family: var(--font-mono); }
+.budget-figs .fig__k {
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0.02em;
+}
 
-/* 费用明细徽标（与 BudgetView 同口径） */
-.items { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.budget-figs .fig__v {
+  margin-top: 2px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ---------------- 费用明细 ---------------- */
+.items { list-style: none; display: flex; flex-direction: column; }
 
 .item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 9px 10px;
-  border-radius: var(--r-sm);
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--line-faint);
 }
 
-.item:hover { background: var(--glass-hover); }
+.item:last-child { border-bottom: 0; }
+
+.item:hover { background: rgba(23, 22, 15, 0.015); }
 
 .item__cat {
   flex: none;
-  width: 44px;
+  width: 46px;
   text-align: center;
-  font-size: 11.5px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 500;
   padding: 3px 0;
-  border-radius: var(--r-xs);
+  border-radius: 3px;
   border: 1px solid var(--line);
-  color: var(--t2);
-  background: var(--glass);
+  color: var(--ink-2);
+  background: var(--paper-2);
 }
 
 .item__body { flex: 1; min-width: 0; }
-.item__name { font-size: 13.2px; color: var(--t1); }
+.item__name { font-size: 13px; color: var(--ink); }
 
 .item__meta { display: flex; align-items: center; gap: 8px; margin-top: 3px; }
-.item__date { font-size: 11px; color: var(--t4); font-family: var(--font-mono); }
+
+.item__date {
+  font-size: 10.5px;
+  color: var(--ink-4);
+  font-family: var(--font-mono);
+}
 
 .src {
   display: inline-flex;
   align-items: center;
-  height: 19px;
-  padding: 0 8px;
-  border-radius: var(--r-full);
+  height: 18px;
+  padding: 0 7px;
+  border-radius: 3px;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
   border: 1px solid transparent;
   cursor: help;
 }
 
-.src--real { color: #6EE7B7; background: rgba(52, 211, 153, 0.12); border-color: rgba(52, 211, 153, 0.35); }
-.src--snap { color: #A5F3FC; background: rgba(34, 211, 238, 0.12); border-color: rgba(34, 211, 238, 0.35); }
-.src--itin { color: #D8B4FE; background: rgba(168, 85, 247, 0.12); border-color: rgba(168, 85, 247, 0.32); }
-.src--est { color: var(--t4); background: rgba(255, 255, 255, 0.05); border-color: var(--line); }
+.src--real { color: var(--ok); background: var(--ok-dim); border-color: var(--ok-line); }
+.src--snap { color: var(--accent-text); background: var(--accent-dim); border-color: var(--accent-line); }
+.src--itin { color: var(--info); background: var(--info-dim); border-color: var(--info-line); }
+.src--est { color: var(--ink-3); background: var(--paper-2); border-color: var(--line); }
 
-.item__amount { flex: none; font-size: 13.6px; font-weight: 650; color: var(--t1); font-family: var(--font-mono); }
+.item__amount {
+  flex: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
 
 @media (max-width: 1100px) {
   .detail-grid { grid-template-columns: minmax(0, 1fr); }
+  .detail-side { position: static; }
   .detail-map { height: 420px; }
-  .page__inner { padding: 22px 18px 44px; }
+  .page__inner { padding: 22px 18px 48px; }
+}
+
+@media (max-width: 640px) {
+  .plan-row { grid-template-columns: 68px minmax(0, 1fr) auto; gap: 12px; padding: 14px; }
+  .plan-row__go { display: none; }
+  .budget-figs { grid-template-columns: repeat(2, 1fr); }
 }
 </style>

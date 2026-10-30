@@ -1,86 +1,121 @@
 /* ============================================================
    设计令牌 + 全局基础样式
-   深色科技感：深空底 + 青紫渐变 + 玻璃拟态
+   浅色纸感体系：暖白纸质底 + 近黑墨字 + 深青单一强调
+   参照大型模型公司产品页的排版密度：大字号、大留白、发丝分割线
    ============================================================ */
 
+/* -------------------- 自托管字体（不依赖外网 CDN） -------------------- */
+@font-face {
+  font-family: "Geist";
+  src: url("../assets/fonts/Geist-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../assets/fonts/GeistMono-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  /* ---- 背景层次：中性近黑（极简科技，去掉蓝紫染色）---- */
-  --bg-void: #08090A;
-  --bg-base: #0C0D0F;
-  --bg-raise: #111214;
-  --bg-panel: #15171A;
+  /* ---- 纸面层次 ---- */
+  --paper: #FAF9F5;        /* 页面底：暖白纸 */
+  --paper-2: #F3F2EC;      /* 次级面：分区底 */
+  --paper-3: #ECEAE2;      /* 三级面：悬停/轨道 */
+  --surface: #FFFFFF;      /* 卡片面 */
+  --ink: #17160F;          /* 主墨色 */
+  --ink-2: #454337;        /* 次要墨 */
+  --ink-3: #6B6859;        /* 三级（≥4.5:1 on paper） */
+  --ink-4: #706C5B;        /* 元信息（≥4.5:1，含纸色底） */
 
-  /* ---- 面板面 + 发丝级描边（1px hairline，极简质感的核心）---- */
-  --glass: rgba(255, 255, 255, 0.024);
-  --glass-hover: rgba(255, 255, 255, 0.045);
-  --glass-active: rgba(255, 255, 255, 0.065);
-  --line: rgba(255, 255, 255, 0.07);
-  --line-strong: rgba(255, 255, 255, 0.13);
+  /* ---- 发丝线：体系的核心，而不是阴影 ---- */
+  --line: #E3E0D5;
+  --line-strong: #CFCABC;
+  --line-faint: #EDEAE1;
 
-  /* ---- 文字（中性灰阶，已按 WCAG AA 校准 ≥ 4.5:1）---- */
-  --t1: #ECEDEF;          /* 主文字：≈15:1 */
-  --t2: #A1A7B0;          /* 次要文字：≈7.6:1 */
-  --t3: #8A9099;          /* 三级文字：≈5.7:1 */
-  --t4: #7A808A;          /* 提示/元信息：≈4.7:1 */
+  /* ---- 兼容旧令牌名（既有页面样式仍引用） ---- */
+  --bg-void: var(--paper);
+  --bg-base: var(--paper);
+  --bg-raise: var(--paper-2);
+  --bg-panel: var(--surface);
+  --glass: rgba(23, 22, 15, 0.022);
+  --glass-hover: rgba(23, 22, 15, 0.045);
+  --glass-active: rgba(23, 22, 15, 0.065);
+  --t1: var(--ink);
+  --t2: var(--ink-2);
+  --t3: var(--ink-3);
+  --t4: var(--ink-4);
 
-  /* ---- 单一强调色（极简科技：整站只用这一个高亮色，克制使用）---- */
-  --cyan: #22D3EE;          /* 强调青：仅用于激活态 / 主按钮 / 焦点环 / 关键数据 */
-  --accent: #22D3EE;
-  --accent-text: #67E8F9;   /* 深底上的文字安全青 */
-  --accent-dim: rgba(34, 211, 238, 0.12);
-  /* 兼容旧命名：渐变统一收敛为「同色系微弱渐变」，不再多色 */
-  --indigo: #22D3EE;
-  --indigo-text: #67E8F9;
-  --violet: #22D3EE;
-  --teal: #22D3EE;
-  --grad-brand: #22D3EE;
-  --grad-brand-soft: rgba(34, 211, 238, 0.10);
-  --grad-aurora: #22D3EE;
-  --grad-aurora-soft: rgba(34, 211, 238, 0.10);
-  --grad-cta: #E8EAED;      /* 次强调：中性亮面，避免引入第二种彩色 */
-  --amber: #22D3EE;
-  --amber-text: #67E8F9;
-  --amber-dim: rgba(34, 211, 238, 0.12);
-  --glow-amber: 0 0 20px -8px rgba(34, 211, 238, 0.45);
+  /* ---- 单一强调色：深青（浅底上才够对比） ---- */
+  --accent: #0B6B63;
+  --accent-strong: #07524C;
+  --accent-text: #075E57;
+  --accent-dim: rgba(11, 107, 99, 0.09);
+  --accent-line: rgba(11, 107, 99, 0.28);
+  --cyan: var(--accent);
+  --indigo: var(--accent);
+  --indigo-text: var(--accent-text);
+  --violet: var(--accent);
+  --teal: var(--accent);
+  --grad-brand: var(--accent);
+  --grad-brand-soft: rgba(11, 107, 99, 0.08);
+  --grad-aurora: var(--accent);
+  --grad-aurora-soft: rgba(11, 107, 99, 0.08);
+  --grad-cta: #17160F;
+  --amber: #8A5A00;
+  --amber-text: #8A5A00;
+  --amber-dim: rgba(138, 90, 0, 0.09);
+  --glow-amber: none;
+  --glow-cyan: none;
+  --glow-violet: none;
 
-  /* ---- 语义色 ---- */
-  --ok: #34D399;
-  --ok-dim: rgba(52, 211, 153, 0.14);
-  --warn: #FBBF24;
-  --warn-dim: rgba(251, 191, 36, 0.14);
-  --danger: #F87171;
-  --danger-dim: rgba(248, 113, 113, 0.14);
-  --info: #60A5FA;
-  --info-dim: rgba(96, 165, 250, 0.14);
+  /* ---- 语义色（浅底深字，保证 4.5:1） ---- */
+  --ok: #14663F;
+  --ok-dim: rgba(20, 102, 63, 0.09);
+  --ok-line: rgba(20, 102, 63, 0.26);
+  --warn: #855100;
+  --warn-dim: rgba(133, 81, 0, 0.09);
+  --warn-line: rgba(133, 81, 0, 0.26);
+  --danger: #A32B21;
+  --danger-dim: rgba(163, 43, 33, 0.08);
+  --danger-line: rgba(163, 43, 33, 0.26);
+  --info: #1B548C;
+  --info-dim: rgba(27, 84, 140, 0.08);
+  --info-line: rgba(27, 84, 140, 0.26);
 
-  /* ---- 圆角（极简：收敛，避免大圆角）---- */
-  --r-xs: 5px;
-  --r-sm: 8px;
-  --r-md: 10px;
-  --r-lg: 13px;
-  --r-xl: 18px;
+  /* ---- 圆角：克制，不做大圆角气泡 ---- */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 10px;
+  --r-xl: 14px;
   --r-full: 999px;
 
-  /* ---- 阴影 / 光晕（极简：弱阴影，靠发丝描边而非投影分层）---- */
-  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --sh-2: 0 8px 24px -14px rgba(0, 0, 0, 0.6);
-  --sh-3: 0 20px 50px -26px rgba(0, 0, 0, 0.7);
-  --glow-cyan: 0 0 18px -8px rgba(34, 211, 238, 0.5);
-  --glow-violet: 0 0 18px -8px rgba(34, 211, 238, 0.5);
+  /* ---- 阴影：浅色下靠线分层，阴影只在浮起时出现 ---- */
+  --sh-1: 0 1px 2px rgba(23, 22, 15, 0.05);
+  --sh-2: 0 6px 18px -8px rgba(23, 22, 15, 0.14);
+  --sh-3: 0 24px 56px -28px rgba(23, 22, 15, 0.28);
 
   /* ---- 动效 ---- */
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur: 0.2s;
+  --dur: 0.18s;
 
   /* ---- 字体 ---- */
-  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "SFMono-Regular", "JetBrains Mono", Consolas, "Liberation Mono", monospace;
+  --font: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "HarmonyOS Sans SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, "JetBrains Mono", Consolas,
+    "Liberation Mono", monospace;
 
   /* ---- 布局 ---- */
-  --rail-w: 68px;
-  --side-w: 292px;
+  --rail-w: 0px;
+  --side-w: 268px;
+  --nav-h: 64px;
+  --page-max: 1240px;
 }
 
 /* ============================================================
@@ -103,11 +138,12 @@ body {
   font-family: var(--font);
   font-size: 14px;
   line-height: 1.6;
-  color: var(--t1);
-  background: var(--bg-void);
+  color: var(--ink);
+  background: var(--paper);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  font-feature-settings: "cv11" 1, "ss01" 1;
 }
 
 h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
@@ -145,17 +181,24 @@ img, svg {
   max-width: 100%;
 }
 
+/* 标题统一参数：字重收在 600，字距轻微收紧 */
+h1, h2, h3 {
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
 /* ============================================================
-   滚动条
+   滚动条（浏览器表面也属于设计系统）
    ============================================================ */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+  scrollbar-color: #D6D2C4 transparent;
 }
 
 ::-webkit-scrollbar {
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -163,35 +206,36 @@ img, svg {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: #D6D2C4;
   border-radius: var(--r-full);
-  border: 2px solid transparent;
+  border: 3px solid transparent;
   background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: #BEB9A8;
   background-clip: content-box;
 }
 
 /* ============================================================
-   选中态
+   选中态 / 焦点 / 光标
    ============================================================ */
 ::selection {
-  background: rgba(34, 211, 238, 0.28);
-  color: #fff;
+  background: rgba(11, 107, 99, 0.16);
+  color: var(--ink);
 }
 
-/* ============================================================
-   焦点可见性（键盘可达性）
-   ============================================================ */
 :focus-visible {
-  outline: 2px solid var(--cyan);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
   border-radius: var(--r-xs);
 }
 
-/* 可交互元素：消除 300ms 点击延迟 + 保证最小触控目标（≥44px） */
+input,
+textarea {
+  caret-color: var(--accent);
+}
+
 button,
 [role="button"],
 a,
@@ -204,20 +248,20 @@ select {
 }
 
 /* ============================================================
-   键盘跳转链接（无障碍：直达主内容）
+   键盘跳转链接
    ============================================================ */
 .skip-link {
   position: fixed;
   top: 10px;
   left: 50%;
-  transform: translate(-50%, -160%);
+  transform: translate(-50%, -180%);
   z-index: 999;
   padding: 10px 18px;
-  border-radius: var(--r-sm);
-  background: var(--cyan);
-  color: #05070D;
+  border-radius: var(--r-md);
+  background: var(--ink);
+  color: #FCFBF7;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   box-shadow: var(--sh-2);
   transition: transform 0.18s var(--ease-out);
 }
@@ -228,7 +272,7 @@ select {
 }
 
 /* ============================================================
-   全屏装饰背景：网格 + 双色光晕
+   页面底噪：极细网格，只做纸面质感，不做光晕
    ============================================================ */
 .bg-decor {
   position: fixed;
@@ -241,29 +285,27 @@ select {
 .bg-decor::before {
   content: "";
   position: absolute;
-  inset: -20%;
+  inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 78% 62% at 50% 38%, #000 32%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 78% 62% at 50% 38%, #000 32%, transparent 100%);
+    linear-gradient(rgba(23, 22, 15, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 22, 15, 0.028) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, #000 0%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, #000 0%, transparent 78%);
 }
 
-/* 极简科技：只保留一层极淡的网格作为「科技底噪」，
-   不再使用彩色光晕球（光晕属于氛围型风格，与极简克制冲突） */
 .bg-decor::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 90% 70% at 50% 0%, rgba(255, 255, 255, 0.022), transparent 70%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), transparent 240px);
 }
 
 /* ============================================================
    通用动效
    ============================================================ */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: none; }
 }
 
@@ -273,7 +315,7 @@ select {
 }
 
 @keyframes pop-in {
-  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  from { opacity: 0; transform: scale(0.985) translateY(6px); }
   to { opacity: 1; transform: none; }
 }
 
@@ -283,7 +325,7 @@ select {
 
 @keyframes pulse-soft {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.42; }
+  50% { opacity: 0.35; }
 }
 
 @keyframes shimmer {
@@ -296,6 +338,15 @@ select {
   55%, 100% { opacity: 0; }
 }
 
+/* 唯一的「作者时刻」：首屏内容依次落位，只跑一次 */
+.rise {
+  animation: fade-up 0.55s var(--ease-out) both;
+}
+
+.rise-2 { animation-delay: 0.06s; }
+.rise-3 { animation-delay: 0.12s; }
+.rise-4 { animation-delay: 0.18s; }
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -303,5 +354,6 @@ select {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

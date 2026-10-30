@@ -34,14 +34,6 @@ const interestTags = computed(() =>
     .filter(Boolean)
 )
 
-const budgetHint = computed(() => {
-  const a = Number(form.budget_min)
-  const b = Number(form.budget_max)
-  if (!Number.isFinite(a) || !Number.isFinite(b) || a <= 0 || b <= 0) return ''
-  if (a > b) return '下限高于上限，请调整'
-  return `区间 ¥${a} – ¥${b}`
-})
-
 const budgetInvalid = computed(() => {
   const a = Number(form.budget_min)
   const b = Number(form.budget_max)
@@ -137,7 +129,7 @@ onMounted(load)
               <div class="account__info">
                 <div class="account__name">{{ auth.nickname.value }}</div>
                 <div class="account__sub">
-                  <span class="mono">{{ auth.userId.value }}</span>
+                  <span class="mono">{{ (auth.userId.value || "").slice(0, 8) }}</span>
                   <span v-for="r in auth.roles.value" :key="r" class="badge badge--muted">{{ r }}</span>
                 </div>
               </div>
@@ -148,9 +140,6 @@ onMounted(load)
           <section class="card card--solid panel">
             <div class="panel__head">
               <h2 class="panel__title"><Icon name="wallet" :size="16" /> 预算区间</h2>
-              <span v-if="budgetHint" class="badge" :class="budgetInvalid ? 'badge--danger' : 'badge--brand'">
-                {{ budgetHint }}
-              </span>
             </div>
 
             <div class="grid-2">
@@ -190,7 +179,7 @@ onMounted(load)
             <div class="panel__head">
               <h2 class="panel__title"><Icon name="compass" :size="16" /> 出行风格</h2>
             </div>
-            <div class="chips">
+            <div class="chips chips--pick">
               <button
                 v-for="s in STYLES"
                 :key="s"
@@ -241,12 +230,12 @@ onMounted(load)
             <div class="panel__head">
               <h2 class="panel__title"><Icon name="clock" :size="16" /> 行程节奏</h2>
             </div>
-            <div class="chips">
+            <div class="seg" role="group" aria-label="行程节奏">
               <button
                 v-for="p in PACES"
                 :key="p"
-                class="chip"
                 :class="{ 'is-on': form.pace === p }"
+                :aria-pressed="form.pace === p"
                 @click="form.pace = form.pace === p ? '' : p; touch()"
               >
                 {{ p }}
@@ -258,12 +247,13 @@ onMounted(load)
             <div class="panel__head">
               <h2 class="panel__title"><Icon name="user" :size="16" /> 同行人</h2>
             </div>
-            <div class="chips">
+            <div class="tiles" role="group" aria-label="同行人">
               <button
                 v-for="c in COMPANIONS"
                 :key="c"
-                class="chip"
+                class="tile"
                 :class="{ 'is-on': form.companion === c }"
+                :aria-pressed="form.companion === c"
                 @click="form.companion = form.companion === c ? '' : c; touch()"
               >
                 {{ c }}
@@ -312,12 +302,12 @@ onMounted(load)
 </template>
 
 <style scoped>
-.page { height: 100%; overflow-y: auto; }
+.page { height: 100%; overflow-y: auto; background: var(--paper); }
 
 .page__inner {
-  max-width: 1200px;
+  max-width: 1140px;
   margin: 0 auto;
-  padding: 30px 32px 56px;
+  padding: 30px 32px 64px;
 }
 
 .layout {
@@ -330,7 +320,7 @@ onMounted(load)
 .col-main, .col-side {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   min-width: 0;
 }
 
@@ -341,87 +331,148 @@ onMounted(load)
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .panel__title {
   display: flex;
   align-items: center;
-  gap: 9px;
-  font-size: 14.5px;
-  font-weight: 650;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
 }
 
-.panel__title svg { color: var(--cyan); }
+.panel__title svg { color: var(--ink-4); }
 
 /* 账号 */
 .account {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 14px;
 }
 
 .account__avatar {
-  width: 52px;
-  height: 52px;
+  width: 46px;
+  height: 46px;
   flex: none;
-  border-radius: 16px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
-  font-size: 21px;
-  font-weight: 720;
-  color: #CFFAFE;
-  background: var(--grad-brand-soft);
-  border: 1px solid rgba(34, 211, 238, 0.3);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent-text);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-line);
 }
 
 .account__name {
-  font-size: 16.5px;
-  font-weight: 660;
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .account__sub {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   flex-wrap: wrap;
-  margin-top: 5px;
-  font-size: 11.8px;
-  color: var(--t4);
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--ink-4);
 }
 
-/* 选项 chips */
+/* 选项：选中态是实心，不是发光描边。
+   单选＝深墨实心（只能有一个），多选＝深青淡底（可以叠加）。 */
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 }
 
 .chip {
-  height: 34px;
-  padding: 0 15px;
-  border-radius: var(--r-full);
-  font-size: 13px;
-  color: var(--t2);
-  background: var(--glass);
+  height: 33px;
+  padding: 0 13px;
+  border-radius: var(--r-sm);
+  font-size: 12.5px;
+  color: var(--ink-2);
+  background: var(--surface);
   border: 1px solid var(--line);
-  transition: all var(--dur) var(--ease);
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    background var(--dur) var(--ease);
 }
 
-.chip:hover { color: var(--t1); border-color: var(--line-strong); }
+.chip:hover { color: var(--ink); border-color: var(--line-strong); background: var(--paper); }
 
 .chip.is-on {
-  color: #CFFAFE;
-  border-color: rgba(34, 211, 238, 0.45);
-  background: var(--grad-brand-soft);
-  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.18);
+  color: var(--accent-text);
+  border-color: var(--accent-line);
+  background: var(--accent-dim);
+}
+
+.chips--pick .chip.is-on {
+  color: #FCFBF7;
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+/* 分段控件：单选、选项少而互斥 */
+.seg {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.seg button {
+  height: 33px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  border-left: 1px solid var(--line);
+  transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+
+.seg button:first-child { border-left: 0; }
+.seg button:hover { color: var(--ink); background: var(--paper-2); }
+
+.seg button.is-on {
+  color: #FCFBF7;
+  background: var(--ink);
+}
+
+/* 方格选择：选项多、彼此同级 */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.tile {
+  height: 33px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    background var(--dur) var(--ease);
+}
+
+.tile:hover { color: var(--ink); border-color: var(--line-strong); }
+
+.tile.is-on {
+  color: #FCFBF7;
+  border-color: var(--ink);
+  background: var(--ink);
 }
 
 /* 状态 */
 .state {
   display: flex;
   flex-direction: column;
-  gap: 11px;
 }
 
 .state li {
@@ -429,12 +480,21 @@ onMounted(load)
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  font-size: 13px;
-  color: var(--t3);
+  padding: 9px 0;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  border-bottom: 1px solid var(--line-faint);
 }
+
+.state li:last-child { border-bottom: 0; }
 
 @media (max-width: 1000px) {
   .layout { grid-template-columns: minmax(0, 1fr); }
-  .page__inner { padding: 22px 18px 44px; }
+  .page__inner { padding: 22px 18px 48px; }
+}
+
+@media (max-width: 560px) {
+  .page__inner { padding: 20px 14px 40px; }
+  .panel { padding: 16px; }
 }
 </style>

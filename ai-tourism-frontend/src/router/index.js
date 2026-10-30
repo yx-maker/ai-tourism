@@ -77,8 +77,8 @@ router.beforeEach((to) => {
 
 router.afterEach((to) => {
   document.title = to.meta.title
-    ? `${to.meta.title} · AI 智能旅游规划助手`
-    : 'AI 智能旅游规划助手'
+    ? `${to.meta.title} · 旅途`
+    : '旅途 · AI 智能旅游规划助手'
 })
 
 export default router

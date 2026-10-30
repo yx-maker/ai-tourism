@@ -63,6 +63,49 @@ const statusMeta = computed(() => {
   }
 })
 
+/** 后端返回的 plan 字段是驼峰英文，展示前统一转成中文（未知字段原样保留） */
+const PLAN_LABELS = {
+  userBudget: '用户预算',
+  level: '出行档次',
+  transportMode: '交通方式',
+  transportDuration: '交通时长',
+  transportDurationSource: '时长来源',
+  transportMinutesOneWay: '单程分钟数',
+  hotelTier: '住宿标准',
+  foodTier: '餐饮标准',
+  total: '合计',
+  remaining: '结余',
+  days: '行程天数',
+  nights: '住宿晚数',
+  feasible: '是否可行',
+  minBudget: '最低可行预算',
+  budgetStatus: '预算状态',
+  summary: '方案摘要',
+  tips: '提示'
+}
+
+function planLabel(k) {
+  return PLAN_LABELS[k] || k
+}
+
+/** 后端值 → 中文展示：来源码、布尔、状态这类枚举不直接给用户看英文 */
+const PLAN_VALUES = {
+  transportDurationSource: { TRAIN_REAL: '12306 实爬车次历时', ESTIMATE: '速度模型估算' },
+  budgetStatus: {
+    WITHIN_BUDGET: '预算内',
+    OVER_BUDGET: '超出预算',
+    UNKNOWN: '未指定预算'
+  }
+}
+
+function planValue(k, v) {
+  if (typeof v === 'boolean') return v ? '是' : '否'
+  const map = PLAN_VALUES[k]
+  if (map && map[v] !== undefined) return map[v]
+  if (v === null || v === undefined || v === '') return '—'
+  return typeof v === 'object' ? JSON.stringify(v) : v
+}
+
 function num(v) {
   const n = Number(v)
   return Number.isFinite(n) ? n : 0
@@ -71,6 +114,38 @@ function num(v) {
 function money(v) {
   return `¥${num(v).toLocaleString('zh-CN', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`
 }
+
+/** 分钟 → 「7 小时 2 分」（与后端 TransportDuration.human 同口径） */
+function humanMin(m) {
+  const v = Math.max(Math.round(Number(m) || 0), 0)
+  if (!v) return '—'
+  if (v < 60) return `${v} 分钟`
+  const h = Math.floor(v / 60)
+  const rest = v % 60
+  return rest ? `${h} 小时 ${rest} 分` : `${h} 小时`
+}
+
+/**
+ * 大交通时长：与「按预算选出的交通方式」绑定展示。
+ * 真实来源是 12306 实爬车次历时，估算来源是速度模型，两者必须让用户分得清。
+ */
+const transportDuration = computed(() => {
+  const e = env.value
+  if (!e) return null
+  const d = e.transportDuration || {}
+  const mins = Number(d.minutesOneWay || 0)
+  if (!mins && !e.transportDurationText) return null
+  const real = e.transportDurationSource === 'TRAIN_REAL'
+  return {
+    minutes: mins,
+    kind: d.kind || '',
+    text: e.transportDurationText || `单程约 ${humanMin(mins)} · 往返在途约 ${humanMin(mins * 2)}`,
+    oneWay: d.minutesOneWay ? `单程约 ${humanMin(mins)}` : '',
+    cls: real ? 'src--real' : 'src--est',
+    label: real ? '12306 实爬车次历时' : '速度模型估算',
+    train: d.trainCode ? `${d.trainCode} ${d.depart || ''}→${d.arrive || ''}`.trim() : ''
+  }
+})
 
 /** 分项明细（用真实字段换算，不做任何推测） */
 const breakdown = computed(() => {
@@ -359,12 +434,9 @@ watch(
     <div class="page__inner">
       <header class="page-head">
         <div>
-          <h1 class="page-head__title">
-            预算分析
-            <span class="badge badge--brand" style="margin-left: 10px; vertical-align: 4px">论文核心模块</span>
-          </h1>
+          <h1 class="page-head__title">预算分析</h1>
           <p class="page-head__sub">
-            预算硬约束：给定预算后反推消费档次，超支时按「品质 → 舒适 → 经济」逐级回退，只压不抬
+            给定预算后反推消费档次，超支时按「品质 → 舒适 → 经济」逐级回退，只压不抬。
           </p>
         </div>
       </header>
@@ -425,21 +497,28 @@ watch(
 
           <Transition name="fade">
             <section v-if="result" class="result">
-              <div class="card card--solid hero-card">
-                <div class="hero-card__top">
-                  <div>
-                    <div class="hero-card__label">预算达成状态</div>
-                    <div class="hero-card__status" :class="`is-${statusMeta.cls}`">
-                      <Icon :name="statusMeta.icon" :size="19" />
-                      {{ statusMeta.text }}
-                    </div>
+              <div class="panel verdict">
+                <div class="verdict__top">
+                  <div class="verdict__status" :class="`is-${statusMeta.cls}`">
+                    <Icon :name="statusMeta.icon" :size="16" />
+                    {{ statusMeta.text }}
                   </div>
-                  <span v-if="env?.level" class="badge badge--brand" style="height: 27px; font-size: 12.5px">
-                    档次：{{ env.level }}
+                  <span v-if="env?.level" class="verdict__level">采用 {{ env.level }} 档</span>
+                </div>
+
+                <!-- 大交通：多少钱 → 多长时间。省下的票价是用在途时间换来的，必须同时可见 -->
+                <div v-if="transportDuration" class="verdict__route">
+                  <span class="route__mode">{{ env?.transportMode || '—' }}</span>
+                  <span class="route__dur">{{ transportDuration.text }}</span>
+                  <span class="src" :class="transportDuration.cls" :title="transportDuration.label">
+                    {{ transportDuration.label }}
+                  </span>
+                  <span v-if="transportDuration.train" class="route__train mono">
+                    {{ transportDuration.train }}
                   </span>
                 </div>
 
-                <div class="hero-card__figures">
+                <div class="verdict__figs">
                   <div class="fig">
                     <div class="fig__k">用户预算</div>
                     <div class="fig__v">{{ env?.userBudget != null ? money(env.userBudget) : '未指定' }}</div>
@@ -603,8 +682,8 @@ watch(
                 </div>
                 <div class="plan">
                   <div v-for="(v, k) in plan" :key="k" class="plan__item">
-                    <span class="plan__k">{{ k }}</span>
-                    <span class="plan__v">{{ typeof v === 'object' ? JSON.stringify(v) : v }}</span>
+                    <span class="plan__k">{{ planLabel(k) }}</span>
+                    <span class="plan__v">{{ planValue(k, v) }}</span>
                   </div>
                 </div>
               </div>
@@ -612,7 +691,7 @@ watch(
           </Transition>
 
           <div v-if="!result" class="card panel empty">
-            <div class="empty__icon"><Icon name="wallet" :size="27" /></div>
+            <div class="empty__icon"><Icon name="wallet" :size="22" /></div>
             <div class="empty__title">还没有分析结果</div>
             <p class="empty__desc">
               选择会话并粘贴行程文本，点击「开始分析」。若行程中写明预算（如「预算3000元」），
@@ -680,279 +759,287 @@ watch(
 .page {
   height: 100%;
   overflow-y: auto;
+  background: var(--paper);
 }
 
 .page__inner {
-  max-width: 1380px;
+  max-width: var(--page-max);
   margin: 0 auto;
-  padding: 30px 32px 56px;
+  padding: 30px 32px 64px;
 }
 
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 316px;
+  grid-template-columns: minmax(0, 1fr) 320px;
   gap: 20px;
   align-items: start;
 }
 
-.col-main, .col-side {
+.col-main,
+.col-side {
   display: flex;
   flex-direction: column;
   gap: 18px;
   min-width: 0;
 }
 
-.panel { padding: 20px 22px; }
+.col-side { position: sticky; top: 0; }
 
-.panel--accent {
-  border-color: rgba(251, 191, 36, 0.28);
-  background: linear-gradient(180deg, rgba(251, 191, 36, 0.055), rgba(255, 255, 255, 0.02));
-}
-
-.panel__head {
+/* ---------------- 结论区 ----------------
+   不套 hero 大数字模板：状态先行，四个数字横排，靠线和字重分层 */
+.verdict__top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  margin-bottom: 16px;
-}
-
-.panel__title {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 14.5px;
-  font-weight: 650;
-}
-
-.panel__title svg { color: var(--cyan); }
-
-.panel__foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  margin-top: 16px;
-}
-
-/* ---------------- 结果总览 ---------------- */
-.hero-card { padding: 22px 24px; }
-
-.hero-card__top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.hero-card__label {
-  font-size: 12.5px;
-  color: var(--t3);
-  margin-bottom: 6px;
-}
-
-.hero-card__status {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 25px;
-  font-weight: 730;
-  letter-spacing: -0.6px;
-}
-
-.hero-card__status.is-ok { color: var(--ok); }
-.hero-card__status.is-danger { color: var(--danger); }
-.hero-card__status.is-muted { color: var(--t2); }
-
-.hero-card__figures {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   flex-wrap: wrap;
 }
 
-.fig { flex: 1; min-width: 108px; }
-
-.fig__k {
-  font-size: 12px;
-  color: var(--t3);
-  margin-bottom: 4px;
+.verdict__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.028em;
+  line-height: 1.2;
 }
 
-.fig__v {
-  font-size: 19px;
-  font-weight: 680;
-  letter-spacing: -0.4px;
+.verdict__status.is-ok { color: var(--ok); }
+.verdict__status.is-danger { color: var(--danger); }
+.verdict__status.is-muted { color: var(--ink-3); }
+
+.verdict__level {
+  font-size: 11.5px;
+  color: var(--ink-3);
+  padding: 3px 9px;
+  border-radius: 3px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  letter-spacing: 0.02em;
+}
+
+.verdict__figs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-faint);
+}
+
+/* 大交通一行：方式 + 时长 + 来源，把「钱 → 时间」的取舍放在结论区最前面 */
+.verdict__route {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  background: var(--paper-2);
+  border: 1px solid var(--line-faint);
+}
+
+.route__mode {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.route__dur {
+  font-size: 13px;
+  color: var(--ink-2);
   font-variant-numeric: tabular-nums;
 }
 
-.fig__v.is-pos { color: var(--ok); }
-.fig__v.is-neg { color: var(--danger); }
-
-.fig__sep {
-  width: 1px;
-  height: 34px;
-  background: var(--line);
-  flex: none;
+.route__train {
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0;
 }
 
-.gauge { margin-top: 22px; }
+.fig { min-width: 0; }
+
+.fig__k {
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0.02em;
+}
+
+.fig__v {
+  margin-top: 3px;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+}
+
+.fig__v.is-neg { color: var(--danger); }
+.fig__v.is-pos { color: var(--ok); }
+
+.fig__sep { display: none; }
+
+/* 占用条 */
+.gauge { margin-top: 18px; }
 
 .gauge__track {
-  position: relative;
-  height: 9px;
-  border-radius: var(--r-full);
-  background: rgba(255, 255, 255, 0.07);
+  height: 5px;
+  border-radius: 3px;
+  background: var(--paper-3);
   overflow: hidden;
 }
 
 .gauge__fill {
   height: 100%;
-  border-radius: var(--r-full);
-  background: var(--grad-brand);
-  transition: width 0.7s var(--ease-out);
+  border-radius: 3px;
+  background: var(--accent);
+  transition: width 0.6s var(--ease-out);
 }
 
-.gauge__fill.is-over {
-  background: linear-gradient(90deg, #FBBF24, #F87171);
-}
+.gauge__fill.is-over { background: var(--danger); }
 
 .gauge__legend {
   display: flex;
   justify-content: space-between;
   gap: 12px;
+  flex-wrap: wrap;
   margin-top: 8px;
-  font-size: 12px;
-  color: var(--t3);
+  font-size: 11.5px;
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
 }
 
-/* ---------------- 档次阶梯 ---------------- */
+/* ---------------- 档次阶梯：时间轴 ---------------- */
 .ladder { display: flex; flex-direction: column; }
 
-.rung { display: flex; gap: 14px; }
+.rung {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 12px;
+  padding-bottom: 18px;
+}
+
+.rung:last-child { padding-bottom: 0; }
 
 .rung__line {
   position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 16px;
-  flex: none;
+  justify-content: center;
+  padding-top: 3px;
 }
 
 .rung__dot {
-  width: 12px;
-  height: 12px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  margin-top: 7px;
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
   flex: none;
-  border: 2px solid var(--t4);
-  background: var(--bg-base);
   z-index: 1;
 }
 
 .rung__bar {
-  flex: 1;
-  width: 2px;
+  position: absolute;
+  top: 16px;
+  bottom: -18px;
+  width: 1px;
   background: var(--line);
-  margin: 3px 0 -3px;
 }
 
-.rung--chosen .rung__dot {
-  border-color: var(--ok);
-  background: var(--ok);
-  box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.18);
-}
-
-.rung--partial .rung__dot {
-  border-color: var(--warn);
-  background: var(--warn);
-  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.18);
-}
-
-.rung--rejected .rung__dot {
-  border-color: var(--danger);
-  background: transparent;
-}
-
-.rung__body {
-  flex: 1;
-  min-width: 0;
-  padding: 3px 0 18px;
-}
+.rung__body { min-width: 0; }
 
 .rung__head {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
+  flex-wrap: wrap;
 }
 
 .rung__name {
-  font-size: 14.5px;
-  font-weight: 650;
+  font-size: 13.5px;
+  font-weight: 550;
+  color: var(--ink);
 }
-
-.rung--rejected .rung__name,
-.rung--unreached .rung__name { color: var(--t3); }
 
 .rung__desc {
   margin-top: 3px;
-  font-size: 12.5px;
-  color: var(--t3);
+  font-size: 12px;
+  color: var(--ink-3);
+  line-height: 1.6;
 }
 
 .rung__figures {
   display: flex;
-  gap: 18px;
-  margin-top: 7px;
-  font-size: 13px;
-  color: var(--t2);
+  gap: 16px;
+  margin-top: 6px;
+  font-size: 11.5px;
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
 }
 
-.rung__figures strong { color: var(--t1); font-variant-numeric: tabular-nums; }
+.rung__figures strong { color: var(--ink); font-weight: 550; }
 
-/* ---------------- 分项 ---------------- */
-.breakdown {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.rung--chosen .rung__dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
 }
+
+.rung--chosen .rung__name { color: var(--accent-text); }
+
+.rung--partial .rung__dot { border-color: var(--warn); background: var(--warn); }
+
+.rung--rejected .rung__dot { border-color: var(--line-strong); background: var(--paper-3); }
+.rung--rejected .rung__name { color: var(--ink-3); }
+.rung--rejected .rung__desc { color: var(--ink-4); }
+
+.rung--unreached { opacity: 0.55; }
+
+/* ---------------- 费用封套分项 ---------------- */
+.breakdown { display: flex; flex-direction: column; gap: 16px; }
 
 .bd__row {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 7px;
+  margin-bottom: 6px;
 }
 
-.bd__label { font-size: 13.5px; font-weight: 550; }
+.bd__label { font-size: 12.5px; color: var(--ink-2); }
 
 .bd__amount {
-  font-size: 14px;
-  font-weight: 650;
+  font-size: 13px;
+  font-weight: 550;
+  color: var(--ink);
+  font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
 }
 
 .bd__track {
-  height: 6px;
-  border-radius: var(--r-full);
-  background: rgba(255, 255, 255, 0.06);
+  height: 5px;
+  border-radius: 3px;
+  background: var(--paper-3);
   overflow: hidden;
 }
 
 .bd__fill {
   height: 100%;
-  border-radius: var(--r-full);
-  background: linear-gradient(90deg, rgba(34, 211, 238, 0.9), rgba(99, 102, 241, 0.9));
+  border-radius: 3px;
+  background: var(--accent);
+  opacity: 0.85;
   transition: width 0.6s var(--ease-out);
 }
 
 .bd__note {
   margin-top: 5px;
-  font-size: 11.8px;
-  color: var(--t4);
+  font-size: 11px;
+  color: var(--ink-4);
+  line-height: 1.55;
 }
 
 .bd__total {
@@ -960,229 +1047,217 @@ watch(
   align-items: center;
   justify-content: space-between;
   margin-top: 18px;
-  padding-top: 15px;
-  border-top: 1px solid var(--line);
-  font-size: 13.5px;
-  color: var(--t2);
+  padding-top: 14px;
+  border-top: 1px solid var(--line-faint);
+  font-size: 12px;
+  color: var(--ink-3);
 }
 
 .bd__total strong {
-  font-size: 19px;
-  font-weight: 700;
-  color: var(--t1);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
   font-variant-numeric: tabular-nums;
 }
 
-/* ---------------- 降级 / 建议 / 方案 ---------------- */
-.adj, .sugg {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.adj li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 13.3px;
-  color: #FCD34D;
-  line-height: 1.6;
-}
-
-.adj svg { margin-top: 3px; flex: none; }
-
-.sugg li {
-  display: flex;
-  gap: 11px;
-  font-size: 13.3px;
-  color: var(--t2);
-  line-height: 1.65;
-}
-
-.sugg__i {
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  flex: none;
-  margin-top: 2px;
-  border-radius: 50%;
-  font-size: 11px;
-  font-weight: 700;
-  color: #CFFAFE;
-  background: rgba(34, 211, 238, 0.14);
-  border: 1px solid rgba(34, 211, 238, 0.3);
-}
-
-.plan {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  gap: 10px;
-}
-
-.plan__item {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  padding: 10px 12px;
-  border-radius: var(--r-sm);
-  background: rgba(255, 255, 255, 0.028);
-  border: 1px solid var(--line);
-}
-
-.plan__k { font-size: 11.5px; color: var(--t4); }
-
-.plan__v {
-  font-size: 13px;
-  color: var(--t1);
-  word-break: break-word;
-}
-
-/* ---------------- 侧栏 ---------------- */
-.recent {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.recent__item {
-  padding: 10px 12px;
-  border-radius: var(--r-sm);
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.022);
-  cursor: pointer;
-  transition: all var(--dur) var(--ease);
-}
-
-.recent__item:hover {
-  border-color: var(--line-strong);
-  background: var(--glass-hover);
-}
-
-.recent__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.recent__figs {
-  display: flex;
-  gap: 14px;
-  margin-top: 6px;
-  font-size: 12px;
-  color: var(--t3);
-}
-
-.side-skel { display: flex; flex-direction: column; gap: 8px; }
-
-.tip__p {
-  font-size: 12.8px;
-  line-height: 1.72;
-  color: var(--t3);
-}
-
-.tip__p + .tip__p { margin-top: 10px; }
-
-.fade-enter-active { transition: opacity 0.3s var(--ease), transform 0.3s var(--ease-out); }
-.fade-enter-from { opacity: 0; transform: translateY(10px); }
-
-/* ---------------- 费用明细与价格来源 ---------------- */
-.items {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
+/* ---------------- 费用明细 ---------------- */
+.items { display: flex; flex-direction: column; }
 
 .item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 9px 10px;
-  border-radius: var(--r-sm);
-  transition: background var(--dur) var(--ease);
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--line-faint);
 }
 
-.item:hover { background: var(--glass-hover); }
+.item:last-child { border-bottom: 0; }
+.item:hover { background: rgba(23, 22, 15, 0.015); }
 
 .item__cat {
   flex: none;
-  width: 44px;
+  width: 46px;
   text-align: center;
-  font-size: 11.5px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 500;
   padding: 3px 0;
-  border-radius: var(--r-xs);
+  border-radius: 3px;
   border: 1px solid var(--line);
-  color: var(--t2);
-  background: var(--glass);
+  color: var(--ink-2);
+  background: var(--paper-2);
 }
-
-.item__cat--transport { color: #A5F3FC; border-color: rgba(34, 211, 238, 0.3); background: rgba(34, 211, 238, 0.08); }
-.item__cat--hotel { color: #D8B4FE; border-color: rgba(168, 85, 247, 0.3); background: rgba(168, 85, 247, 0.08); }
-.item__cat--food { color: #FCD34D; border-color: rgba(251, 191, 36, 0.28); background: rgba(251, 191, 36, 0.07); }
-.item__cat--ticket { color: #6EE7B7; border-color: rgba(52, 211, 153, 0.3); background: rgba(52, 211, 153, 0.07); }
-.item__cat--other { color: var(--t2); }
 
 .item__body { flex: 1; min-width: 0; }
+.item__name { font-size: 13px; color: var(--ink); }
 
-.item__name { font-size: 13.2px; color: var(--t1); }
+.item__meta { display: flex; align-items: center; gap: 8px; margin-top: 3px; }
 
-.item__meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 3px;
+.item__date {
+  font-size: 10.5px;
+  color: var(--ink-4);
+  font-family: var(--font-mono);
 }
 
-.item__date { font-size: 11px; color: var(--t4); font-family: var(--font-mono); }
-
-/* 价格来源徽标：真实/快照/攻略载明/估算 四级 */
 .src {
   display: inline-flex;
   align-items: center;
-  height: 19px;
-  padding: 0 8px;
-  border-radius: var(--r-full);
+  height: 18px;
+  padding: 0 7px;
+  border-radius: 3px;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
   border: 1px solid transparent;
   cursor: help;
 }
 
-.src--real { color: #6EE7B7; background: rgba(52, 211, 153, 0.12); border-color: rgba(52, 211, 153, 0.35); }
-.src--snap { color: #A5F3FC; background: rgba(34, 211, 238, 0.12); border-color: rgba(34, 211, 238, 0.35); }
-.src--itin { color: #D8B4FE; background: rgba(168, 85, 247, 0.12); border-color: rgba(168, 85, 247, 0.32); }
-.src--est { color: var(--t4); background: rgba(255, 255, 255, 0.05); border-color: var(--line); }
+.src--real { color: var(--ok); background: var(--ok-dim); border-color: var(--ok-line); }
+.src--snap { color: var(--accent-text); background: var(--accent-dim); border-color: var(--accent-line); }
+.src--itin { color: var(--info); background: var(--info-dim); border-color: var(--info-line); }
+.src--est { color: var(--ink-3); background: var(--paper-2); border-color: var(--line); }
 
 .item__amount {
   flex: none;
-  font-size: 13.6px;
-  font-weight: 650;
-  color: var(--t1);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
   font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
 }
 
 .items__total {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: baseline;
-  margin-top: 10px;
-  padding-top: 12px;
-  border-top: 1px dashed var(--line);
-  font-size: 13px;
-  color: var(--t3);
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-faint);
+  font-size: 12px;
+  color: var(--ink-3);
 }
 
 .items__total strong {
-  font-size: 16px;
-  color: var(--t1);
   font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
 }
 
-@media (max-width: 1100px) {
+/* ---------------- 调整记录 / 建议 ---------------- */
+.panel--accent {
+  background: var(--paper);
+}
+
+.adj { display: flex; flex-direction: column; gap: 9px; }
+
+.adj li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  line-height: 1.65;
+}
+
+.adj svg { color: var(--warn); margin-top: 2px; flex: none; }
+
+.sugg { display: flex; flex-direction: column; gap: 11px; }
+
+.sugg li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12.8px;
+  color: var(--ink-2);
+  line-height: 1.7;
+}
+
+.sugg__i {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  margin-top: 2px;
+  border-radius: 3px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-3);
+}
+
+/* ---------------- 出行方案 ---------------- */
+.plan { display: flex; flex-direction: column; }
+
+.plan__item {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line-faint);
+  font-size: 12.5px;
+}
+
+.plan__item:last-child { border-bottom: 0; }
+.plan__k { color: var(--ink-4); }
+.plan__v { color: var(--ink); line-height: 1.65; }
+
+/* ---------------- 右侧最近分析 ---------------- */
+.recent { display: flex; flex-direction: column; }
+
+.recent__item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 11px 8px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  border-bottom: 1px solid var(--line-faint);
+  transition: background var(--dur) var(--ease);
+}
+
+.recent__item:last-child { border-bottom: 0; }
+.recent__item:hover { background: var(--paper); }
+
+.recent__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.recent__figs {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
+}
+
+.side-skel { display: flex; flex-direction: column; gap: 8px; }
+
+.tip__p {
+  font-size: 12.3px;
+  line-height: 1.75;
+  color: var(--ink-3);
+}
+
+.tip__p + .tip__p { margin-top: 10px; }
+
+/* ---------------- 响应式 ---------------- */
+@media (max-width: 1080px) {
   .layout { grid-template-columns: minmax(0, 1fr); }
-  .page__inner { padding: 22px 18px 44px; }
+  .col-side { position: static; }
+  .page__inner { padding: 22px 18px 48px; }
+}
+
+@media (max-width: 620px) {
+  .verdict__figs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .fig__v { font-size: 18px; }
+  .verdict__status { font-size: 18px; }
+  .panel { padding: 18px 16px; }
+  .plan__item { grid-template-columns: 1fr; gap: 2px; }
 }
 </style>

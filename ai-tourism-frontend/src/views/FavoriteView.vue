@@ -105,10 +105,10 @@ onMounted(load)
       </div>
 
       <div v-else-if="!list.length" class="card empty">
-        <div class="empty__icon"><Icon name="heart" :size="27" /></div>
+        <div class="empty__icon"><Icon name="heart" :size="22" /></div>
         <div class="empty__title">还没有收藏任何景点</div>
         <p class="empty__desc">
-          去「景点库」浏览 118 条真实 POI，点击卡片上的「收藏」即可加入这里。
+          去「景点库」浏览带真实票价的景点，点卡片右上角的收藏图标即可出现在这里。
         </p>
         <RouterLink to="/poi" class="btn btn--primary" style="margin-top: 4px">
           <Icon name="pin" :size="15" /> 浏览景点库
@@ -135,13 +135,12 @@ onMounted(load)
 
               <div class="fav-card__meta">
                 <span class="fav-card__price" :class="{ 'is-free': !(Number(detail(f)?.ticket_price) > 0) }">
-                  <Icon name="coins" :size="13" />
                   {{ detail(f) ? priceText(detail(f).ticket_price) : '—' }}
                 </span>
-                <span v-if="detail(f)?.poi_rank_in_china" class="badge badge--brand">
-                  全国 #{{ detail(f).poi_rank_in_china }}
+                <span class="fav-card__side mono">
+                  <template v-if="detail(f)?.poi_rank_in_china">全国 #{{ detail(f).poi_rank_in_china }} · </template>
+                  {{ fmtDate(f.created_time) }}
                 </span>
-                <span class="fav-card__date">{{ fmtDate(f.created_time) }} 收藏</span>
               </div>
             </article>
           </div>
@@ -162,48 +161,66 @@ onMounted(load)
 </template>
 
 <style scoped>
-.page { height: 100%; overflow-y: auto; }
+.page { height: 100%; overflow-y: auto; background: var(--paper); }
 
 .page__inner {
-  max-width: 1380px;
+  max-width: var(--page-max);
   margin: 0 auto;
-  padding: 30px 32px 56px;
+  padding: 30px 32px 64px;
 }
 
-.group { margin-bottom: 30px; }
+.group { margin-bottom: 32px; }
 
+/* 城市分组：一行标签 + 一条通到底的线，不用高亮胶囊 */
 .group__head {
   display: flex;
   align-items: center;
-  gap: 11px;
-  margin-bottom: 13px;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
 }
 
 .group__city {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13.5px;
-  font-weight: 620;
-  color: #CFFAFE;
-  padding: 5px 12px;
-  border-radius: var(--r-full);
-  background: var(--grad-brand-soft);
-  border: 1px solid rgba(34, 211, 238, 0.26);
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
 }
 
-.group__count { font-size: 12.5px; color: var(--t4); }
+.group__city svg { color: var(--ink-4); }
+
+.group__count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: var(--paper-2);
+}
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 14px;
 }
 
 .fav-card {
   display: flex;
   flex-direction: column;
-  padding: 16px 18px 14px;
+  padding: 14px 16px 15px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.fav-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--sh-1);
 }
 
 .fav-card__top {
@@ -215,29 +232,31 @@ onMounted(load)
 }
 
 .fav-card__name {
-  font-size: 15.5px;
-  font-weight: 650;
-  letter-spacing: -0.2px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  color: var(--ink);
 }
 
 .fav-card__x {
   display: grid;
   place-items: center;
-  width: 27px;
-  height: 27px;
+  width: 26px;
+  height: 26px;
   flex: none;
   border-radius: var(--r-xs);
-  color: var(--t4);
-  transition: all var(--dur) var(--ease);
+  color: var(--ink-4);
+  transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
 
 .fav-card__x:hover { color: var(--danger); background: var(--danger-dim); }
 
 .fav-card__desc {
   flex: 1;
-  font-size: 12.8px;
-  line-height: 1.68;
-  color: var(--t3);
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink-3);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -247,33 +266,32 @@ onMounted(load)
 
 .fav-card__meta {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 9px;
   flex-wrap: wrap;
   margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
+  padding-top: 11px;
+  border-top: 1px solid var(--line-faint);
 }
 
 .fav-card__price {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12.8px;
-  font-weight: 620;
-  color: #FCD34D;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
 }
 
-.fav-card__price.is-free { color: var(--teal); }
+.fav-card__price.is-free { color: var(--accent-text); }
 
-.fav-card__date {
+.fav-card__side {
   margin-left: auto;
-  font-size: 11.5px;
-  color: var(--t4);
+  font-size: 11px;
+  color: var(--ink-4);
 }
 
 @media (max-width: 720px) {
-  .page__inner { padding: 22px 16px 44px; }
+  .page__inner { padding: 22px 16px 48px; }
   .grid { grid-template-columns: minmax(0, 1fr); }
 }
 </style>

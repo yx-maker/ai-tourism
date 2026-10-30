@@ -73,9 +73,9 @@ onUnmounted(() => {
   display: grid;
   place-items: center;
   padding: 24px;
-  background: rgba(3, 5, 10, 0.72);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(23, 22, 15, 0.34);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 
 .modal {
@@ -83,8 +83,8 @@ onUnmounted(() => {
   max-height: 86vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(180deg, rgba(20, 27, 48, 0.98), rgba(11, 16, 32, 0.98));
-  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: var(--r-xl);
   box-shadow: var(--sh-3);
   overflow: hidden;
@@ -96,29 +96,33 @@ onUnmounted(() => {
   justify-content: space-between;
   gap: 16px;
   padding: 20px 22px 16px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--line-faint);
 }
 
 .modal__title {
   font-size: 16px;
-  font-weight: 680;
-  letter-spacing: -0.2px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 .modal__sub {
   margin-top: 4px;
   font-size: 12.5px;
-  color: var(--t3);
+  color: var(--ink-3);
 }
 
 .modal__x {
-  color: var(--t3);
-  padding: 6px;
-  border-radius: var(--r-xs);
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  color: var(--ink-3);
+  border-radius: var(--r-sm);
   transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
 
-.modal__x:hover { color: var(--t1); background: var(--glass-hover); }
+.modal__x:hover { color: var(--ink); background: var(--paper-2); }
 
 .modal__body {
   padding: 20px 22px;
@@ -128,15 +132,15 @@ onUnmounted(() => {
 .modal__foot {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  padding: 15px 22px 19px;
-  border-top: 1px solid var(--line);
-  background: rgba(0, 0, 0, 0.18);
+  gap: 8px;
+  padding: 14px 22px 18px;
+  border-top: 1px solid var(--line-faint);
+  background: var(--paper);
 }
 
-.modal-enter-active { transition: opacity 0.22s var(--ease); }
-.modal-leave-active { transition: opacity 0.16s var(--ease); }
+.modal-enter-active { transition: opacity 0.2s var(--ease); }
+.modal-leave-active { transition: opacity 0.14s var(--ease); }
 .modal-enter-from, .modal-leave-to { opacity: 0; }
-.modal-enter-active .modal { transition: transform 0.28s var(--ease-out); }
-.modal-enter-from .modal { transform: scale(0.95) translateY(14px); }
+.modal-enter-active .modal { transition: transform 0.24s var(--ease-out); }
+.modal-enter-from .modal { transform: scale(0.98) translateY(8px); }
 </style>

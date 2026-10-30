@@ -16,8 +16,7 @@ const NAV = [
   { name: 'plans', label: '我的行程', icon: 'route' },
   { name: 'budget', label: '预算分析', icon: 'wallet' },
   { name: 'poi', label: '景点库', icon: 'pin' },
-  { name: 'favorites', label: '我的收藏', icon: 'heart' },
-  { name: 'preference', label: '偏好设置', icon: 'sliders' }
+  { name: 'favorites', label: '收藏', icon: 'heart' }
 ]
 
 const initial = computed(() => (auth.nickname.value || '旅').slice(0, 1).toUpperCase())
@@ -48,7 +47,6 @@ onMounted(() => {
     <!-- 键盘用户的跳转链接（无障碍） -->
     <a class="skip-link" href="#main-content">跳到主内容</a>
 
-    <!-- 极简科技底噪：极淡网格 -->
     <div class="bg-decor" aria-hidden="true" />
 
     <!-- 未登录：登录/注册整页 -->
@@ -58,38 +56,64 @@ onMounted(() => {
       </div>
     </template>
 
-    <!-- 已登录：左侧图标导航 + 内容区 -->
+    <!-- 已登录：顶部横向导航 + 内容区 -->
     <template v-else>
-      <nav class="rail" aria-label="主导航">
-        <div class="rail__brand" title="AI 智能旅游规划助手">
-          <Icon name="compass" :size="21" :stroke="1.9" />
-        </div>
+      <header class="topbar">
+        <div class="topbar__inner">
+          <RouterLink :to="{ name: 'chat' }" class="brand" aria-label="旅途 · AI 智能旅游规划助手">
+            <span class="brand__mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none">
+                <path d="M4 17.2 9.4 7l3.6 6.2L15.4 9l4.6 8.2" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="9.4" cy="7" r="1.9" fill="currentColor" />
+              </svg>
+            </span>
+            <span class="brand__name">旅途</span>
+            <span class="brand__tag">AI</span>
+          </RouterLink>
 
-        <ul class="rail__nav">
-          <li v-for="item in NAV" :key="item.name">
+          <nav class="nav" aria-label="主导航">
             <RouterLink
+              v-for="item in NAV"
+              :key="item.name"
               :to="{ name: item.name }"
-              class="rail__item"
+              class="nav__item"
               :class="{ 'is-active': route.name === item.name }"
               :aria-current="route.name === item.name ? 'page' : undefined"
-              :aria-label="item.label"
             >
-              <Icon :name="item.icon" :size="19" />
-              <span class="rail__tip" aria-hidden="true">{{ item.label }}</span>
+              <Icon :name="item.icon" :size="17" class="nav__icon" />
+              <span class="nav__label">{{ item.label }}</span>
             </RouterLink>
-          </li>
-        </ul>
+          </nav>
 
-        <div class="rail__foot">
-          <button class="rail__avatar" :title="auth.nickname.value" :aria-label="'账号：' + (auth.nickname.value || '未命名')" @click="router.push({ name: 'preference' })">
-            {{ initial }}
-          </button>
-          <button class="rail__item rail__item--quit" title="退出登录" aria-label="退出登录" @click="onLogout">
-            <Icon name="logout" :size="18" />
-            <span class="rail__tip" aria-hidden="true">退出登录</span>
-          </button>
+          <div class="topbar__right">
+            <RouterLink
+              :to="{ name: 'preference' }"
+              class="icon-btn"
+              :class="{ 'is-active': route.name === 'preference' }"
+              aria-label="偏好设置"
+              title="偏好设置"
+            >
+              <Icon name="sliders" :size="17" />
+            </RouterLink>
+
+            <span class="topbar__divider" aria-hidden="true" />
+
+            <button
+              class="account"
+              :aria-label="'账号：' + (auth.nickname.value || '未命名')"
+              @click="router.push({ name: 'preference' })"
+            >
+              <span class="account__avatar">{{ initial }}</span>
+              <span class="account__name">{{ auth.nickname.value || '我的账号' }}</span>
+            </button>
+
+            <button class="icon-btn icon-btn--quit" title="退出登录" aria-label="退出登录" @click="onLogout">
+              <Icon name="logout" :size="17" />
+            </button>
+          </div>
         </div>
-      </nav>
+      </header>
 
       <main id="main-content" class="app__main" tabindex="-1">
         <router-view v-slot="{ Component }">
@@ -108,6 +132,7 @@ onMounted(() => {
 .app {
   position: relative;
   display: flex;
+  flex-direction: column;
   height: 100%;
   overflow: hidden;
 }
@@ -120,165 +145,233 @@ onMounted(() => {
   overflow-y: auto;
 }
 
-/* ---------------- 左侧图标导航 ---------------- */
-.rail {
+/* ---------------- 顶部导航 ---------------- */
+.topbar {
   position: relative;
-  z-index: 2;
-  width: var(--rail-w);
+  z-index: 30;
   flex: none;
+  height: var(--nav-h);
+  background: rgba(250, 249, 245, 0.86);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+}
+
+.topbar__inner {
+  max-width: 1520px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 28px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 14px 0 16px;
-  /* 极简：中性半透明面 + 发丝描边即可分层，不用渐变 */
-  background: rgba(10, 11, 13, 0.72);
-  border-right: 1px solid var(--line);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  gap: 28px;
 }
 
-.rail__brand {
-  display: grid;
-  place-items: center;
-  width: 40px;
+/* 品牌 */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  flex: none;
   height: 40px;
-  margin-bottom: 12px;
-  border-radius: 10px;
-  /* 极简：单色实心 + 极弱光晕，不做多色渐变与流动动画 */
-  background: var(--accent);
-  color: #08090A;
-  box-shadow: 0 0 18px -10px rgba(34, 211, 238, 0.7);
+  margin-left: -6px;
+  padding: 0 6px;
+  border-radius: var(--r-sm);
 }
 
-.rail__nav {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  flex: 1;
-}
-
-.rail__item {
-  position: relative;
+.brand__mark {
   display: grid;
   place-items: center;
-  /* 触控目标 ≥ 44×44（WCAG 2.2 / 平台 HIG 最小值） */
-  width: 44px;
-  height: 44px;
-  border-radius: var(--r-md);
-  color: var(--t3);
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--accent);
+  color: #F7FBF9;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.brand__name {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+.brand__tag {
+  display: inline-grid;
+  place-items: center;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 3px;
+  border: 1px solid var(--line-strong);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+
+/* 导航项 */
+.nav {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav::-webkit-scrollbar { display: none; }
+
+.nav__item {
+  position: relative;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: var(--r-sm);
+  font-size: 13.5px;
+  font-weight: 450;
+  color: var(--ink-3);
   transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
 
-.rail__item:hover {
-  color: var(--t1);
+.nav__item:hover {
+  color: var(--ink);
   background: var(--glass-hover);
 }
 
-.rail__item.is-active {
-  color: var(--accent-text);
-  background: var(--accent-dim);
-  box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.22);
+.nav__item.is-active {
+  color: var(--ink);
+  font-weight: 550;
 }
 
-/* 激活态左侧指示条 */
-.rail__item.is-active::before {
+/* 激活指示：一条 2px 短线，不用色块 */
+.nav__item.is-active::after {
   content: "";
   position: absolute;
-  left: -14px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 20px;
-  border-radius: 0 3px 3px 0;
+  left: 12px;
+  right: 12px;
+  bottom: 3px;
+  height: 2px;
+  border-radius: 2px;
   background: var(--accent);
-  box-shadow: var(--glow-cyan);
 }
 
-/* 悬浮提示 */
-.rail__tip {
-  position: absolute;
-  left: calc(100% + 12px);
-  top: 50%;
-  transform: translateY(-50%) translateX(-6px);
-  padding: 6px 11px;
-  border-radius: var(--r-xs);
-  background: rgba(20, 27, 48, 0.97);
-  border: 1px solid var(--line-strong);
-  color: var(--t1);
-  /* 正文不小于 13px，保证小屏与弱视可读性 */
-  font-size: 13px;
-  line-height: 1.4;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
-  box-shadow: var(--sh-2);
-  z-index: 50;
-}
+.nav__icon { display: none; }
 
-/* 悬浮与键盘聚焦都显示提示：不能只依赖 hover */
-.rail__item:hover .rail__tip,
-.rail__item:focus-visible .rail__tip {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0);
-}
-
-.rail__foot {
+/* 右侧账号 */
+.topbar__right {
+  flex: none;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 4px;
 }
 
-.rail__avatar {
-  position: relative;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+.icon-btn {
   display: grid;
   place-items: center;
-  font-size: 14px;
-  font-weight: 700;
-  color: #CFFAFE;
-  background: rgba(34, 211, 238, 0.14);
-  border: 1px solid rgba(34, 211, 238, 0.34);
-  transition: box-shadow var(--dur) var(--ease);
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-sm);
+  color: var(--ink-3);
+  transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
 
-/* 视觉 36px，点击热区扩展到 44×44（小图标不放大小圆，用伪元素扩热区） */
-.rail__avatar::after {
-  content: "";
-  position: absolute;
-  inset: -4px;
+.icon-btn:hover,
+.icon-btn.is-active {
+  color: var(--ink);
+  background: var(--glass-hover);
+}
+
+.icon-btn--quit:hover {
+  color: var(--danger);
+  background: var(--danger-dim);
+}
+
+.topbar__divider {
+  width: 1px;
+  height: 18px;
+  margin: 0 6px;
+  background: var(--line);
+}
+
+.account {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 8px 0 4px;
+  border-radius: var(--r-sm);
+  transition: background var(--dur) var(--ease);
+}
+
+.account:hover { background: var(--glass-hover); }
+
+.account__avatar {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-line);
+  color: var(--accent-text);
+  font-size: 12px;
+  font-weight: 600;
 }
 
-.rail__avatar:hover { box-shadow: var(--glow-cyan); }
-
-.rail__item--quit:hover { color: #FCA5A5; background: var(--danger-dim); }
+.account__name {
+  max-width: 108px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--ink-2);
+}
 
 /* ---------------- 内容区 ---------------- */
 .app__main {
   position: relative;
   z-index: 1;
   flex: 1;
-  min-width: 0;
-  height: 100%;
+  min-height: 0;
   overflow: hidden;
 }
 
-/* 路由切换动效 */
-.view-enter-active { transition: opacity 0.24s var(--ease), transform 0.24s var(--ease-out); }
-.view-leave-active { transition: opacity 0.14s var(--ease); }
-.view-enter-from { opacity: 0; transform: translateY(8px); }
+/* 路由切换 */
+.view-enter-active { transition: opacity 0.2s var(--ease), transform 0.2s var(--ease-out); }
+.view-leave-active { transition: opacity 0.12s var(--ease); }
+.view-enter-from { opacity: 0; transform: translateY(4px); }
 .view-leave-to { opacity: 0; }
 
-/* 小屏：收窄轨道宽度，但触控目标仍保持 ≥44px */
-@media (max-width: 720px) {
-  .rail { width: 60px; }
-  .rail__item { width: 44px; height: 44px; }
-  .rail__nav { gap: 4px; }
+/* ---------------- 响应式 ---------------- */
+@media (max-width: 1080px) {
+  .topbar__inner { gap: 16px; padding: 0 18px; }
+  .account__name { display: none; }
+}
+
+@media (max-width: 780px) {
+  .app { --nav-h: 56px; }
+  .topbar__inner { padding: 0 10px; gap: 6px; }
+  .brand { gap: 7px; padding: 0 4px; }
+  .brand__name { font-size: 14px; letter-spacing: 0.04em; }
+  .brand__tag { display: none; }
+  .nav { gap: 0; overflow: visible; justify-content: flex-end; }
+  .nav__item { width: 40px; padding: 0; justify-content: center; }
+  .nav__icon { display: block; }
+  .nav__label { display: none; }
+  .nav__item.is-active::after { left: 9px; right: 9px; bottom: 2px; }
+  .topbar__divider { display: none; }
+  .icon-btn--quit { display: none; }
+  .topbar__right .icon-btn { display: none; }
+  .account { padding: 0; }
+}
+
+@media (max-width: 420px) {
+  .nav { justify-content: center; }
+  .nav__item { width: 38px; }
 }
 </style>
